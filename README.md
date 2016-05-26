@@ -1,22 +1,20 @@
-# Classe Merce
-package merce;
+# Classe Abbigliamento
+package abbigliamento;
+import merce.*; //qui mi dà errore! Non mi trova il package
+
 /**
  *
  * @author Giulia Evangelisti
  */
-public class Merce {
+public class Abbigliamento extends Merce { //Qui dà errore
 
-    int quantita;
-    
-    void setquantita(int quant){
-        this.quantita=quant;}
-    
-    void getquantita(){
-System.out.println(this.quantita);    }
-    Merce(int quant){
-        this.quantita=quant; //Costruttore con parametri
-       
+    char taglia;
+    String genere;
+    int IDabb;
+      void setTaglia (char tg){
+        this.taglia=tg;}
+      
+    void getTaglia(){
+        System.out.println(this.taglia);
     }
-    Merce(){
-        this.quantita=-1; //Costruttore senza paramentri, inizializza la variabile a -1
-    }}
+}
