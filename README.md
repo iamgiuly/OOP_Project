@@ -1,4 +1,22 @@
-# OOP_Project
-Il progetto qui esposto è sviluppato da quattro studentesse di ingegneria informatica e dell'automazione. 
-Sto apportando questa modifica per provare il funzionamento di GitHub.
-Ciao modifica
+# Classe Merce
+package merce;
+/**
+ *
+ * @author Giulia Evangelisti
+ */
+public class Merce {
+
+    int quantita;
+    
+    void setquantita(int quant){
+        this.quantita=quant;}
+    
+    void getquantita(){
+System.out.println(this.quantita);    }
+    Merce(int quant){
+        this.quantita=quant; //Costruttore con parametri
+       
+    }
+    Merce(){
+        this.quantita=-1; //Costruttore senza paramentri, inizializza la variabile a -1
+    }}
