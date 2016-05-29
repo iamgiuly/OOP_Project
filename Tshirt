@@ -1,0 +1,30 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package abbigliamento;
+
+/**
+ *
+ * @author Sara
+ */
+public class Tshirt extends Abbigliamento {
+    float prezzobase;
+    public void setPrezzoBase(float pb)
+    {
+        prezzobase=pb;
+    }
+    public void getPrezzoBase()
+    {
+        System.out.println(prezzobase);
+    }
+    public Tshirt()
+    {
+        prezzobase=0;
+    }
+    public Tshirt(int pb)
+    {
+        prezzobase=pb;
+    }
+}
