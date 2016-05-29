@@ -1,0 +1,47 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package abbigliamento; 
+import merce.*;
+/**
+ *
+ * @author Sara
+ */
+
+public class Abbigliamento extends Merce { 
+
+char taglia; String genere; int IDabb; 
+public void setTaglia (char tg){ this.taglia=tg;}
+public void getTaglia(){ System.out.println(this.taglia); }
+public void setGenere(String gen)
+{
+    this.genere=gen;
+}
+public void getGenere()
+{
+    System.out.println(genere);
+}
+public void setIDabb(int ID)
+{
+    this.IDabb=ID;
+}
+public void getIDabb()
+{
+    System.out.println(IDabb);
+}
+public Abbigliamento()
+{
+    taglia='M'; //è la taglia più comune, va di default magari
+    genere="";
+    IDabb=0;
+}
+public Abbigliamento(char tg,String gen,int ID)
+{
+    taglia=tg;
+    genere=gen;
+    IDabb=ID;
+}
+}
+
