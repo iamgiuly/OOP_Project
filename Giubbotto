@@ -1,0 +1,25 @@
+package abbigliamento;
+
+/**
+ *
+ * @author Sara
+ */
+public class Giubbotto extends Abbigliamento {
+    float prezzobase;
+    public void setPrezzoBase(float pb)
+    {
+        prezzobase=pb;
+    }
+    public void getPrezzoBase()
+    {
+        System.out.println(prezzobase);
+    }
+    public Giubbotto()
+    {
+        prezzobase=0;
+    }
+    public Giubbotto(int pb)
+    {
+        prezzobase=pb;
+    }
+}
