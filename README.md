@@ -13,6 +13,7 @@ public class Merce {
     
     void getquantita(){
 System.out.println(this.quantita);    }
+
     Merce(int quant){
         this.quantita=quant; //Costruttore con parametri
        
