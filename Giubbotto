@@ -2,24 +2,31 @@ package abbigliamento;
 
 /**
  *
- * @author Sara
+ * @author Giulia Evangelisti
  */
 public class Giubbotto extends Abbigliamento {
-    float prezzobase;
-    public void setPrezzoBase(float pb)
-    {
-        prezzobase=pb;
-    }
-    public void getPrezzoBase()
-    {
-        System.out.println(prezzobase);
-    }
+    
     public Giubbotto()
     {
-        prezzobase=0;
+        this.genere="NotDefined";
+        this.materiale="Cotone";
+        this.Pers=false;
+        this.NrPers=0;
+        this.colore="Bianco";
+        this.prezzobase=0;
+        this.Tipostampa="Notdefined";
+        this.PrezzoUnitario=0;
     }
-    public Giubbotto(int pb)
+    public Giubbotto (String g, String m, boolean p, int np, String color, int pb, String tipo, float pu)
     {
-        prezzobase=pb;
+        this.genere=g;
+        this.materiale=m;
+        this.Pers=p;
+        this.NrPers=np;
+        this.colore=color;
+        this.prezzobase=pb;
+        this.Tipostampa=tipo;
+        this.PrezzoUnitario=pu;
     }
+
 }
