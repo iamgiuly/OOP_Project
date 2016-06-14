@@ -2,24 +2,44 @@ package abbigliamento;
 
 /**
  *
- * @author Sara
+ * @author Giulia Evangelisti
  */
 public class Borsa extends Abbigliamento {
-    float prezzobase;
-    public void setPrezzoBase(float pb)
-    {
-        prezzobase=pb;
+    private modello model;
+
+    public enum modello {Tracolla, Zaino, Notdefined}
+    
+    public void setMod(String m){  //setto il modello, ricordando che in Java enum è una vera e propria classe
+        this.model=modello.valueOf(m);
     }
-    public void getPrezzoBase()
-    {
-        System.out.println(prezzobase);
+    public void getMod(){
+        System.out.println(model);
     }
+    
+    /*Costruttore senza parametri */
     public Borsa()
     {
-        prezzobase=0;
+        this.prezzobase=0;
+        this.genere="notdefined";
+        this.materiale="cotone";
+        this.NrPers=0;
+        this.Pers=false;
+        this.model=modello.Notdefined;
+        this.Tipostampa="Notdefined";
+        this.PrezzoUnitario=0;
     }
-    public Borsa(int pb)
-    {
-        prezzobase=pb;
-    }
-}
+    
+    /* Costruttore con parametri */
+    public Borsa(String g, String m, int nrpers, boolean p, float pb, String mo, String color, String tipo, float pu){
+    this.genere=g;
+    this.materiale=m;
+    this.NrPers=nrpers;
+    this.Pers=p; 
+    this.prezzobase=pb;
+    this.model=modello.valueOf("mo");
+    this.colore=color;
+    this.Tipostampa=tipo;
+    this.PrezzoUnitario=pu;
+    
+    }  }
+    
