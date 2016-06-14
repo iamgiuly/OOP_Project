@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package abbigliamento;
 import merce.*; 
 
@@ -12,6 +17,9 @@ String materiale;
 boolean Pers;
 int NrPers; 
 float prezzobase;
+String colore;
+String Tipostampa;
+float PrezzoUnitario;
 
 
 public void setGenere(String gen)
@@ -50,6 +58,31 @@ public void getNumPers(){
         System.out.println(NrPers);
     }
 
+public void setcolore(String s){
+    this.colore=s;
+}
+
+public void getcolore(){
+    System.out.println(this.colore);
+}
+
+public void setTipost(String tipo){
+    this.Tipostampa=tipo;
+}
+
+public void getTipost(){
+    System.out.println(this.Tipostampa);
+    
+}
+
+public void setPzUnitario(float pu){
+    this.PrezzoUnitario=pu;
+}
+
+public void getPzUnitario(){
+    System.out.println(this.PrezzoUnitario);
+}
+
 public Abbigliamento()
 { 
     genere="";
@@ -57,8 +90,10 @@ public Abbigliamento()
     NrPers=0;
     Pers=false; 
     prezzobase=0;
+    this.colore="Bianco";
+    PrezzoUnitario=0;
 }
-public Abbigliamento(String g, String m, int nrpers, boolean p, float pb)
+public Abbigliamento(String g, String m, int nrpers, boolean p, float pb, String s, int pu)
 {
     
     genere=g;
@@ -66,5 +101,8 @@ public Abbigliamento(String g, String m, int nrpers, boolean p, float pb)
     NrPers=nrpers;
     Pers=p; 
     prezzobase=pb;
+    this.colore=s;
+    PrezzoUnitario=pu;
 }
 }
+
