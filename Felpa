@@ -2,24 +2,74 @@ package abbigliamento;
 
 /**
  *
- * @author Sara
+ * @author Giulia Evangelisti
  */
 public class Felpa extends Abbigliamento {
-    float prezzobase;
-    public void setPrezzoBase(float pb)
-    {
-        prezzobase=pb;
+    boolean cappuccio;
+    boolean tasche;
+    boolean cerniera;
+    
+    public void setcapp(boolean c){
+        this.cappuccio=c;
     }
-    public void getPrezzoBase()
-    {
-        System.out.println(prezzobase);
+    
+    public void getcapp(){
+        if (this.cappuccio==true)
+            System.out.println("Cappuccio Presente");
+        else 
+            System.out.println("Cappuccio non presente");
     }
+    
+    public void settasche(boolean t){
+        this.tasche=t;
+    }
+    
+    public void gettasche(){
+        if (this.tasche==true)
+            System.out.println("Tasche presenti");
+        else 
+            System.out.println("Tasche non presenti");
+    }
+       
+    public void setcerniera(boolean c){
+        this.cerniera=c;
+    }
+    
+    public void getcerniera(){
+        if (this.cerniera==true)
+            System.out.println("Cerniera Presente");
+        else 
+            System.out.println("Cerniera non presente");
+    }
+    
+    
     public Felpa()
     {
-        prezzobase=0;
+        this.genere="NotDefined";
+        this.materiale="Cotone";
+        this.Pers=false;
+        this.NrPers=0;
+        this.colore="Bianco";
+        this.prezzobase=0;
+        this.cappuccio=false;
+        this.tasche=false;
+        this.cerniera=false;
+        this.Tipostampa="Notdefined";
+        this.PrezzoUnitario=0;
     }
-    public Felpa(int pb)
+    public Felpa(String g, String m, boolean p, int np, String color, int pb, boolean capp, boolean tasc, boolean cern, String tipo, float pu)
     {
-        prezzobase=pb;
+        this.genere=g;
+        this.materiale=m;
+        this.Pers=p;
+        this.NrPers=np;
+        this.colore=color;
+        this.prezzobase=pb;
+        this.cappuccio=capp;
+        this.tasche=tasc;
+        this.cerniera=cern;
+        this.Tipostampa=tipo;
+        this.PrezzoUnitario=pu;
     }
+
 }
