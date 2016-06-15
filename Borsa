@@ -46,7 +46,7 @@ public class Borsa extends Abbigliamento {
     
     public double CalcoloPU(String m, int nrpers, boolean p, String mo, String color, String tipo){
     if (!"Bianco".equals(color))
-            this.PrezzoUnitario+=1.00;
+            PrezzoUnitario+=1.00;
     else if (p==true){
          if(tipo=="Serigrafia")
              PrezzoUnitario+=2.00*nrpers;
