@@ -1,0 +1,71 @@
+package abbigliamento;
+public class Maglia extends Abbigliamento {
+    
+    boolean scollatura;
+    boolean maniche;
+
+    
+
+    
+    public void setScollatura(boolean b){
+       scollatura=b;
+    }
+    public void getScollatura(){
+        System.out.println(scollatura);
+    }
+    public void setManiche(boolean b){
+        maniche=b;
+    }
+    public void getManiche(){
+        System.out.println(maniche);
+    }
+    
+
+public Maglia()
+{ 
+    this.genere="";
+    this.materiale="";
+    this.NrPers=0;
+    this.Pers=false; 
+    this.prezzobase=0;
+    this.colore="Bianco";
+    this.Tipostampa="notdefined";
+    this.scollatura=false;
+    this.maniche=false;
+    this.PrezzoUnitario=0;
+    
+}
+public Maglia (String g, String m, int nrpers, boolean p, float pb, String s, String tipo, boolean scoll, boolean manica, float pu)
+{
+    
+    this.genere=g;
+    this.materiale=m;
+    this.NrPers=nrpers;
+    this.Pers=p; 
+    this.prezzobase=pb;
+    this.colore=s;
+    this.Tipostampa=tipo;
+    this.scollatura=scoll;
+    this.maniche=manica;
+    this.PrezzoUnitario=pu;
+}
+
+    public double CalcoloPU(String m, int nrpers, boolean p, String mo, String color, String tipo, boolean scoll, boolean manica){
+    if (!"Bianco".equals(color))
+            this.PrezzoUnitario+=1.00;
+    else if(scoll==true)
+        this.PrezzoUnitario*=1.00;
+    else if (manica==true)
+        this.PrezzoUnitario*=1.00;
+    else if (p==true){
+         if(tipo=="Serigrafia")
+             this.PrezzoUnitario+=2.00*nrpers;
+         if(tipo=="Transfer")
+             this.PrezzoUnitario+=3.00*nrpers;
+         if(tipo=="Digitale")
+             this.PrezzoUnitario+=4.00*nrpers;
+    }
+
+    return this.PrezzoUnitario;
+        }
+}
