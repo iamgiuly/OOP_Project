@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package prog;
+package Magazzino;
 import java.sql.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -13,195 +13,116 @@ import java.sql.SQLException;
  * @author Sara
  */
 public class Magazzino {
+    private GestioneBorse b;
+    private GestioneFelpe f;
+    private GestioneGiubbotto g;
+    private GestionePantalone j;
+    private GestioneTshirt t;
+    private GestionePubblicità p;
+    
     public Magazzino()
     {
      try{
      Class.forName("com.mysql.jdbc.Driver");
-     }catch(ClassNotFoundException|SQLException s)
+     b=new GestioneBorse();
+     f=new GestioneFelpe();
+     g=new GestioneGiubbotto();
+     t=new GestioneTshirt();
+     }catch(ClassNotFoundException s)
      {
-         System.out.println("Errore Classe!");
+         System.out.println("Errore Connessione!");
      }
     }
+    
     public void inserisciFelpa(String cv,int sv,int mv,int lv,int xlv,int cppv,int cernv,int tasv,float pbv,String Matv)
     {
-        try{
-        Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "root", "");
-        PreparedStatement pst=conn.prepareStatement("INSERT INTO felpa(Colore, S, M, L, XL, Cappuccio, Cerniera, Tasche, PrezzoBase, Materiale) VALUES(?,?,?,?,?,?,?,?,?,?)");
-        pst.setString(1,cv);
-        pst.setInt(2,sv);
-        pst.setInt(3,mv);
-        pst.setInt(4,lv);
-        pst.setInt(5,xlv);
-        pst.setInt(6,cppv);
-        pst.setInt(7,cernv);
-        pst.setInt(8,tasv);
-        pst.setFloat(9,pbv);
-        pst.setString(10,Matv);
-        pst.executeUpdate();
-        conn.close();
-        System.out.println("Fatto");
-        }catch(SQLException ex)
-     {
-         System.out.println("ErrorSql!");
-     }
+        f.inserisciFelpa(cv, sv, mv, lv, xlv, cppv, cernv, tasv, pbv, Matv);
+    }
+    
+    public void cambiaQuantitaFelpa(int id,int q,String taglia) 
+    {
+        f.cambiaQuantitaFelpa(id, q, taglia);
+    }
+    
+    public void eliminaFelpa(int id)
+    {
+        f.eliminaFelpa(id);
     }
     
     public void inserisciBorsa(String mod,String col,float pb,int q)
     {
-        try{
-        Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "root", "");
-        PreparedStatement pst=conn.prepareStatement("INSERT INTO borse(Modello,Colore,PrezzoBase,Quantità) VALUES(?,?,?,?)");
-        pst.setString(1,mod);
-        pst.setString(2,col);
-        pst.setFloat(3,pb);
-        pst.setInt(4,q);
-        pst.executeUpdate();
-        conn.close();
-        System.out.println("Fatto");
-        }catch(SQLException ex)
-     {
-         System.out.println("ErrorSql!");
-     }
+        b.inserisciBorsa(mod, col, pb, q);
     }
     
-     public void inserisciGiubbotto(String gen,String mat,String col,int s,int m,int l,int xl,float pb)
+    public void cambiaQuantitaBorsa(int id,int q)
     {
-        try{
-        Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "root", "");
-        PreparedStatement pst=conn.prepareStatement("INSERT INTO giubbotto(Genere,Materiale,Colore,S,M,L,XL,PrezzoBase) VALUES(?,?,?,?,?,?,?,?)");
-        pst.setString(1,gen);
-        pst.setString(2,mat);
-        pst.setString(3,col);
-        pst.setInt(4,s);
-        pst.setInt(5,m);
-        pst.setInt(6,l);
-        pst.setInt(7,xl);
-        pst.setFloat(8,pb);
-        pst.executeUpdate();
-        conn.close();
-        System.out.println("Fatto");
-        }catch(SQLException ex)
-     {
-         System.out.println("ErrorSql!");
-     }
+        b.cambiaQuantitaBorsa(id, q);
     }
-     
+    
+    public void eliminaBorsa(int id)
+    {
+        b.eliminaBorsa(id);
+    }   
+    
+    public void inserisciGiubbotto(String gen,String mat,String col,int s,int m,int l,int xl,float pb)
+    {
+        g.inserisciGiubbotto(gen, mat, col, s, m, l, xl, pb);
+    }
+    
+    public void cambiaQuantitaGiubbotto(int id,int q,String taglia)
+    {
+        g.cambiaQuantitaGiubbotto(id, q, taglia);
+    }
+    
+    public void eliminaGiubbotto(int id)
+    {
+        g.eliminaGiubbotto(id);
+    }
+    
        public void inserisciPantalone(String gen,String col,String mat,String mod,int s,int m,int l,int xl,float pb)
     {
-        try{
-        Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "root", "");
-        PreparedStatement pst=conn.prepareStatement("INSERT INTO pantaloni(Genere,Colore,Materiale,Modello,S,M,L,XL,PrezzoBase) VALUES(?,?,?,?,?,?,?,?,?)");
-        pst.setString(1,gen);
-        pst.setString(2,col);
-        pst.setString(3,mat);
-        pst.setString(4,mod);
-        pst.setInt(5,s);
-        pst.setInt(6,m);
-        pst.setInt(7,l);
-        pst.setInt(8,xl);
-        pst.setFloat(9,pb);
-        pst.executeUpdate();
-        conn.close();
-        System.out.println("Fatto");
-        }catch(SQLException ex)
-     {
-         System.out.println("ErrorSql!");
-     }
-    }
-  
-       public void inserisciTshirt(String gen,String col,int s,int m,int l,int xl,String scol,String maniche,String mat,float pb)
-    {
-        try{
-        Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "root", "");
-        PreparedStatement pst=conn.prepareStatement("INSERT INTO maglia(Genere,Colore,S,M,L,XL,Scollatura,Maniche,Materiale,PrezzoBase) VALUES(?,?,?,?,?,?,?,?)");
-        pst.setString(1,gen);
-        pst.setString(2,col);
-        pst.setInt(3,s);
-        pst.setInt(4,m);
-        pst.setInt(5,l);
-        pst.setInt(6,xl);
-        pst.setString(7,scol);
-        pst.setString(8,maniche);
-        pst.setString(9,mat);
-        pst.setFloat(10,pb);
-        pst.executeUpdate();
-        conn.close();
-        System.out.println("Fatto");
-        }catch(SQLException ex)
-     {
-         System.out.println("ErrorSql!");
-     }
+        j.inserisciPantalone(gen, col, mat, mod, s, m, l, xl, pb);
     }
        
-    public void inserisciPubblicità(String tc,String form,float sp,String col,float pb,int q)
+    public void cambiaQuantitaPantalone(int id,int q,String taglia)
     {
-        try{
-            Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "root", "");
-            PreparedStatement pst=conn.prepareStatement("INSERT into pubblicità(TipoCarta,Formato,Spessore,Colore,PrezzoBase,Quantità) VALUES (?,?,?,?,?,?)");
-            pst.setString(1,tc);
-            pst.setString(2,form);
-            pst.setFloat(3,sp);
-            pst.setString(4,col);
-            pst.setFloat(5,pb);
-            pst.setInt(6,q);
-            pst.executeUpdate();
-            conn.close();
-            System.out.println("Fatto");
-        }catch(SQLException ex)
-        {
-            System.out.println("Errore SQL!");
-        }
+        j.cambiaQuantitaPantalone(id,q,taglia);
     }
     
-    public void cambiaQuantitaBorsa(int id,int q) //cambia la quantità
-    // NB: AGGIORNA, NON SOTTRAE! Se ho 20 maglie e ne ordino 5, 
-    //alla funzione dovrò passare 15, il risultato già della sottrazione
-    //la sottrazione sarà fatta dalla riga di codice precedente al richiamo della funzione
-    {
-        try{ 
-        int qatt=this.getQuantitaAttuale("borse",id);
-        if(q<=qatt)
-        {
-            //questa parte funziona quella prima di controllo no, ma il compilatore
-            //non da' errori, eseguendolo da solo Errore Sql
-        Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "root", "");
-        PreparedStatement pst=conn.prepareStatement("UPDATE borse SET Quantità=? WHERE IDborse=?");
-        pst.setInt(1,q);
-        pst.setInt(2,id);
-        pst.executeUpdate();
-        pst.close();
-        conn.close();
-        System.out.println("Fatto");
-        }
-        else
-        {System.out.println("Quantità ecceduta!");}
-        }catch(SQLException ex)
-        {
-            System.out.println("Errore SQL!");
-        }
-    }
-    
-    public int getQuantitaAttuale(String tabella,int id)
-    {
-        try{
-        Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "root", "");
-        Statement st=conn.createStatement();
-        ResultSet res=st.executeQuery("SELECT * FROM "+tabella+" WHERE IDborse="+id+""); //gli spazi sono importanti!!
-        //altrimenti è come scrivere FROMtabella che non è un comando sql
-        
-        if(res.next())
-        {
-            int q=res.getInt("Quantità");
-            System.out.println("La quantità è: "+q+"");
-            return q;
-        }
-        res.close(); //chiudere prima res
-        conn.close(); //poi connessione
-        }catch(SQLException ex)
-        {
-            System.out.println("Errore SQL!");
-            ex.printStackTrace();
-        }
-        return -1;
-    }
+     public void eliminaPantalone(int id)
+     {
+         j.eliminaPantalone(id);
+     }
+     
+     public void inserisciTshirt(String gen,String col,int s,int m,int l,int xl,String scol,String maniche,String mat,float pb)
+     {
+         t.inserisciTshirt(gen, col, s, m, l, xl, scol, maniche, mat, pb);
+     }
+  
+     public void cambiaQuantitaTshirt(int id,int q,String taglia)
+     {
+         t.cambiaQuantitaTshirt(id,q,taglia);
+     }
+     
+     public void eliminaTshirt(int id)
+     {
+         t.eliminaTshirt(id);
+     }
+     
+     public void inserisciPubblicità(String tc,String form,float sp,String col,float pb,int q)
+     {
+         p.inserisciPubblicità(tc, form, sp, col, pb, q);
+     }
+     
+     public void cambiaQuantitaPubblicità(int id,int q)
+     {
+         p.cambiaQuantitaPubblicità(id, q);
+     }
+     
+     public void eliminaPubblicità(int id)
+     {
+         p.eliminaPubblicità(id);
+     }
+     
+     
 }
