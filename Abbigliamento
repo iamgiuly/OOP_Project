@@ -1,3 +1,6 @@
+git fetch origin
+git checkout -b Abbigliamento origin/Abbigliamento
+git merge master
 package abbigliamento;
 import merce.*; 
 
