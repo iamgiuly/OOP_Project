@@ -1,0 +1,32 @@
+package abbigliamento;
+
+/**
+ *
+ * @author Giulia Evangelisti
+ */
+public class Giubbotto extends Abbigliamento {
+    
+    public Giubbotto()
+    {
+        this.genere="NotDefined";
+        this.materiale="Cotone";
+        this.Pers=false;
+        this.NrPers=0;
+        this.colore="Bianco";
+        this.prezzobase=0;
+        this.Tipostampa="Notdefined";
+        this.PrezzoUnitario=0;
+    }
+    public Giubbotto (String g, String m, boolean p, int np, String color, int pb, String tipo, float pu)
+    {
+        this.genere=g;
+        this.materiale=m;
+        this.Pers=p;
+        this.NrPers=np;
+        this.colore=color;
+        this.prezzobase=pb;
+        this.Tipostampa=tipo;
+        this.PrezzoUnitario=pu;
+    }
+
+}
