@@ -1,0 +1,95 @@
+package abbigliamento;
+
+/**
+ *
+ * @author Giulia Evangelisti
+ */
+public class Felpa extends Abbigliamento {
+    boolean cappuccio;
+    boolean tasche;
+    boolean cerniera;
+    
+    public void setcapp(boolean c){
+        this.cappuccio=c;
+    }
+    
+    public void getcapp(){
+        if (this.cappuccio==true)
+            System.out.println("Cappuccio Presente");
+        else 
+            System.out.println("Cappuccio non presente");
+    }
+    
+    public void settasche(boolean t){
+        this.tasche=t;
+    }
+    
+    public void gettasche(){
+        if (this.tasche==true)
+            System.out.println("Tasche presenti");
+        else 
+            System.out.println("Tasche non presenti");
+    }
+       
+    public void setcerniera(boolean c){
+        this.cerniera=c;
+    }
+    
+    public void getcerniera(){
+        if (this.cerniera==true)
+            System.out.println("Cerniera Presente");
+        else 
+            System.out.println("Cerniera non presente");
+    }
+    
+    
+    public Felpa()
+    {
+        this.genere="NotDefined";
+        this.materiale="Cotone";
+        this.Pers=false;
+        this.NrPers=0;
+        this.colore="Bianco";
+        this.prezzobase=0;
+        this.cappuccio=false;
+        this.tasche=false;
+        this.cerniera=false;
+        this.Tipostampa="Notdefined";
+        this.PrezzoUnitario=0;
+    }
+    public Felpa(String g, String m, boolean p, int np, String color, int pb, boolean capp, boolean tasc, boolean cern, String tipo, float pu)
+    {
+        this.genere=g;
+        this.materiale=m;
+        this.Pers=p;
+        this.NrPers=np;
+        this.colore=color;
+        this.prezzobase=pb;
+        this.cappuccio=capp;
+        this.tasche=tasc;
+        this.cerniera=cern;
+        this.Tipostampa=tipo;
+        this.PrezzoUnitario=pu;
+    }
+    
+        public double CalcoloPU(String m, int nrpers, boolean p, String color, String tipo, boolean cern, boolean capp, boolean tasc){
+    if (!"Bianco".equals(color))
+            this.PrezzoUnitario+=1.00;
+    else if (capp==true)
+        this.PrezzoUnitario+=2.00;
+    else if (cern==true)
+        this.PrezzoUnitario+=1.50;
+    else if (tasc==true)
+        this.PrezzoUnitario+=2.00;
+    else if (p==true){
+         if(tipo=="Serigrafia")
+             this.PrezzoUnitario+=2.00*nrpers;
+         if(tipo=="Transfer")
+             this.PrezzoUnitario+=3.00*nrpers;
+         if(tipo=="Digitale")
+             this.PrezzoUnitario+=4.00*nrpers;
+    }
+    return this.PrezzoUnitario;
+        }
+
+}
