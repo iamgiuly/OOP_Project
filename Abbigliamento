@@ -1,0 +1,102 @@
+package abbigliamento;
+import merce.*; 
+
+/**
+ *
+ * @author Giulia Evangelisti
+ */
+public class Abbigliamento extends Merce { 
+
+String genere;
+String materiale;
+boolean Pers;
+int NrPers; 
+double prezzobase;
+String colore;
+String Tipostampa;
+double PrezzoUnitario=0;
+
+
+public void setGenere(String gen)
+{
+    this.genere=gen;
+}
+public void getGenere()
+{
+    System.out.println(genere);
+}
+public void setMateriale(String m){
+    this.materiale=m;
+   
+}
+public void getMateriale(){
+    System.out.println(this.materiale);
+}
+
+public void setPrezzoBase(double pb)
+    {
+        prezzobase=pb;
+    }
+    public void getPrezzoBase()
+    {
+        System.out.println(prezzobase);
+    }
+public void setNumPers(boolean p, int num){
+        if (p==true && num<=8)
+            NrPers=num; 
+        else if (num>8)
+            System.out.println("Non e' possibile applicare più di 8 personalizzazioni"); 
+                    else if(p==false)
+                        System.out.println("Non sono previste personalizzazioni");}
+
+public void getNumPers(){
+        System.out.println(NrPers);
+    }
+
+public void setcolore(String s){
+    this.colore=s;
+}
+
+public void getcolore(){
+    System.out.println(this.colore);
+}
+
+public void setTipost(String tipo){
+    this.Tipostampa=tipo;
+}
+
+public void getTipost(){
+    System.out.println(this.Tipostampa);
+    
+}
+
+public void setPzUnitario(float pu){
+    this.PrezzoUnitario=pu;
+}
+
+public void getPzUnitario(){
+    System.out.println(this.PrezzoUnitario);
+}
+
+public Abbigliamento()
+{ 
+    genere="";
+    materiale="";
+    NrPers=0;
+    Pers=false; 
+    prezzobase=0;
+    this.colore="Bianco";
+    PrezzoUnitario=0;
+}
+public Abbigliamento(String g, String m, int nrpers, boolean p, double pb, String s)
+{
+    
+    genere=g;
+    materiale=m;
+    NrPers=nrpers;
+    Pers=p; 
+    prezzobase=pb;
+    this.colore=s;
+}
+}
+
