@@ -41,5 +41,24 @@ public class Borsa extends Abbigliamento {
     this.Tipostampa=tipo;
     this.PrezzoUnitario=pu;
     
-    }  }
+    }
+    
+    
+    public double CalcoloPU(String m, int nrpers, boolean p, String mo, String color, String tipo){
+    if (!"Bianco".equals(color))
+            this.PrezzoUnitario+=1.00;
+    else if (p==true){
+         if(tipo=="Serigrafia")
+             PrezzoUnitario+=2.00*this.NrPers;
+         if(tipo=="Transfer")
+             PrezzoUnitario+=3.00*this.NrPers;
+         if(tipo=="Digitale")
+             PrezzoUnitario+=4.00*this.NrPers;
+    }
+    else if ("Zaino".equals(mo)){
+        PrezzoUnitario+=3.00;}
+    return PrezzoUnitario;
+        }
+        
+    }
     
