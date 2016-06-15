@@ -49,11 +49,11 @@ public class Borsa extends Abbigliamento {
             this.PrezzoUnitario+=1.00;
     else if (p==true){
          if(tipo=="Serigrafia")
-             PrezzoUnitario+=2.00*this.NrPers;
+             PrezzoUnitario+=2.00*nrpers;
          if(tipo=="Transfer")
-             PrezzoUnitario+=3.00*this.NrPers;
+             PrezzoUnitario+=3.00*nrpers;
          if(tipo=="Digitale")
-             PrezzoUnitario+=4.00*this.NrPers;
+             PrezzoUnitario+=4.00*nrpers;
     }
     else if ("Zaino".equals(mo)){
         PrezzoUnitario+=3.00;}
