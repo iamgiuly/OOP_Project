@@ -27,7 +27,7 @@ public Maglia()
     this.materiale="";
     this.NrPers=0;
     this.Pers=false; 
-    this.prezzobase=0;
+    this.prezzobase=5.00;
     this.colore="Bianco";
     this.Tipostampa="notdefined";
     this.scollatura=false;
@@ -35,14 +35,13 @@ public Maglia()
     this.PrezzoUnitario=0;
     
 }
-public Maglia (String g, String m, int nrpers, boolean p, float pb, String s, String tipo, boolean scoll, boolean manica, float pu)
+public Maglia (String g, String m, int nrpers, boolean p, String s, String tipo, boolean scoll, boolean manica, float pu)
 {
     
     this.genere=g;
     this.materiale=m;
     this.NrPers=nrpers;
     this.Pers=p; 
-    this.prezzobase=pb;
     this.colore=s;
     this.Tipostampa=tipo;
     this.scollatura=scoll;
@@ -50,7 +49,7 @@ public Maglia (String g, String m, int nrpers, boolean p, float pb, String s, St
     this.PrezzoUnitario=pu;
 }
 
-    public double CalcoloPU(String m, int nrpers, boolean p, String color, String tipo, boolean scoll, boolean manica){
+    public double CalcoloPU(int nrpers, boolean p, String color, String tipo, boolean scoll, boolean manica){
     if (!"Bianco".equals(color))
             this.PrezzoUnitario+=1.00;
     if(scoll==true)
