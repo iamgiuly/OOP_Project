@@ -1,0 +1,23 @@
+package ordini;
+import abbigliamento.*;
+
+/**
+ *
+ * @author Giulia Evangelisti
+ */
+
+public class PreventivoMaglia {
+    double parzialeMaglia;
+    Maglia maglia;
+    
+    public PreventivoMaglia(){
+        this.parzialeMaglia=0;
+    }
+    
+    public double ParzialeMaglia(int nrpers, boolean p, String color, String tipo, boolean scoll, boolean manica){
+        maglia = new Maglia();
+        parzialeMaglia+=maglia.CalcoloPU(nrpers, p, color, tipo, scoll, manica);
+    return parzialeMaglia;
+    }
+    
+}
