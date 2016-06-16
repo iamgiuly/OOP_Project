@@ -53,11 +53,11 @@ public Maglia (String g, String m, int nrpers, boolean p, float pb, String s, St
     public double CalcoloPU(String m, int nrpers, boolean p, String color, String tipo, boolean scoll, boolean manica){
     if (!"Bianco".equals(color))
             this.PrezzoUnitario+=1.00;
-    else if(scoll==true)
+    if(scoll==true)
         this.PrezzoUnitario*=1.00;
-    else if (manica==true)
+    if (manica==true)
         this.PrezzoUnitario*=1.00;
-    else if (p==true){
+    if (p==true){
          if(tipo=="Serigrafia")
              this.PrezzoUnitario+=2.00*nrpers;
          if(tipo=="Transfer")

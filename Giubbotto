@@ -28,5 +28,22 @@ public class Giubbotto extends Abbigliamento {
         this.Tipostampa=tipo;
         this.PrezzoUnitario=pu;
     }
+    
+            public double CalcoloPU(String m, int nrpers, boolean p, String color, String tipo, String materiale){
+    if (!"Bianco".equals(color))
+            this.PrezzoUnitario+=1.00;
+    if ("Pelle".equals(materiale))
+            this.PrezzoUnitario+=7.00;
+    if (p==true){
+         if(tipo=="Serigrafia")
+             this.PrezzoUnitario+=2.00*nrpers;
+         if(tipo=="Transfer")
+             this.PrezzoUnitario+=3.00*nrpers;
+         if(tipo=="Digitale")
+             this.PrezzoUnitario+=4.00*nrpers;
+    }
+
+    return this.PrezzoUnitario;
+        }
 
 }

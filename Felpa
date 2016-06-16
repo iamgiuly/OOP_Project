@@ -69,13 +69,13 @@ public class Felpa extends Abbigliamento {
         public double CalcoloPU(String m, int nrpers, boolean p, String color, String tipo, boolean cern, boolean capp, boolean tasc){
     if (!"Bianco".equals(color))
             this.PrezzoUnitario+=1.00;
-    else if (capp==true)
+    if (capp==true)
         this.PrezzoUnitario+=2.00;
-    else if (cern==true)
+    if (cern==true)
         this.PrezzoUnitario+=1.50;
-    else if (tasc==true)
+    if (tasc==true)
         this.PrezzoUnitario+=2.00;
-    else if (p==true){
+    if (p==true){
          if(tipo=="Serigrafia")
              this.PrezzoUnitario+=2.00*nrpers;
          if(tipo=="Transfer")
