@@ -1,7 +1,5 @@
 package abbigliamento;
 
-import java.util.Objects;
-
 /**
  *
  * @author Giulia Evangelisti
@@ -43,7 +41,7 @@ public class Borsa extends Abbigliamento {
     this.Tipostampa=tipo;
     
     }
-    public double CalcoloPU(String m, int nrpers, boolean p, String mo, String color, String tipo){
+    public double CalcoloPU(int nrpers, boolean p, String mo, String color, String tipo){
     if (!"Bianco".equals(color))
             this.PrezzoUnitario+=1.00;
     if (p==true){

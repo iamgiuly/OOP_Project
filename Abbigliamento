@@ -99,4 +99,3 @@ public Abbigliamento(String g, String m, int nrpers, boolean p, double pb, Strin
     this.colore=s;
 }
 }
-

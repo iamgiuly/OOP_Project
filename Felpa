@@ -1,3 +1,9 @@
+package abbigliamento;
+
+/**
+ *
+ * @author Giulia Evangelisti
+ */
 public class Felpa extends Abbigliamento {
     boolean cappuccio;
     boolean tasche;
@@ -44,21 +50,20 @@ public class Felpa extends Abbigliamento {
         this.Pers=false;
         this.NrPers=0;
         this.colore="Bianco";
-        this.prezzobase=0;
+        this.prezzobase=7.00; //Per ora il pb si può modificare solo richiamando la setpb
         this.cappuccio=false;
         this.tasche=false;
         this.cerniera=false;
         this.Tipostampa="Notdefined";
         this.PrezzoUnitario=0;
     }
-    public Felpa(String g, String m, boolean p, int np, String color, int pb, boolean capp, boolean tasc, boolean cern, String tipo, float pu)
+    public Felpa(String g, String m, boolean p, int np, String color, boolean capp, boolean tasc, boolean cern, String tipo, float pu)
     {
         this.genere=g;
         this.materiale=m;
         this.Pers=p;
         this.NrPers=np;
         this.colore=color;
-        this.prezzobase=pb;
         this.cappuccio=capp;
         this.tasche=tasc;
         this.cerniera=cern;
@@ -66,7 +71,7 @@ public class Felpa extends Abbigliamento {
         this.PrezzoUnitario=pu;
     }
     
-        public double CalcoloPU(String m, int nrpers, boolean p, String color, String tipo, boolean cern, boolean capp, boolean tasc){
+        public double CalcoloPU(int nrpers, boolean p, String color, String tipo, boolean cern, boolean capp, boolean tasc){
     if (!"Bianco".equals(color))
             this.PrezzoUnitario+=1.00;
     if (capp==true)
