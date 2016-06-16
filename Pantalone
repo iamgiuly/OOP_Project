@@ -21,7 +21,7 @@ public Pantalone()
     this.materiale="";
     this.NrPers=0;
     this.Pers=false; 
-    this.prezzobase=0;
+    this.prezzobase=6.00;
     this.colore="Bianco";
     this.Tipostampa="notdefined";
     this.model="notdefined";
@@ -29,19 +29,18 @@ public Pantalone()
     
 }
 
-public Pantalone(String g, String m, int nrpers, boolean p, float pb, String s, String tipost, String mod, float pu)
+public Pantalone(String g, String m, int nrpers, boolean p, String s, String tipost, String mod, float pu)
 { 
     this.genere=g;
     this.materiale=m;
     this.NrPers=nrpers;
     this.Pers=p; 
-    this.prezzobase=pb;
     this.colore=s;
     this.Tipostampa=tipost;
     this.model=mod;
     this.PrezzoUnitario=pu;
 }
-    public double CalcoloPU(String m, int nrpers, boolean p, String color, String tipo, String mo){
+    public double CalcoloPU(int nrpers, boolean p, String color, String tipo, String mo){
     if (!"Bianco".equals(color))
             this.PrezzoUnitario+=1.00;
     if ("Lunghi".equals(mo))
