@@ -9,27 +9,26 @@ public class Giubbotto extends Abbigliamento {
     public Giubbotto()
     {
         this.genere="NotDefined";
-        this.materiale="Cotone";
+        this.materiale="Pelle";
         this.Pers=false;
         this.NrPers=0;
-        this.colore="Bianco";
-        this.prezzobase=0;
+        this.colore="Nero";
+        this.prezzobase= 15.00;
         this.Tipostampa="Notdefined";
-        this.PrezzoUnitario=0;
+        this.PrezzoUnitario=0; // mi sa che non serve
     }
-    public Giubbotto (String g, String m, boolean p, int np, String color, int pb, String tipo, float pu)
+    public Giubbotto (String g, String m, boolean p, int np, String color, String tipo, float pu)
     {
         this.genere=g;
         this.materiale=m;
         this.Pers=p;
         this.NrPers=np;
         this.colore=color;
-        this.prezzobase=pb;
         this.Tipostampa=tipo;
         this.PrezzoUnitario=pu;
     }
     
-            public double CalcoloPU(String m, int nrpers, boolean p, String color, String tipo, String materiale){
+        public double CalcoloPU(int nrpers, boolean p, String color, String tipo, String materiale){
     if (!"Bianco".equals(color))
             this.PrezzoUnitario+=1.00;
     if ("Pelle".equals(materiale))
