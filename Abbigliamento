@@ -99,21 +99,3 @@ public Abbigliamento(String g, String m, int nrpers, boolean p, double pb, Strin
     this.colore=s;
 }
 }
-
-
-    prezzobase=0;
-    this.colore="Bianco";
-    PrezzoUnitario=0;
-}
-public Abbigliamento(String g, String m, int nrpers, boolean p, double pb, String s)
-{
-    
-    genere=g;
-    materiale=m;
-    NrPers=nrpers;
-    Pers=p; 
-    prezzobase=pb;
-    this.colore=s;
-}
-}
-
