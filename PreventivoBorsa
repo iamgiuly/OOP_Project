@@ -1,0 +1,22 @@
+package ordini;
+import abbigliamento.*;
+
+/**
+ *
+ * @author Giulia Evangelisti
+ */
+public class PreventivoBorsa {
+    double parzialeBorsa;
+    Borsa borsa;
+    
+    //qui si potrebbe fare un'interfaccia del metodo visto che si ripete in tutte le classi Preventivo(Maglia,Borsa,...)
+    public PreventivoBorsa(){
+        this.parzialeBorsa=0;
+    }
+    
+    public double ParzialeBorsa(int nrpers, boolean p, String model, String color, String tipo){
+        borsa = new Borsa();
+        parzialeBorsa+=borsa.CalcoloPU(nrpers, p, model, color, tipo);
+    return parzialeBorsa;
+    }   
+}
