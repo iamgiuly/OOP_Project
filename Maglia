@@ -1,61 +1,50 @@
 package abbigliamento;
-public class Maglia extends Abbigliamento {
-    
-    boolean scollatura;
-    boolean maniche;
 
+/**
+ *
+ * @author Giulia Evangelisti
+ */
+public class Pantalone extends Abbigliamento {
+    String model;
     
+public void setMod (String mod){
+    this.model=mod;
+}
 
-    
-    public void setScollatura(boolean b){
-       scollatura=b;
-    }
-    public void getScollatura(){
-        System.out.println(scollatura);
-    }
-    public void setManiche(boolean b){
-        maniche=b;
-    }
-    public void getManiche(){
-        System.out.println(maniche);
-    }
-    
+public void geMod(){
+    System.out.println(this.model);
+}
 
-public Maglia()
+public Pantalone()
 { 
     this.genere="";
     this.materiale="";
     this.NrPers=0;
     this.Pers=false; 
-    this.prezzobase=5.00;
+    this.prezzobase=6.00;
     this.colore="Bianco";
     this.Tipostampa="notdefined";
-    this.scollatura=false;
-    this.maniche=false;
+    this.model="notdefined";
     this.PrezzoUnitario=0;
     
 }
-public Maglia (String g, String m, int nrpers, boolean p, String s, String tipo, boolean scoll, boolean manica, float pu)
-{
-    
+
+public Pantalone(String g, String m, int nrpers, boolean p, String s, String tipost, String mod, float pu)
+{ 
     this.genere=g;
     this.materiale=m;
     this.NrPers=nrpers;
     this.Pers=p; 
     this.colore=s;
-    this.Tipostampa=tipo;
-    this.scollatura=scoll;
-    this.maniche=manica;
+    this.Tipostampa=tipost;
+    this.model=mod;
     this.PrezzoUnitario=pu;
 }
-
-    public double CalcoloPU(int nrpers, boolean p, String color, String tipo, boolean scoll, boolean manica){
+    public double CalcoloPU(int nrpers, boolean p, String color, String tipo, String mo){
     if (!"Bianco".equals(color))
             this.PrezzoUnitario+=1.00;
-    if(scoll==true)
-        this.PrezzoUnitario*=1.00;
-    if (manica==true)
-        this.PrezzoUnitario*=1.00;
+    if ("Lunghi".equals(mo))
+        this.PrezzoUnitario+=2.00;
     if (p==true){
          if(tipo=="Serigrafia")
              this.PrezzoUnitario+=2.00*nrpers;
@@ -67,4 +56,5 @@ public Maglia (String g, String m, int nrpers, boolean p, String s, String tipo,
 
     return this.PrezzoUnitario;
         }
+
 }
