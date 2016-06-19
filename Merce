@@ -1,0 +1,55 @@
+package merce;
+/**
+ *
+ * @author Giulia Evangelisti
+ */
+
+enum colore {bianco, rosso, blu, verde, rosa, grigio}; //creo il tipo di dato per il colore in modo di fissre l'insieme possibile di colori
+enum stampa {serigrafia, termosaldato, digitale, transfer, notdefined}; //tipo di dato per descrivere la tipologia di stampa sulla merce
+
+public class Merce {
+
+    
+    int quantita; 
+    colore color; //creo un attributo di tipo colore sopra definito (enum)
+    stampa tipoStampa; //creo un attributo di tipo stampa sopra definito (enum)
+    
+    /* Di seguito abbiamo tutti i metodi set e get necessari per accedere agli attributi della classe Merce */
+    
+    void setquantita(int quant){
+        this.quantita=quant;}
+    
+    void getquantita(){
+    System.out.println(this.quantita);    }
+    
+    void setcolore(colore c){
+        color=c; 
+    }
+    void getcolore(){
+        System.out.println(color);
+    }
+    
+    void setStampa(stampa s){
+        tipoStampa=s;
+    }
+    
+    void getStampa(){
+        System.out.println(tipoStampa);
+    }
+    
+    /*Costruttore con parametri */
+    public Merce(int q, colore c, stampa s){
+       quantita=q;
+       color=c;
+       tipoStampa=s;
+       
+    }
+    
+    /* Costruttore senza paramentri, inizializza la variabile a -1 */
+    public Merce(){
+        quantita=-1; 
+        tipoStampa= stampa.notdefined; //Nel costruttore senza parametri verrà impostato il tipo stampa a notdefined
+        color= colore.bianco;         //essendo una enum una specie di struct vi si accede come di consueto indicando il  nome.elemento
+        //il bianco è il colore più comune!
+        
+    }}
