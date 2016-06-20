@@ -1,22 +1,20 @@
 package ordini;
 import abbigliamento.*;
-
 /**
  *
  * @author Giulia Evangelisti
  */
-public class PreventivoBorsa {
-    double parzialeBorsa;
-    Borsa borsa;
+public class PreventivoFelpa {
+    double parzialeFelpa;
+    Felpa felpa;
     
-    //qui si potrebbe fare un'interfaccia del metodo visto che si ripete in tutte le classi Preventivo(Maglia,Borsa,...)
-    public PreventivoBorsa(){
-        this.parzialeBorsa=0;
+    public PreventivoFelpa(){
+        this.parzialeFelpa=0;
     }
     
-    public double ParzialeBorsa(int nrpers, boolean p, String model, String color, String tipo){
-        borsa = new Borsa();
-        parzialeBorsa+=borsa.CalcoloPU(nrpers, p, model, color, tipo);
-    return parzialeBorsa;
-    }   
+    public double ParzialeFelpa (int nrpers, boolean p, String color, String tipo, boolean cern, boolean capp, boolean tasche){
+        felpa = new Felpa();
+        parzialeFelpa+=felpa.CalcoloPU(nrpers, p, color, tipo, cern, capp, tasche);
+    return parzialeFelpa;
+    }
 }
