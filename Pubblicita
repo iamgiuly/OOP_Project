@@ -3,7 +3,7 @@ import merce.*;
 
 /**
  *
- * @author Giulia
+ * @author Giulia Evangelisti
  */
 public class Pubblicita extends Merce {
     String TipoCarta;
