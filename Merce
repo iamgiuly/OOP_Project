@@ -4,52 +4,39 @@ package merce;
  * @author Giulia Evangelisti
  */
 
-enum colore {bianco, rosso, blu, verde, rosa, grigio}; //creo il tipo di dato per il colore in modo di fissre l'insieme possibile di colori
-enum stampa {serigrafia, termosaldato, digitale, transfer, notdefined}; //tipo di dato per descrivere la tipologia di stampa sulla merce
-
 public class Merce {
 
+    String colore; 
+    double PrezzoUnitario=0;
     
-    int quantita; 
-    colore color; //creo un attributo di tipo colore sopra definito (enum)
-    stampa tipoStampa; //creo un attributo di tipo stampa sopra definito (enum)
     
     /* Di seguito abbiamo tutti i metodi set e get necessari per accedere agli attributi della classe Merce */
     
-    void setquantita(int quant){
-        this.quantita=quant;}
-    
-    void getquantita(){
-    System.out.println(this.quantita);    }
-    
-    void setcolore(colore c){
-        color=c; 
+
+    public void setcolore(String c){
+        colore=c; 
     }
-    void getcolore(){
-        System.out.println(color);
+    public String getcolore(){
+        return this.colore;
     }
     
-    void setStampa(stampa s){
-        tipoStampa=s;
+    public void setPU(double pu){
+        this.PrezzoUnitario=pu;
     }
     
-    void getStampa(){
-        System.out.println(tipoStampa);
+    public double getPU(){
+        return this.PrezzoUnitario;
     }
     
     /*Costruttore con parametri */
-    public Merce(int q, colore c, stampa s){
-       quantita=q;
-       color=c;
-       tipoStampa=s;
-       
+    public Merce(String colore, double pu){
+        this.colore=colore;
+        this.PrezzoUnitario=pu;
     }
     
     /* Costruttore senza paramentri, inizializza la variabile a -1 */
     public Merce(){
-        quantita=-1; 
-        tipoStampa= stampa.notdefined; //Nel costruttore senza parametri verrà impostato il tipo stampa a notdefined
-        color= colore.bianco;         //essendo una enum una specie di struct vi si accede come di consueto indicando il  nome.elemento
-        //il bianco è il colore più comune!
+        this.colore="Bianco";
+        this.PrezzoUnitario=0;
         
     }}
