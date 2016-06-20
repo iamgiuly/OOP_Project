@@ -1,0 +1,120 @@
+package pubblicita;
+import merce.*;
+
+/**
+ *
+ * @author Giulia Evangelisti
+ */
+public class Pubblicita extends Merce {
+    String TipoCarta;
+    String formato;
+    String ColoreCarta;
+    String spessore; 
+    boolean coloreStampa;
+    double prezzounitario=0;
+    double parzialeSpessore=0;
+    //il tipo stampa è uno solo, il numero stampe è uno, l'ho considerato così poi si può sempre modificare
+
+    public String getTipoCarta()
+    {
+        return this.TipoCarta;
+    }
+    public void setTipoCarta(String tc)
+    {
+        this.TipoCarta=tc;
+    }
+    public String getSpessore()
+    {
+        return this.spessore;
+    }
+    public void setSpessore(String sp)
+    {
+        this.spessore=sp;
+    }
+    public String getColoreCarta(){
+        return this.ColoreCarta;
+    }
+    public void setColoreCarta(String cc){
+        this.ColoreCarta=cc;
+    }
+    public String getFormato()
+    {
+        return this.formato;
+    }
+    public void setFormato(String form)
+    {
+        this.formato=form;
+    }
+    public boolean getColoreStampa(){
+        return this.coloreStampa;
+    }
+    public void setColoreStampa(boolean cs){
+        this.coloreStampa=cs;
+    }
+    
+
+            
+    public Pubblicita()
+    {
+        this.TipoCarta="Liscia";
+        this.formato="A4";
+        this.coloreStampa=false;
+        this.spessore="7 mm";
+    }
+    public Pubblicita(String tc, String cc, String formato, boolean cs, String sp)
+    {
+        this.TipoCarta=tc;
+        this.formato=formato;
+        this.coloreStampa=cs;
+        this.spessore=sp;
+    }
+    public double calcoloSP(String sp){
+        if(sp!=null) switch(sp){
+            case "7 mm":
+                parzialeSpessore+=0.60;
+                break;
+            case "10 mm":
+                parzialeSpessore+=0.80;
+                break;
+            case "1 cm":
+                parzialeSpessore+=1.30;
+        }
+        return parzialeSpessore;
+    }
+    
+    public double calcoloPU(String cc, String formato, boolean cs, String sp){
+       if(!"Bianco".equals(cc))
+           prezzounitario+=2.00;
+       if(formato!=null) switch (formato){
+           case "A2":
+               prezzounitario+=2.5;
+               if (cs==true)
+                   prezzounitario+=3.00;
+               prezzounitario+=this.calcoloSP(sp);
+               break;
+           case "A3":
+               prezzounitario+=2.00;
+                if (cs==true)
+                   prezzounitario+=3.00;
+               prezzounitario+=this.calcoloSP(sp);              
+               break;
+           case "A4":
+               prezzounitario+=1.50;
+               if (cs==true)
+                   prezzounitario+=3.00;
+               prezzounitario+=this.calcoloSP(sp);               
+               break;
+           case "60x120":
+               prezzounitario+=5.00;
+               if (cs==true)
+                   prezzounitario+=3.00;
+               prezzounitario+=this.calcoloSP(sp);               
+               break;    
+           default:
+               System.out.println("Si è verificato un errore");
+               break; //Come si gestisce se una persona inserisce una scritta diversa?? Bisogna mettere secondo me un menù a tendina
+               }
+return prezzounitario;}
+    
+       
+}
