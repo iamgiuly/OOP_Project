@@ -10,7 +10,7 @@ package Ordini;
  *
  * @author Serena
  */
-    class IOException extends Exception {
+    class IOExeption extends Exception {          //Questa classe va su un altro file
     static void ThrowOne () throws IOExeption{
         System.out.println("All'interno di ThrowOne");
 
@@ -81,9 +81,15 @@ public class Personalizzazione {
      * Inoltre, nel caso in cui venga fornita una stringa "scorretta" stampa a video un messaggio
      * di errore e permette di reinserire l'informazione corretta, che verrà rianalizzata per
      * poter calcolare il prezzo giusto (ciclo do while). 
+     * @param ts
+     * @param i
+     * @param np
+     * @return 
+     * @throws Ordini.IOExeption
+     * @throws java.io.IOException
      */
     
-    public double prezzoPersonalizzazioni(String ts,String i,int np) throws IOException,IOException {
+    public double prezzoPersonalizzazioni(String ts,String i,int np) throws IOExeption,IOException {
         double prezzo=prezzoBase;
         BufferedReader br=new BufferedReader (new InputStreamReader(System.in));
         if(ts!=null && i!=null) switch(ts) {
