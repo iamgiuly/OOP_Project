@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -26,7 +27,7 @@ public class GestioneGiubbotto {
     public void inserisciGiubbotto(String gen,String mat,String col,int s,int m,int l,int xl,float pb)
     {
         try{
-            Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/oopproject", "admin", "password");
+            Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "admin", "password");
         PreparedStatement pst=conn.prepareStatement("INSERT INTO giubbotto(Genere,Materiale,Colore,S,M,L,XL,PrezzoBase) VALUES(?,?,?,?,?,?,?,?)");
         pst.setString(1,gen);
         pst.setString(2,mat);
@@ -48,7 +49,7 @@ public class GestioneGiubbotto {
     public int getQuantitaAttuale(int id, String taglia)
     {
         try{
-        Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/oopproject", "admin", "password");
+        Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "admin", "password");
         Statement st=conn.createStatement();
         ResultSet res=st.executeQuery("SELECT * FROM giubbotto WHERE IDgiubb="+id+""); 
         if(res.next())
@@ -78,7 +79,7 @@ public class GestioneGiubbotto {
         {
             //questa parte funziona quella prima di controllo no, ma il compilatore
             //non da' errori, eseguendolo da solo Errore Sql
-        Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/oopproject", "admin", "password");
+        Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "admin", "password");
         PreparedStatement pst=conn.prepareStatement("UPDATE giubbotto SET "+taglia+"=? WHERE IDgiubb=?");
         pst.setInt(1,q);
         pst.setInt(2,id);
@@ -98,7 +99,7 @@ public class GestioneGiubbotto {
     public void eliminaGiubbotto(int id)
     {
         try{
-            Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/oopproject", "admin", "password");
+            Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "admin", "password");
             Statement st=conn.createStatement();
             ResultSet rs=st.executeQuery("DELETE from giubbotto WHERE IDgiubb="+id+"");
         }catch(SQLException s)
@@ -107,4 +108,33 @@ public class GestioneGiubbotto {
             s.printStackTrace();
         }
     }
+    
+    public void visualizzaGiubbotti()
+     {
+         try{
+             Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "admin", "password");
+             Statement st=conn.createStatement();
+             ResultSet rs=st.executeQuery("SELECT * from giubbotto");
+             ResultSetMetaData rm=rs.getMetaData();
+             int numColonne=rm.getColumnCount();
+             for(int i=1; i<=numColonne;i++)
+             {
+                 System.out.print(rm.getColumnName(i) + "   ");
+             }
+             System.out.println();
+             while(rs.next())
+             {
+                 for(int i = 1 ; i <= numColonne; i++){ //stampa una riga
+                     System.out.print(rs.getString(i) + " ");
+                 }
+                 System.out.println();
+             }
+             st.close();
+             rs.close();
+             conn.close();
+         }catch(SQLException s)
+         {
+             System.out.println("Errore SQL!");
+         }
+     }
 }
