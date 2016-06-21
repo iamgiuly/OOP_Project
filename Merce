@@ -7,8 +7,9 @@ package merce;
 public class Merce {
 
     String colore; 
-    double PrezzoUnitario=0;
-    
+    double PrezzoUnitario;
+    double prezzobase;
+    boolean coloreStampa; //True se la stampa è a colori , false se è in bianco e nero
     
     /* Di seguito abbiamo tutti i metodi set e get necessari per accedere agli attributi della classe Merce */
     
@@ -20,6 +21,13 @@ public class Merce {
         return this.colore;
     }
     
+    public boolean getColoreStampa(){
+        return this.coloreStampa;
+    }
+    public void setColoreStampa(boolean cs){
+        this.coloreStampa=cs;
+    }
+    
     public void setPU(double pu){
         this.PrezzoUnitario=pu;
     }
@@ -28,15 +36,27 @@ public class Merce {
         return this.PrezzoUnitario;
     }
     
+    public void setPB(double pb){
+        this.prezzobase=pb;
+    }
+    
+    public double gelPB(){
+        return this.prezzobase;
+    }
+    
     /*Costruttore con parametri */
-    public Merce(String colore, double pu){
+    public Merce(String colore, double pu, double pb, boolean colorestampa){
         this.colore=colore;
         this.PrezzoUnitario=pu;
+        this.prezzobase=pb;
+        this.coloreStampa=colorestampa;
     }
     
     /* Costruttore senza paramentri, inizializza la variabile a -1 */
     public Merce(){
         this.colore="Bianco";
         this.PrezzoUnitario=0;
+        this.prezzobase=0;
+        this.coloreStampa=false;
         
     }}
