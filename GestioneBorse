@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -26,7 +27,7 @@ public class GestioneBorse {
     public void inserisciBorsa(String mod,String col,float pb,int q)
     {
         try{
-            Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/oopproject", "admin", "password");
+            Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "admin", "password");
         PreparedStatement pst=conn.prepareStatement("INSERT INTO borse(Modello,Colore,PrezzoBase,Quantità) VALUES(?,?,?,?)");
         pst.setString(1,mod);
         pst.setString(2,col);
@@ -52,7 +53,7 @@ public class GestioneBorse {
         {
             //questa parte funziona quella prima di controllo no, ma il compilatore
             //non da' errori, eseguendolo da solo Errore Sql
-        Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/oopproject", "admin", "password");
+        Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "admin", "password");
         PreparedStatement pst=conn.prepareStatement("UPDATE borse SET Quantità=? WHERE IDborsa=?");
         pst.setInt(1,q);
         pst.setInt(2,id);
@@ -72,7 +73,7 @@ public class GestioneBorse {
     public int getQuantitaAttuale(int id)
     {
         try{
-        Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/oopproject", "admin", "password");
+        Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "admin", "password");
         Statement st=conn.createStatement();
         ResultSet res=st.executeQuery("SELECT * FROM borse WHERE IDborse="+id+""); //gli spazi sono importanti!!
         //altrimenti è come scrivere FROMtabella che non è un comando sql
@@ -96,7 +97,7 @@ public class GestioneBorse {
     public void eliminaBorsa(int id)
     {
         try{
-            Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/oopproject", "admin", "password");
+            Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "admin", "password");
             Statement st=conn.createStatement();
             ResultSet rs=st.executeQuery("DELETE from borse WHERE IDborse="+id+"");
         }catch(SQLException s)
@@ -106,4 +107,35 @@ public class GestioneBorse {
         }
     }
     
+    public void visualizzaBorse()
+     {
+         try{
+             Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "admin", "password");
+             Statement st=conn.createStatement();
+             ResultSet rs=st.executeQuery("SELECT * from borse");
+             ResultSetMetaData rm=rs.getMetaData();
+             int numColonne=rm.getColumnCount();
+             for(int i=1; i<=numColonne;i++)
+             {
+                 System.out.print(rm.getColumnName(i) + "   ");
+             }
+             System.out.println();
+             while(rs.next())
+             {
+                 for(int i = 1 ; i <= numColonne; i++){ //stampa una riga
+                     System.out.print(rs.getString(i) + " ");
+                 }
+                 System.out.println();
+             }
+             st.close();
+             rs.close();
+             conn.close();
+         }catch(SQLException s)
+         {
+             System.out.println("Errore SQL!");
+         }
+     }
+    
 }
+
+
