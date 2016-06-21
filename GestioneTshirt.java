@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -23,21 +24,22 @@ public class GestioneTshirt {
         
     }
     
-    public void inserisciTshirt(String gen,String col,int s,int m,int l,int xl,String scol,String maniche,String mat,float pb)
+    public void inserisciMaglia(int idmaglia,String gen,String col,int s,int m,int l,int xl,String scol,String maniche,String mat,float pb)
     {
         try{
-            Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/oopproject", "admin", "password");
-        PreparedStatement pst=conn.prepareStatement("INSERT INTO maglia(Genere,Colore,S,M,L,XL,Scollatura,Maniche,Materiale,PrezzoBase) VALUES(?,?,?,?,?,?,?,?)");
-        pst.setString(1,gen);
-        pst.setString(2,col);
-        pst.setInt(3,s);
-        pst.setInt(4,m);
-        pst.setInt(5,l);
-        pst.setInt(6,xl);
-        pst.setString(7,scol);
-        pst.setString(8,maniche);
-        pst.setString(9,mat);
-        pst.setFloat(10,pb);
+            Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "admin", "password");
+        PreparedStatement pst=conn.prepareStatement("INSERT INTO maglia(IDmaglia,Genere,Colore,S,M,L,XL,Scollatura,Maniche,Materiale,PrezzoBase) VALUES(?,?,?,?,?,?,?,?,?,?,?)");
+        pst.setInt(1,idmaglia);
+        pst.setString(2,gen);
+        pst.setString(3,col);
+        pst.setInt(4,s);
+        pst.setInt(5,m);
+        pst.setInt(6,l);
+        pst.setInt(7,xl);
+        pst.setString(8,scol);
+        pst.setString(9,maniche);
+        pst.setString(10,mat);
+        pst.setFloat(11,pb);
         pst.executeUpdate();
         conn.close();
         System.out.println("Fatto");
@@ -50,7 +52,7 @@ public class GestioneTshirt {
     public int getQuantitaAttuale(int id, String taglia)
     {
         try{
-        Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/oopproject", "admin", "password");
+        Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "admin", "password");
         Statement st=conn.createStatement();
         ResultSet res=st.executeQuery("SELECT * FROM maglia WHERE IDmaglia="+id+""); //gli spazi sono importanti!!
         //altrimenti è come scrivere FROMtabella che non è un comando sql
@@ -71,7 +73,7 @@ public class GestioneTshirt {
         return -1;
     }
     
-    public void cambiaQuantitaTshirt(int id,int q,String taglia) //cambia la quantità
+    public void cambiaQuantitaMaglia(int id,int q,String taglia) //cambia la quantità
     // NB: AGGIORNA, NON SOTTRAE! Se ho 20 maglie e ne ordino 5, 
     //alla funzione dovrò passare 15, il risultato già della sottrazione
     //la sottrazione sarà fatta dalla riga di codice precedente al richiamo della funzione
@@ -82,7 +84,7 @@ public class GestioneTshirt {
         {
             //questa parte funziona quella prima di controllo no, ma il compilatore
             //non da' errori, eseguendolo da solo Errore Sql
-        Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/oopproject", "admin", "password");
+        Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "admin", "password");
         PreparedStatement pst=conn.prepareStatement("UPDATE maglia SET "+taglia+"=? WHERE IDmaglia=?");
         pst.setInt(1,q);
         pst.setInt(2,id);
@@ -99,10 +101,10 @@ public class GestioneTshirt {
         }
     }
     
-    public void eliminaTshirt(int id)
+    public void eliminaMaglia(int id)
     {
         try{
-            Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/oopproject", "admin", "password");
+            Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "admin", "password");
             Statement st=conn.createStatement();
             ResultSet rs=st.executeQuery("DELETE from maglia WHERE IDmaglia="+id+"");
         }catch(SQLException s)
@@ -111,4 +113,33 @@ public class GestioneTshirt {
             s.printStackTrace();
         }
     }
+    
+    public void visualizzaMaglie()
+     {
+         try{
+             Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "admin", "password");
+             Statement st=conn.createStatement();
+             ResultSet rs=st.executeQuery("SELECT * from maglia");
+             ResultSetMetaData rm=rs.getMetaData();
+             int numColonne=rm.getColumnCount();
+             for(int i=1; i<=numColonne;i++)
+             {
+                 System.out.print(rm.getColumnName(i) + "   ");
+             }
+             System.out.println();
+             while(rs.next())
+             {
+                 for(int i = 1 ; i <= numColonne; i++){ //stampa una riga
+                     System.out.print(rs.getString(i) + " ");
+                 }
+                 System.out.println();
+             }
+             st.close();
+             rs.close();
+             conn.close();
+         }catch(SQLException s)
+         {
+             System.out.println("Errore SQL!");
+         }
+     }
 }
