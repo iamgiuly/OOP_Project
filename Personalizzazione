@@ -10,7 +10,7 @@ package Ordini;
  *
  * @author Serena
  */
-    class IOExeption extends Exception {
+    class IOException extends Exception {
     static void ThrowOne () throws IOExeption{
         System.out.println("All'interno di ThrowOne");
 
