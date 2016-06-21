@@ -5,7 +5,7 @@ package ordini;
  * @author Giulia Evangelisti
  */
 class IOException extends Exception {
-    static void ThrowOne () throws IOExeption{
+    static void ThrowOne () throws IOException{
         System.out.println("All'interno di ThrowOne");
 
 }
