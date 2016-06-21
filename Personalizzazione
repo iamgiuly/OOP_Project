@@ -1,0 +1,116 @@
+package Ordini;
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ *
+ * @author Serena
+ */
+    class IOExeption extends Exception {
+    static void ThrowOne () throws IOExeption{
+        System.out.println("All'interno di ThrowOne");
+
+}
+}
+
+import java.io.*;
+
+/**Ho creato la classe Personalizzazione per poter sfruttare il suo metodo
+ * prezzoPersona1izzazioni dato che le sue funzionalità sono spesso utili
+ * all'interno del codice.
+ */
+ 
+public class Personalizzazione {
+    private String tipoStampa;
+    private String inchiostro;
+    private double prezzoBase;
+    private int numPersonalizzazioni;
+    
+    public void setTipoStampa(String ts) {
+        this.tipoStampa=ts;
+    }
+    
+    public void setInchiostro(String i) {
+        this.inchiostro=i;
+    }
+    
+    public void setPrezzoBase(double pb) {
+        this.prezzoBase=pb;
+    }
+    
+    public void setNumPersonalizzazioni(int np) {
+        this.numPersonalizzazioni=np;
+    }
+    
+    public String getTipoStampa() {
+        return this.tipoStampa;
+    }
+    
+    public String getInchiostro() {
+        return this.inchiostro;
+    }
+    
+    public double getPrezzoBase() {
+        return this.prezzoBase;
+    }
+    
+    public int getNumPersonalizzazioni() {
+        return this.numPersonalizzazioni;
+    }
+    
+    public Personalizzazione() {
+        this.tipoStampa=null;
+        this.inchiostro=null;
+        this.prezzoBase=0;
+        this.numPersonalizzazioni=0;
+    }
+    
+    public Personalizzazione(String ts,String i,int np) {
+        this.tipoStampa=ts;
+        this.inchiostro=i;
+        this.prezzoBase=1.50;
+        this.numPersonalizzazioni=np;
+    }
+    
+    /**Il metodo sotto implementato calcola il prezzo relativo a una personalizzazione
+     * analizzando caso per caso il tipo di stampa e l'inchiostro utilizzato tramite uno switch case.
+     * Inoltre, nel caso in cui venga fornita una stringa "scorretta" stampa a video un messaggio
+     * di errore e permette di reinserire l'informazione corretta, che verrà rianalizzata per
+     * poter calcolare il prezzo giusto (ciclo do while). 
+     */
+    
+    public double prezzoPersonalizzazioni(String ts,String i,int np) throws IOException,IOException {
+        double prezzo=prezzoBase;
+        BufferedReader br=new BufferedReader (new InputStreamReader(System.in));
+        if(ts!=null && i!=null) switch(ts) {
+            case "serigrafia": do { if("colorato".equals(i)) prezzo+=0.50;
+                               else if(!"nero".equals(i)) System.out.println("Errore! inserire nuovamente: ");
+                               ts=br.readLine();}while(!"nero".equals(ts)|| !"colore".equals(ts));
+                               break;
+            case "termosaldato": prezzo+=1.00;
+                                 do{ if("colorato".equals(i)) prezzo+=0.50;
+                                 else if(!"nero".equals(i)) System.out.println("Errore! inserire nuovamente: ");
+                                 ts=br.readLine();}while(!"nero".equals(ts)|| !"colore".equals(ts));
+                                 break;
+            case "transfer": prezzo+=2.00;
+                             do{ if("colorato".equals(i)) prezzo+=0.50;
+                             else if(!"nero".equals(i)) System.out.println("Errore! inserire nuovamente: ");
+                             ts=br.readLine();}while(!"nero".equals(ts)|| !"colore".equals(ts));
+                             break;
+            case "digitale": prezzo+=3.00;
+                             do{ if("colorato".equals(i)) prezzo+=0.50;
+                             else if(!"nero".equals(i)) System.out.println("Errore! inserire nuovamente: ");
+                             ts=br.readLine();}while(!"nero".equals(ts)|| !"colore".equals(ts));
+                             break;
+
+        }
+        
+        return prezzo*=np;
+    }
+    
+}
+
