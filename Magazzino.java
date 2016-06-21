@@ -7,7 +7,13 @@ package Magazzino;
 import java.sql.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.lang.NullPointerException;
+
 /**
  *
  * @author Sara
@@ -17,8 +23,9 @@ public class Magazzino {
     private GestioneFelpe f;
     private GestioneGiubbotto g;
     private GestionePantalone j;
-    private GestioneTshirt t;
     private GestionePubblicità p;
+    private GestioneOrdine o;
+    private GestioneTshirt t;
     
     public Magazzino()
     {
@@ -27,7 +34,10 @@ public class Magazzino {
      b=new GestioneBorse();
      f=new GestioneFelpe();
      g=new GestioneGiubbotto();
+     o=new GestioneOrdine();
      t=new GestioneTshirt();
+     j=new GestionePantalone();
+     p=new GestionePubblicità();
      }catch(ClassNotFoundException s)
      {
          System.out.println("Errore Connessione!");
@@ -47,6 +57,11 @@ public class Magazzino {
     public void eliminaFelpa(int id)
     {
         f.eliminaFelpa(id);
+    }
+    
+    public void inserisciMaglia(int idmaglia,String gen,String col,int s,int m,int l,int xl,String scol,String maniche,String mat,float pb)
+    {
+        t.inserisciMaglia(idmaglia,gen,col,s,m,l,xl,scol,maniche,mat,pb);
     }
     
     public void inserisciBorsa(String mod,String col,float pb,int q)
@@ -94,20 +109,7 @@ public class Magazzino {
          j.eliminaPantalone(id);
      }
      
-     public void inserisciTshirt(String gen,String col,int s,int m,int l,int xl,String scol,String maniche,String mat,float pb)
-     {
-         t.inserisciTshirt(gen, col, s, m, l, xl, scol, maniche, mat, pb);
-     }
-  
-     public void cambiaQuantitaTshirt(int id,int q,String taglia)
-     {
-         t.cambiaQuantitaTshirt(id,q,taglia);
-     }
-     
-     public void eliminaTshirt(int id)
-     {
-         t.eliminaTshirt(id);
-     }
+      
      
      public void inserisciPubblicità(String tc,String form,float sp,String col,float pb,int q)
      {
@@ -124,5 +126,34 @@ public class Magazzino {
          p.eliminaPubblicità(id);
      }
      
+     public void inserisciOrdine(int id,String cliente,String data,int idmaglia,int idpers,int quantita,String taglia,float pfin,int idb,int idf,int idgiubb,int idpantalone,int idpubb,String stato)
+     {
+         o.inserisciOrdine(id, cliente, data, idmaglia, idpers, quantita, taglia, pfin, idb, idf, idgiubb, idpantalone, idpubb, stato);
+     }
      
+     public void eliminaOrdine(int id)
+     {
+         o.eliminaOrdine(id);
+     }
+     
+     public void visualizzaMagazzino()
+     {
+         try{
+             b.visualizzaBorse();
+             f.visualizzaFelpe();
+             g.visualizzaGiubbotti();
+             j.visualizzaPantaloni();
+             t.visualizzaMaglie();
+             p.visualizzaPubblicita();
+         }catch(NullPointerException e)
+         {
+             System.out.println("Errore!");
+             e.printStackTrace();
+         }
+     }
+     
+     public void visualizzaOrdini()
+     {
+         o.visualizzaOrdini();
+     }
 }
