@@ -1,5 +1,4 @@
-package abbigliamento;
-
+package merce;
 /**
  *
  * @author Giulia Evangelisti
@@ -11,48 +10,36 @@ public void setMod (String mod){
     this.model=mod;
 }
 
-public void geMod(){
-    System.out.println(this.model);
+public String geMod(){
+    return this.model;
 }
 
 public Pantalone()
 { 
     this.genere="";
     this.materiale="";
-    this.NrPers=0;
-    this.Pers=false; 
-    this.prezzobase=6.00;
+    this.prezzobase=(float)6.00;
     this.colore="Bianco";
-    this.Tipostampa="notdefined";
     this.model="notdefined";
     this.PrezzoUnitario=0;
     
 }
 
-public Pantalone(String g, String m, int nrpers, boolean p, String s, String tipost, String mod, float pu)
+public Pantalone(String g, String m, String s, String mod, float pu)
 { 
     this.genere=g;
     this.materiale=m;
-    this.NrPers=nrpers;
-    this.Pers=p; 
+    this.prezzobase=(float)6.00;
     this.colore=s;
-    this.Tipostampa=tipost;
     this.model=mod;
     this.PrezzoUnitario=pu;
 }
-    public double CalcoloPU(int nrpers, boolean p, String color, String tipo, String mo){
+    public float CalcoloPU(String color, String mo){
+        PrezzoUnitario=prezzobase;
     if (!"Bianco".equals(color))
             this.PrezzoUnitario+=1.00;
     if ("Lunghi".equals(mo))
         this.PrezzoUnitario+=2.00;
-    if (p==true){
-         if(tipo=="Serigrafia")
-             this.PrezzoUnitario+=2.00*nrpers;
-         if(tipo=="Transfer")
-             this.PrezzoUnitario+=3.00*nrpers;
-         if(tipo=="Digitale")
-             this.PrezzoUnitario+=4.00*nrpers;
-    }
 
     return this.PrezzoUnitario;
         }
