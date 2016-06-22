@@ -1,4 +1,10 @@
-package abbigliamento;
+package merce;
+
+/**
+ *
+ * @author Giulia Evangelisti
+ */
+
 public class Maglia extends Abbigliamento {
     
     boolean scollatura;
@@ -10,11 +16,11 @@ public class Maglia extends Abbigliamento {
     public void setScollatura(boolean b){
        scollatura=b;
     }
-    public void getScollatura(){
-        System.out.println(scollatura);
+    public boolean getScollatura(){
+        return this.scollatura;
     }
-    public void setManiche(boolean b){
-        maniche=b;
+    public boolean setManiche(boolean b){
+        return this.maniche;
     }
     public void getManiche(){
         System.out.println(maniche);
@@ -25,45 +31,33 @@ public Maglia()
 { 
     this.genere="";
     this.materiale="";
-    this.NrPers=0;
-    this.Pers=false; 
-    this.prezzobase=5.00;
+    this.prezzobase=(float)5.00;
     this.colore="Bianco";
-    this.Tipostampa="notdefined";
     this.scollatura=false;
     this.maniche=false;
     this.PrezzoUnitario=0;
     
 }
-public Maglia (String g, String m, int nrpers, boolean p, String s, String tipo, boolean scoll, boolean manica, float pu)
+public Maglia (String g, String m, String s, boolean scoll, boolean manica, float pu)
 {
     
     this.genere=g;
     this.materiale=m;
-    this.NrPers=nrpers;
-    this.Pers=p; 
+    this.prezzobase=(float)5.00;
     this.colore=s;
-    this.Tipostampa=tipo;
     this.scollatura=scoll;
     this.maniche=manica;
     this.PrezzoUnitario=pu;
 }
 
-    public double CalcoloPU(int nrpers, boolean p, String color, String tipo, boolean scoll, boolean manica){
+    public float CalcoloPU(String color, boolean scoll, boolean manica){
+        PrezzoUnitario=prezzobase;
     if (!"Bianco".equals(color))
             this.PrezzoUnitario+=1.00;
     if(scoll==true)
         this.PrezzoUnitario*=1.00;
     if (manica==true)
         this.PrezzoUnitario*=1.00;
-    if (p==true){
-         if(tipo=="Serigrafia")
-             this.PrezzoUnitario+=2.00*nrpers;
-         if(tipo=="Transfer")
-             this.PrezzoUnitario+=3.00*nrpers;
-         if(tipo=="Digitale")
-             this.PrezzoUnitario+=4.00*nrpers;
-    }
 
     return this.PrezzoUnitario;
         }
