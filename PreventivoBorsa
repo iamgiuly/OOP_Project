@@ -1,12 +1,12 @@
 package ordini;
-import abbigliamento.*;
+import merce.Borsa;
 
 /**
  *
  * @author Giulia Evangelisti
  */
 public class PreventivoBorsa {
-    double parzialeBorsa;
+    float parzialeBorsa;
     Borsa borsa;
     
     //qui si potrebbe fare un'interfaccia del metodo visto che si ripete in tutte le classi Preventivo(Maglia,Borsa,...)
@@ -14,9 +14,9 @@ public class PreventivoBorsa {
         this.parzialeBorsa=0;
     }
     
-    public double ParzialeBorsa(int nrpers, boolean p, String model, String color, String tipo){
+    public float ParzialeBorsa(String model, String color){
         borsa = new Borsa();
-        parzialeBorsa+=borsa.CalcoloPU(nrpers, p, model, color, tipo);
+        parzialeBorsa+=borsa.CalcoloPU(model, color);
     return parzialeBorsa;
     }   
 }
