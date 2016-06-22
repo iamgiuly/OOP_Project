@@ -24,6 +24,7 @@ public class Borsa extends Abbigliamento {
         this.materiale="cotone";
         this.colore="Nero";
         this.model=modello.Notdefined;
+        PrezzoUnitario=0;
     }
     
     /* Costruttore con parametri */
@@ -34,8 +35,10 @@ public class Borsa extends Abbigliamento {
     this.prezzobase=7.00; //Il prezzo base viene automaticamente settato a 7 euro
     this.model=modello.valueOf("mo");
     this.colore=color;
+    PrezzoUnitario=0;
     }
     public double CalcoloPU(String mo, String color){
+        PrezzoUnitario=prezzobase;
     if (!"Bianco".equals(color))
             this.PrezzoUnitario+=1.00;
 
@@ -46,5 +49,4 @@ public class Borsa extends Abbigliamento {
 
    
 }
-   
    
