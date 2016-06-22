@@ -156,4 +156,10 @@ public class Magazzino {
      {
          o.visualizzaOrdini();
      }
+     
+      public int getLastIDmaglia()
+     {
+         int i=t.getLastID();
+         return i;
+     }
 }
