@@ -57,13 +57,13 @@ public Abbigliamento()
     materiale="";
     NrPers=0;
     Pers=false; 
-    prezzobase=0;
+    prezzobase=(float)0.00;
     this.colore="Bianco";
-    PrezzoUnitario=0;
+    PrezzoUnitario=(float)0.00;
     this.Tipostampa=null;
 }
 
-    public Abbigliamento(String g, String m, int nrpers, boolean p, double pb, String s, String tipostampa)
+    public Abbigliamento(String g, String m, int nrpers, boolean p, float pb, String s, String tipostampa)
 {
     
     genere=g;
