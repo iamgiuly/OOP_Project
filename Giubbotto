@@ -1,4 +1,4 @@
-package abbigliamento;
+package merce;
 
 /**
  *
@@ -10,37 +10,25 @@ public class Giubbotto extends Abbigliamento {
     {
         this.genere="NotDefined";
         this.materiale="Pelle";
-        this.Pers=false;
-        this.NrPers=0;
         this.colore="Nero";
         this.prezzobase= 15.00;
-        this.Tipostampa="Notdefined";
-        this.PrezzoUnitario=0; // mi sa che non serve
+        this.PrezzoUnitario=0;
     }
-    public Giubbotto (String g, String m, boolean p, int np, String color, String tipo, float pu)
+    public Giubbotto (String g, String m, String color, float pu)
     {
         this.genere=g;
         this.materiale=m;
-        this.Pers=p;
-        this.NrPers=np;
         this.colore=color;
-        this.Tipostampa=tipo;
+        this.prezzobase=15.00;
         this.PrezzoUnitario=pu;
     }
     
-        public double CalcoloPU(int nrpers, boolean p, String color, String tipo, String materiale){
+        public double CalcoloPU(String color, String materiale){
+            PrezzoUnitario=prezzobase;
     if (!"Bianco".equals(color))
             this.PrezzoUnitario+=1.00;
     if ("Pelle".equals(materiale))
             this.PrezzoUnitario+=7.00;
-    if (p==true){
-         if(tipo=="Serigrafia")
-             this.PrezzoUnitario+=2.00*nrpers;
-         if(tipo=="Transfer")
-             this.PrezzoUnitario+=3.00*nrpers;
-         if(tipo=="Digitale")
-             this.PrezzoUnitario+=4.00*nrpers;
-    }
 
     return this.PrezzoUnitario;
         }
