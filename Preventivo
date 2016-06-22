@@ -13,7 +13,7 @@ public class Preventivo {
  PreventivoPubblicita ppubb;
  
  
- void CalcoloPreventivo() throws IOExeption, IOException {
+float CalcoloPreventivo() throws IOExeption, IOException {
      
      //Per il momento ho inserito il "dialogo" con l'utente qui dentro ma si può sempre tirar fuori e passare s come parametro.
  
@@ -52,5 +52,5 @@ public class Preventivo {
          }
          
  }while(!"stop".equals(s1));
-     
+     return totale;
 }}
