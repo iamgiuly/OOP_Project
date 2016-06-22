@@ -1,4 +1,4 @@
-package abbigliamento;
+package merce;
 
 /**
  *
@@ -7,13 +7,13 @@ package abbigliamento;
 public class Borsa extends Abbigliamento {
     public modello model;
 
-    public enum modello {Tracolla, Zaino, Notdefined}
+    public enum modello {Tracolla, Zaino, Notdefined} //per ora lascio enum ma penso sia più facile metterlo String
     
     public void setMod(String m){  //setto il modello, ricordando che in Java enum è una vera e propria classe
         this.model=modello.valueOf(m);
     }
-    public void getMod(){
-        System.out.println(model);
+    public modello getMod(){
+        return this.model;
     }
     
     /*Costruttore senza parametri */
@@ -22,36 +22,23 @@ public class Borsa extends Abbigliamento {
         this.prezzobase=7.00;
         this.genere="notdefined";
         this.materiale="cotone";
-        this.NrPers=0;
-        this.Pers=false;
+        this.colore="Nero";
         this.model=modello.Notdefined;
-        this.Tipostampa="Notdefined";
     }
     
     /* Costruttore con parametri */
-    public Borsa(String g, String m, int nrpers, boolean p, String mo, String color, String tipo){  //Ho rimosso la possibilità di inserire qui il prezzo base
+    public Borsa(String g, String m, String mo, String color){  //Ho rimosso la possibilità di inserire qui il prezzo base
                                                                                                     //lo si può fare solo richiamano la set prezzo base()
     this.genere=g;
     this.materiale=m;
-    this.NrPers=nrpers;
-    this.Pers=p; 
     this.prezzobase=7.00; //Il prezzo base viene automaticamente settato a 7 euro
     this.model=modello.valueOf("mo");
     this.colore=color;
-    this.Tipostampa=tipo;
-    
     }
-    public double CalcoloPU(int nrpers, boolean p, String mo, String color, String tipo){
+    public double CalcoloPU(String mo, String color){
     if (!"Bianco".equals(color))
             this.PrezzoUnitario+=1.00;
-    if (p==true){
-         if(tipo=="Serigrafia")
-             this.PrezzoUnitario+=2.00*nrpers;
-         if(tipo=="Transfer")
-             this.PrezzoUnitario+=3.00*nrpers;
-         if(tipo=="Digitale")
-             this.PrezzoUnitario+=4.00*nrpers;
-    }
+
     if ("Zaino".equals(mo)){
         this.PrezzoUnitario+=3.00;}
     return this.PrezzoUnitario;
@@ -59,4 +46,5 @@ public class Borsa extends Abbigliamento {
 
    
 }
+   
    
