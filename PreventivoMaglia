@@ -1,5 +1,6 @@
 package ordini;
-import abbigliamento.*;
+
+import merce.Maglia;
 
 /**
  *
@@ -7,16 +8,16 @@ import abbigliamento.*;
  */
 
 public class PreventivoMaglia {
-    double parzialeMaglia;
+    float parzialeMaglia;
     Maglia maglia;
     
     public PreventivoMaglia(){
         this.parzialeMaglia=0;
     }
     
-    public double ParzialeMaglia(int nrpers, boolean p, String color, String tipo, boolean scoll, boolean manica){
+    public float ParzialeMaglia(String color, boolean scoll, boolean manica){
         maglia = new Maglia();
-        parzialeMaglia+=maglia.CalcoloPU(nrpers, p, color, tipo, scoll, manica);
+        parzialeMaglia+=maglia.CalcoloPU(color, scoll, manica);
     return parzialeMaglia;
     }
     
