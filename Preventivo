@@ -1,0 +1,56 @@
+package ordini;
+import java.io.*;
+
+
+/**
+ 
+ * @author Giulia Evangelisti
+ */
+public class Preventivo {
+
+ float totale=0;
+ PreventivoAbbigliamento pabb;
+ PreventivoPubblicita ppubb;
+ 
+ 
+ void CalcoloPreventivo() throws IOExeption, IOException {
+     
+     //Per il momento ho inserito il "dialogo" con l'utente qui dentro ma si può sempre tirar fuori e passare s come parametro.
+ 
+     BufferedReader br = new BufferedReader (new InputStreamReader(System.in));
+     String s1, s2;
+     do {
+         
+         System.out.println("Scegliere Abbigliamento o Pubblicità");
+         System.out.println("Immettere stop per uscire");
+         s1=br.readLine();
+         
+         if(null != s1) switch (s1) {
+             case "Abbigliamento":
+                 do{
+                     System.out.println("Inserire il capo (Maglia, Pantalone, Borsa, Giubbotto, Felpa");
+                     s2=br.readLine();
+                     pabb= new PreventivoAbbigliamento();
+                     totale+=pabb.ParzialeAbbigliamento(s2);
+                     System.out.println("Immettere stop per uscire dalla sezione Abbigliamento, qualsiasi altro carattere per continuare");
+                     s2=br.readLine();
+                 }while(!"stop".equals(s2));
+                 break;
+                 
+             case "Pubblicità":
+                 do{
+                 ppubb= new PreventivoPubblicita();
+                 totale+=ppubb.ParzialePubblicita();
+                 System.out.println("Inserire stop per uscire dalla sezione abbigliamento, qualsiasi altro carattere per continuare");
+                 s2=br.readLine();
+                 }while(!"stop".equals(s2));
+                 break;
+                 
+             default:
+                 System.out.println("Errore! Riprovare.");
+                 break;
+         }
+         
+ }while(!"stop".equals(s1));
+     
+}}
