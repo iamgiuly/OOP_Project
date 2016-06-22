@@ -1,5 +1,4 @@
 package merce;
-import merce.*;
 
 /**
  *
@@ -9,8 +8,8 @@ public class Pubblicita extends Merce {
     String TipoCarta;
     String formato;
     String spessore; 
-    boolean coloreStampa;
-    double parzialeSpessore;
+    
+    float parzialeSpessore;
     //il tipo stampa è uno solo, il numero stampe è uno, l'ho considerato così poi si può sempre modificare
 
     public String getTipoCarta()
@@ -43,13 +42,7 @@ public class Pubblicita extends Merce {
     {
         this.formato=form;
     }
-    public boolean getColoreStampa(){
-        return this.coloreStampa;
-    }
-    public void setColoreStampa(boolean cs){
-        this.coloreStampa=cs;
-    }
-    
+
 
             
     public Pubblicita()
@@ -70,7 +63,7 @@ public class Pubblicita extends Merce {
         this.colore=color;
         this.parzialeSpessore=0;
     }
-    public double calcoloSP(String sp){
+    public float calcoloSP(String sp){
         if(sp!=null) switch(sp){
             case "7 mm":
                 parzialeSpessore+=0.60;
@@ -84,9 +77,9 @@ public class Pubblicita extends Merce {
         return parzialeSpessore;
     }
     
-    public double calcoloPU(String cc, String formato, boolean cs, String sp){
+    public float calcoloPU(String cc, String formato, boolean cs, String sp){
        if(!"Bianco".equals(cc))
-           PrezzoUnitario+=2.00;
+           PrezzoUnitario+=2.00; //e se una persona scrive pinco panco invece che un colore? XD
        if(formato!=null) switch (formato){
            case "A2":
                PrezzoUnitario+=2.5;
@@ -119,5 +112,4 @@ public class Pubblicita extends Merce {
 return PrezzoUnitario;}
     
        
-}
 }
