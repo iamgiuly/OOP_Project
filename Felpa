@@ -49,6 +49,7 @@ public class Felpa extends Abbigliamento {
         this.genere=g;
         this.materiale=m;
         this.colore=color;
+        this.prezzobase=7.00;
         this.cappuccio=capp;
         this.tasche=tasc;
         this.cerniera=cern;
@@ -56,6 +57,7 @@ public class Felpa extends Abbigliamento {
     }
     
         public double CalcoloPU(String color, boolean cern, boolean capp, boolean tasc){
+            PrezzoUnitario=prezzobase;
     if (!"Bianco".equals(color))
             this.PrezzoUnitario+=1.00;
     if (capp==true)
