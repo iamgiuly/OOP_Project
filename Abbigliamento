@@ -72,6 +72,7 @@ public Abbigliamento()
     Pers=p; 
     prezzobase=pb;
     this.colore=s;
+    this.PrezzoUnitario=(float)0.00;
     this.Tipostampa=tipostampa;
 }
 }
