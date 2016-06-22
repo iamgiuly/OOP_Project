@@ -142,4 +142,21 @@ public class GestioneTshirt {
              System.out.println("Errore SQL!");
          }
      }
+     
+     public int getLastID()
+    {
+        try{
+        Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "admin", "password");
+             Statement st=conn.createStatement();
+             ResultSet rs=st.executeQuery("SELECT IDmaglia from maglia");
+             rs.last();
+             int lastid=rs.getInt("IDmaglia");
+             return lastid;
+        }catch(SQLException ex)
+        {
+            System.out.println("Errore SQL!");
+            ex.printStackTrace();
+        }
+        return -1;
+    }
 }
