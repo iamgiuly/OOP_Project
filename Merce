@@ -52,11 +52,11 @@ public class Merce {
         this.coloreStampa=colorestampa;
     }
     
-    /* Costruttore senza paramentri, inizializza la variabile a -1 */
+    /* Costruttore senza paramentri*/
     public Merce(){
         this.colore="Bianco";
-        this.PrezzoUnitario=0;
-        this.prezzobase=0;
+        this.PrezzoUnitario=(float)0.00;
+        this.prezzobase=(float)0.00;
         this.coloreStampa=false;
         
     }}
