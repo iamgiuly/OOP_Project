@@ -19,7 +19,7 @@ public class Borsa extends Abbigliamento {
     /*Costruttore senza parametri */
     public Borsa()
     {
-        this.prezzobase=7.00;
+        this.prezzobase=(float)7.00;
         this.genere="notdefined";
         this.materiale="cotone";
         this.colore="Nero";
@@ -32,12 +32,13 @@ public class Borsa extends Abbigliamento {
                                                                                                     //lo si può fare solo richiamano la set prezzo base()
     this.genere=g;
     this.materiale=m;
-    this.prezzobase=7.00; //Il prezzo base viene automaticamente settato a 7 euro
+    this.prezzobase=(float)7.00; //Il prezzo base viene automaticamente settato a 7 euro
     this.model=modello.valueOf("mo");
     this.colore=color;
     PrezzoUnitario=0;
     }
-    public double CalcoloPU(String mo, String color){
+    
+    public float CalcoloPU(String mo, String color){
         PrezzoUnitario=prezzobase;
     if (!"Bianco".equals(color))
             this.PrezzoUnitario+=1.00;
