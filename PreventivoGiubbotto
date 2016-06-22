@@ -1,21 +1,22 @@
 package ordini;
-import abbigliamento.*;
+import merce.Giubbotto;
 
 /**
  *
  * @author Giulia Evangelisti
  */
 public class PreventivoGiubbotto {
-        double parzialeGiubbotto;
+        float parzialeGiubbotto;
     Giubbotto giubb;
     
     public PreventivoGiubbotto(){
         this.parzialeGiubbotto=0;
     }
     
-    public double ParzialeGiubbotto(int nrpers, boolean p, String color, String tipo, String materiale){
+    public float ParzialeGiubbotto(String color, String materiale){
         giubb = new Giubbotto();
-        parzialeGiubbotto+=giubb.CalcoloPU(nrpers, p, color, tipo, materiale);
+        parzialeGiubbotto+=giubb.CalcoloPU(color, materiale);
     return parzialeGiubbotto;
     }
 }
+

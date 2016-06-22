@@ -1,0 +1,56 @@
+package ordini;
+import merce.Pubblicita;
+import java.io.*;
+
+/**
+ *
+ * @author Giulia Evangelisti
+ */
+public class PreventivoPubblicita {
+ 
+float totalePubblicita;
+Pubblicita pubb;
+
+
+void PreventivoPubblicita(){
+    this.totalePubblicita=0;
+}
+
+public float ParzialePubblicita() throws IOExeption, IOException{
+   BufferedReader br = new BufferedReader (new InputStreamReader(System.in));
+   
+           String colorecarta; 
+           String formato; 
+           boolean colorestampa=false; String colorestampa2; //colore stampa 2 legge se l'utente mette a colori o in bianco e nero
+           String spessore;
+           
+         System.out.println("Inserire il colore della carta");
+          colorecarta=br.readLine();
+         
+         do{
+         System.out.println("Inserire formato (A2 - A3 - A4 - 60x120");
+         formato=br.readLine();
+         if(!"A2".equals(formato)||!"A3".equals(formato)||!"A4".equals(formato)||!"60x120".equals(formato))
+             System.out.println("Errore, riprovare");
+         }while(!"A2".equals(formato)||!"A3".equals(formato)||!"A4".equals(formato)||!"60x120".equals(formato));
+         
+         do{
+         System.out.println("Stampa a colori?");
+            colorestampa2=br.readLine();
+            if("Colore".equals(colorestampa2))
+            colorestampa=true;
+                else if (!"Nero".equals(colorestampa2))
+                        System.out.println("Errore!");
+                                }while(!"Colore".equals(colorestampa2)||!"Nero".equals(colorestampa2));
+                    
+         do{
+         System.out.println("Inserire lo spessore");
+            spessore=br.readLine();
+         if(!"7mm".equals(spessore)||"8mm".equals(spessore)||"1cm".equals(spessore))
+             System.out.println("Errore, riprovare");
+         }while(!"7mm".equals(spessore)||"8mm".equals(spessore)||"1cm".equals(spessore));
+         
+         totalePubblicita+=pubb.calcoloPU(colorecarta, formato, colorestampa, spessore);
+         return totalePubblicita;
+}
+}

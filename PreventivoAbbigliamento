@@ -1,5 +1,4 @@
 package ordini;
-import abbigliamento.*; //mi sa che non serve
 import java.io.*;
 /**
  *
@@ -12,16 +11,22 @@ PreventivoPantalone ppanta;
 PreventivoGiubbotto pgiubb;
 PreventivoFelpa pfelpa;
 PreventivoBorsa pborsa;
-double totaleAbbigliamento;
+Personalizzazione pers;
+float totaleAbbigliamento;
 
 public PreventivoAbbigliamento(){
     this.totaleAbbigliamento=0;
 }
 
-public double ParzialeAbbigliamento(String s) throws IOExeption, IOException  { 
+public float ParzialeAbbigliamento(String s) throws IOExeption, IOException  { 
     
-int nrpers = 0;
-boolean p=false; String color; String tipo = null;
+boolean p=false; int nrpers=0; String i="nero"; String tipo="Serigrafia"; 
+
+// E' richiesta l'inizializzazione delle variabili relative alla classe personalizzazione, p indica se sono presenti o meno personalizzazioni
+//avendola impostata a false, posso inizializzare le altre a quelasiasi valore in quanto se p=false non entrerà mai nel ramo per calcolare
+//il prezzo relativo alla personalizzazione
+
+String color; 
 boolean scoll=false; boolean manica=false; String pp; String mm; String ss;
 boolean cern=false; boolean tasche=false; boolean capp=false;
 String model; String materiale;
@@ -32,7 +37,32 @@ String model; String materiale;
     
     BufferedReader br = new BufferedReader (new InputStreamReader(System.in));
     
-    switch(s){
+    //La richiesta all'utente sulle caratteristiche delle personalizzazioni viene fatta un'unica volta all'inizio (così da non ripetere il codice)
+    //prima di entrare nel ramo specifico dello switch
+    
+             do{              
+               System.out.println("Sono presenti personalizzazioni? Sì/No"); 
+            pp=  br.readLine ();
+            if("Sì".equals(pp))
+                p=true;
+            else if(!"No".equals(pp))
+                System.out.println("Errore");
+            
+            }while(!"Sì".equals(pp)||!"No".equals(pp));
+            
+            if (p==true){
+                
+            System.out.println("Inserire il numero di personalizzazioni ");
+            nrpers= (int) br.read();
+            System.out.println("Inserire tipologia di stampa usata ");
+            tipo= br.readLine();
+            System.out.println("Inserire 'colorato' se la stampa è a colori, nero se la stampa è in bianco e nero");
+            i=br.readLine();
+            
+            }
+            
+    if(s!=null) switch(s){
+
         case "Maglia":
         case "maglia":{
             
@@ -40,36 +70,39 @@ String model; String materiale;
             
             System.out.println("Scrivere il colore della maglia ");
             color=br.readLine();
+  
+            //Per ogni dettaglio che va ad aggiungere nella maglia (o nel pantalone, etc..) (maniche, scollo a V) si è inserito un DO post condizionale
+            //la cui condizione di uscita è che la stringa combaci con Sì o No. Così si evita che l'utente inserisca una stringa differente e il programma 
+            //prosegui
             
-            System.out.println("Inserire Sì se la maglia è a maniche lunghe ");
+            do{                
+            System.out.println("La maglia è a maniche lunghe? (Sì/No)");
             mm= br.readLine();
             if("Sì".equals(mm))
                 manica=true;
             else if(!"No".equals(mm))
-                System.out.println("Errore, la maglia verrà considerata a maniche corte"); //in questo caso rimane a false!
+                System.out.println("Errore!"); //in questo caso rimane a false perchè è inizializzata all'inizio
             
+            }while(!"Sì".equals(mm)||!"No".equals(mm));
+            
+            do{                
             System.out.println("La maglia ha lo scollo a V?");
             ss=br.readLine();
             if("Sì".equals(ss))
                 scoll=true;
             else if (!"No".equals(ss))
-                    System.out.println("Errore, la maglia verrà considerata con scollatua classica a girocollo");
-                
-            System.out.println("Sono presenti personalizzazioni?");
-            pp=  br.readLine ();
-            if("Sì".equals(pp))
-                p=true;
-            else if(!"No".equals(pp))
-                System.out.println("Errore, la maglia verrà considerata senza personalizzazioni");
+                    System.out.println("Errore!");
+            
+            }while(!"Sì".equals(ss)||!"No".equals(ss));     
+            
+            totaleAbbigliamento+= pmaglia.ParzialeMaglia(color, scoll, manica);
             
             if (p==true){
-            System.out.println("Inserire il numero di personalizzazioni ");
-            nrpers= (int) br.read();
-            System.out.println("Inserire tipologia di stampa usata ");
-            tipo= br.readLine();
+            pers = new Personalizzazione();
+            totaleAbbigliamento+=pers.prezzoPersonalizzazioni(tipo, i, nrpers);
             }
-            
-            totaleAbbigliamento+= pmaglia.ParzialeMaglia(nrpers, p, color, tipo, scoll, manica);}
+            }
+                     
         case "Pantalone":
         case "pantalone":{
             
@@ -78,48 +111,42 @@ String model; String materiale;
             System.out.println("Scrivere il colore del pantalone ");
             color=br.readLine();  
             
+            do{               
             System.out.println("Inserire modello (Lunghi/Corti) ");
             model=br.readLine();
- //LA PARTE DI PERSONALIZZAZIONE E' RIDONDANTE, DEVO PENSARE SE SI PUO' ELIMINARE
-            System.out.println("Sono presenti personalizzazioni?");
-            pp=  br.readLine ();
-            if("Sì".equals(pp))
-                p=true;
-            else if(!"No".equals(pp))
-                System.out.println("Errore, i pantaloni verranno considerati senza personalizzazioni");
+            if(!"Lunghi".equals(model)||!"Corti".equals(model))
+                System.out.println("Errore!");
             
+            }while(!"Lunghi".equals(model)||!"Corti".equals(model));
+
+            totaleAbbigliamento+=ppanta.ParzialePantalone(color, model);
             if (p==true){
-            System.out.println("Inserire il numero di personalizzazioni ");
-            nrpers= (int) br.read();
-            System.out.println("Inserire tipologia di stampa usata ");
-            tipo= br.readLine();
+            pers = new Personalizzazione();
+            totaleAbbigliamento+=pers.prezzoPersonalizzazioni(tipo, i, nrpers);           
             }
-            totaleAbbigliamento+=ppanta.ParzialePantalone(nrpers, p, color, tipo, model);
-            
+           
         }
         
         case "Giubbotto":
         case "giubbotto":{
+            
             System.out.println("Scrivere il colore del giubbotto ");
             color=br.readLine();  
             
+            do{
             System.out.println("Inserire maetriale (Pelle/Jeans) ");
             materiale=br.readLine();
- //LA PARTE DI PERSONALIZZAZIONE E' RIDONDANTE, DEVO PENSARE SE SI PUO' ELIMINARE
-            System.out.println("Sono presenti personalizzazioni?");
-            pp=  br.readLine ();
-            if("Sì".equals(pp))
-                p=true;
-            else if(!"No".equals(pp))
-                System.out.println("Errore, il giubbotto verrà considerata senza personalizzazioni");
+            if(!"Pelle".equals(materiale)||!"Jeans".equals(materiale))
+                System.out.println("Errore!");
+            }while(!"Pelle".equals(materiale)||!"Jeans".equals(materiale));
+            
+            totaleAbbigliamento+=pgiubb.ParzialeGiubbotto(color, materiale);
             
             if (p==true){
-            System.out.println("Inserire il numero di personalizzazioni ");
-            nrpers= (int) br.read();
-            System.out.println("Inserire tipologia di stampa usata ");
-            tipo= br.readLine();
+            pers = new Personalizzazione();
+            totaleAbbigliamento+=pers.prezzoPersonalizzazioni(tipo, i, nrpers);           
             }
-            totaleAbbigliamento+=pgiubb.ParzialeGiubbotto(nrpers, p, color, tipo, materiale);
+            
            }
         
         case "Felpa":
@@ -129,31 +156,43 @@ String model; String materiale;
             
             System.out.println("Scrivere il colore dela felpa ");
             color=br.readLine();
-         //Posso riutilizzare le variabili d'appoggio, in assenza di strade alternative, ss = cerniera /mm = tasche /pp = cappuccio come nella maglia
+         //Posso riutilizzare le variabili d'appoggio,  ss = cerniera /mm = tasche /pp = cappuccio come nella maglia
          //in quanto sono variabili momentanee che servono al calcolo del capo singolo che andrà poi sommato nel Preventivo vero e prorpio 
          
-            System.out.println("La felpa ha il cappuccio?");
+            do{
+            System.out.println("La felpa ha il cappuccio?(Sì/No)");
             pp=br.readLine();
             if("Sì".equals(pp))
                 capp=true;
             else if (!"No".equals(pp))
-                System.out.println("Errore!La felpa verrà automaticamente consierata senza cappuccio!");
+                System.out.println("Errore!");
+            }while(!"Sì".equals(pp)||!"No".equals(pp));
             
-            System.out.println("La felpa ha le tasche?");
+            do{
+            System.out.println("La felpa ha le tasche? (Sì/No)");
             mm=br.readLine();
             if("Sì".equals(mm))
                 tasche=true;
             else if (!"No".equals(mm))
-                System.out.println("Errore! La felpa verrà automaticamente considerata senza tasche!");
+                System.out.println("Errore!");
+            }while(!"Sì".equals(mm)||!"No".equals(mm));
             
-            System.out.println("La felpa ha la cerniera?");
+            do{
+            System.out.println("La felpa ha la cerniera? (Sì/No)");
             ss=br.readLine();
             if("Sì".equals(ss))
                 cern=true;
             else if (!"No".equals(ss))
-                System.out.println("Errore! La felpa verrà automaicamente considerata senza cerniera!");
+                System.out.println("Errore!");
+            } while(!"Sì".equals(ss)||!"No".equals(ss));
             
-            totaleAbbigliamento+=pfelpa.ParzialeFelpa(nrpers, p, color, tipo, cern, capp, tasche);
+            totaleAbbigliamento+=pfelpa.ParzialeFelpa(color, cern, capp, tasche);
+            
+            if (p==true){
+            pers = new Personalizzazione();
+            totaleAbbigliamento+=pers.prezzoPersonalizzazioni(tipo, i, nrpers);           
+            }
+            
         }
         
         case "Borsa":
@@ -164,26 +203,28 @@ String model; String materiale;
             System.out.println("Scrivere il colore della borsa ");
             color=br.readLine();  
             
-            System.out.println("Inserire il modello (zaino/tracolla) ");
+            do{
+            System.out.println("Inserire il modello (Zaino/Tracolla) ");
             model=br.readLine();
- //LA PARTE DI PERSONALIZZAZIONE E' RIDONDANTE, DEVO PENSARE SE SI PUO' ELIMINARE
-            System.out.println("Sono presenti personalizzazioni?");
-            pp=  br.readLine ();
-            if("Sì".equals(pp))
-                p=true;
-            else if(!"No".equals(pp))
-                System.out.println("Errore, il giubbotto verrà considerata senza personalizzazioni");
-            
+            if(!"Zaino".equals(model)||!"Tracolla".equals(model))
+                System.out.println("Errore");
+            }while(!"Zaino".equals(model)||!"Tracolla".equals(model));
+
+            totaleAbbigliamento+=pborsa.ParzialeBorsa(model, color);
             if (p==true){
-            System.out.println("Inserire il numero di personalizzazioni ");
-            nrpers= (int) br.read();
-            System.out.println("Inserire tipologia di stampa usata ");
-            tipo= br.readLine();
+            pers = new Personalizzazione();
+            totaleAbbigliamento+=pers.prezzoPersonalizzazioni(tipo, i, nrpers);           
             }
-            totaleAbbigliamento+=pborsa.ParzialeBorsa(nrpers, p, model, color, tipo);
+            
+           
         }
+        default:
+            System.out.println("Si è verificato un errore");
+            break;
     
     }
     return totaleAbbigliamento;
-}
-}
+
+}}
+
+

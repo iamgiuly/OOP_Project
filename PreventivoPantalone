@@ -1,20 +1,21 @@
 package ordini;
-import abbigliamento.*;
+import merce.Pantalone;
 /**
  *
  * @author Giulia Evangelisti
  */
 public class PreventivoPantalone {
-    double parzialePantalone;
+    float parzialePantalone;
     Pantalone pantalone;
     
     public PreventivoPantalone(){
         this.parzialePantalone=0;
     }
     
-    public double ParzialePantalone(int nrpers, boolean p, String color, String tipo, String mo){
+    public float ParzialePantalone(String color, String mo){
         pantalone = new Pantalone();
-        parzialePantalone+=pantalone.CalcoloPU(nrpers, p, color, tipo, mo);
+        parzialePantalone+=pantalone.CalcoloPU(color, mo);
     return parzialePantalone;
     }
 }
+
