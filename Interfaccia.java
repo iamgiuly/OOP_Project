@@ -245,7 +245,7 @@ public class Interfaccia extends javax.swing.JFrame {
         l=Integer.parseInt(textField5.getText());
         xl=Integer.parseInt(textField8.getText());
         pb=Float.parseFloat(textField9.getText());
-        mag.inserisciMaglia(a.incrementAndGet(), gen, col, s,1,1,1,"V","Corte","Cotone",pb);
+        mag.inserisciMaglia(a.incrementAndGet(), gen, col, s,m,l,xl,scol,man,mat,pb);
         // TODO add your handling code here:
     }//GEN-LAST:event_button1MouseClicked
 
