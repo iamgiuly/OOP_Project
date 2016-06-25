@@ -1,0 +1,15 @@
+Supponiamo di avere due classi, SchermataPrincipale.java e GestioneMagazzino.java
+SchermataPrincipale è una JForm, GestioneMagazzino invece è una JDialog (può essere anche JForm ma spiego sotto perchè)
+SchermataPrincipale ha un bottone che apre la finestra di GestioneMagazzino
+In SchermataPrincipale si dichiara come variabile un oggetto della finestra che vogliamo andare ad aprire, es:
+GestioneMagazzino g=new GestioneMagazzino(this,true); //il costruttore del JDialog prende come parametri la finestra "padre" e un boolean.
+Fatto questo, nel bottone in SchermataPrincipale si aggiunge un evento MouseClicked, e da lì si fa semplicemente:
+g.setVisible(true);
+In questo modo si rende visibile la finestra gestione Magazzino. (poi con tante piccole modifiche si può ad esempio
+decidere la posizione della finestra quando appare ecc ecc)
+
+IMPORTANTE!! Di default, gli oggetti JForm hanno come azione predefinita quando si clicca sulla X di uscire dall'applicazione.
+I JDialog invece chiudono solo quella finestra. Per questo è meglio che la schermata principale sia JForm e tutte le altre che si
+devono aprire JDialog, così non dobbiamo modificare che ogni volta che si clicca la X non deve chiudere tutta l'applicazione ma solo
+quella finestra. 
+
