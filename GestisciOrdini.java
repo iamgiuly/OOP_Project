@@ -28,15 +28,14 @@ public class GestisciOrdini extends java.awt.Dialog {
     private void initComponents() {
 
         jInternalFrame2 = new javax.swing.JInternalFrame();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
 
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -46,7 +45,7 @@ public class GestisciOrdini extends java.awt.Dialog {
 
         jInternalFrame2.setVisible(true);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
@@ -54,12 +53,14 @@ public class GestisciOrdini extends java.awt.Dialog {
                 {null, null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "IDordine", "Cliente", "DataOrdine", "IDmaglia", "IDpers", "Quantità", "Taglia", "Prezzo finale", "IDborsa", "IDfelpa", "IDgiubbotto", "IDpantalone", "IDpubblicità", "Stato"
+                "IDordine", "Cliente", "DataOrdine", "IDmaglia", "IDpers", "Quantità", "Taglia", "PrezzoFinale", "IDborse", "IDfelpa", "IDgiubbotto", "IDpantalone", "IDpubblicità", "Stato"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane2.setViewportView(jTable2);
 
-        jInternalFrame2.getContentPane().add(jScrollPane1, java.awt.BorderLayout.CENTER);
+        jLabel1.setText("Tabella degli ordini");
+
+        jButton1.setLabel("Salva modifiche");
 
         jMenu1.setText("Ordine");
 
@@ -71,22 +72,38 @@ public class GestisciOrdini extends java.awt.Dialog {
         });
         jMenu1.add(jMenuItem1);
 
-        jMenuItem2.setText("Modifica");
-        jMenu1.add(jMenuItem2);
-
-        jMenuItem3.setText("Rimuovi");
-        jMenu1.add(jMenuItem3);
+        jMenuItem4.setText("Cerca");
+        jMenu1.add(jMenuItem4);
 
         jMenuBar2.add(jMenu1);
 
-        jMenu3.setText("Fattura");
-
-        jMenuItem6.setText("Emetti");
-        jMenu3.add(jMenuItem6);
-
-        jMenuBar2.add(jMenu3);
-
         jInternalFrame2.setJMenuBar(jMenuBar2);
+
+        javax.swing.GroupLayout jInternalFrame2Layout = new javax.swing.GroupLayout(jInternalFrame2.getContentPane());
+        jInternalFrame2.getContentPane().setLayout(jInternalFrame2Layout);
+        jInternalFrame2Layout.setHorizontalGroup(
+            jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 640, Short.MAX_VALUE)
+            .addGroup(jInternalFrame2Layout.createSequentialGroup()
+                .addGap(256, 256, 256)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrame2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(76, 76, 76))
+        );
+        jInternalFrame2Layout.setVerticalGroup(
+            jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jInternalFrame2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(36, 36, 36))
+        );
 
         add(jInternalFrame2, java.awt.BorderLayout.CENTER);
 
@@ -124,15 +141,14 @@ public class GestisciOrdini extends java.awt.Dialog {
 
 
     // Variables declaration - do not modify                     
+    private javax.swing.JButton jButton1;
     private javax.swing.JInternalFrame jInternalFrame2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable2;
     // End of variables declaration                   
 }
