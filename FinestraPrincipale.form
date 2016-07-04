@@ -72,7 +72,7 @@
                               <Component id="jButton1" min="-2" pref="121" max="-2" attributes="0"/>
                               <Component id="jButton3" alignment="0" min="-2" pref="121" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="139" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="135" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -85,11 +85,11 @@
                   <Component id="jLabel1" min="-2" pref="29" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                   <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                   <Component id="jButton2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                   <Component id="jButton3" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="63" max="32767" attributes="0"/>
+                  <EmptySpace pref="66" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
