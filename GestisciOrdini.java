@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Gestisci.ordini;
+package Interfaccia;
 
 /**
  *
@@ -53,7 +53,7 @@ public class GestisciOrdini extends java.awt.Dialog {
                 {null, null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "IDordine", "Cliente", "DataOrdine", "IDmaglia", "IDpers", "Quantità", "Taglia", "PrezzoFinale", "IDborse", "IDfelpa", "IDgiubbotto", "IDpantalone", "IDpubblicità", "Stato"
+                "Cod. ordine", "Cliente", "Data", "Cod. maglia", "Cod. pers.", "Quantità", "Taglia", "Prezzo finale", "Cod. borsa", "Cod. felpa", "Cod. giubbotto", "Cod. pantalone", "Cod. pubblicità", "Stato"
             }
         ));
         jScrollPane2.setViewportView(jTable2);
@@ -83,7 +83,7 @@ public class GestisciOrdini extends java.awt.Dialog {
         jInternalFrame2.getContentPane().setLayout(jInternalFrame2Layout);
         jInternalFrame2Layout.setHorizontalGroup(
             jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 640, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 903, Short.MAX_VALUE)
             .addGroup(jInternalFrame2Layout.createSequentialGroup()
                 .addGap(256, 256, 256)
                 .addComponent(jLabel1)
