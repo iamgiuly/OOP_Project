@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Finestra.principale;
+package Interfaccia;
 
 /**
  *
@@ -73,7 +73,7 @@ public class FinestraPrincipale extends javax.swing.JFrame {
                             .addComponent(jButton2)
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(139, 139, 139))))
+                        .addGap(135, 135, 135))))
         );
         jInternalFrame1Layout.setVerticalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -82,11 +82,11 @@ public class FinestraPrincipale extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
                 .addComponent(jButton1)
-                .addGap(31, 31, 31)
+                .addGap(30, 30, 30)
                 .addComponent(jButton2)
-                .addGap(28, 28, 28)
+                .addGap(30, 30, 30)
                 .addComponent(jButton3)
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addContainerGap(66, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
