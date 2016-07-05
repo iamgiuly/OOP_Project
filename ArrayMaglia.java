@@ -31,7 +31,6 @@ import java.sql.SQLException;
  */
 public class ArrayMaglia {
     Integer[] IDmaglie;
-    PdfTextArray array;
     
     public ArrayMaglia(){
         
