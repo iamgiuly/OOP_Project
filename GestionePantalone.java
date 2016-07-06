@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Magazzino;
 
 import java.sql.Connection;
@@ -24,10 +19,10 @@ public class GestionePantalone {
         
     }
     
-    public void inserisciPantalone(String gen,String col,String mat,String mod,int s,int m,int l,int xl,float pb)
+    public void inserisciPantalone(int idpant,String gen,String col,String mat,String mod,int s,int m,int l,int xl,float pb)
     {
         try{
-            Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "admin", "password");
+            Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "root", "");
         PreparedStatement pst=conn.prepareStatement("INSERT INTO pantaloni(Genere,Colore,Materiale,Modello,S,M,L,XL,PrezzoBase) VALUES(?,?,?,?,?,?,?,?,?)");
         pst.setString(1,gen);
         pst.setString(2,col);
@@ -51,7 +46,7 @@ public class GestionePantalone {
     public int getQuantitaAttuale(int id, String taglia)
     {
         try{
-        Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "admin", "password");
+        Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "root", "");
         Statement st=conn.createStatement();
         ResultSet res=st.executeQuery("SELECT * FROM pantaloni WHERE IDpanta="+id+""); 
         if(res.next())
@@ -81,7 +76,7 @@ public class GestionePantalone {
         {
             //questa parte funziona quella prima di controllo no, ma il compilatore
             //non da' errori, eseguendolo da solo Errore Sql
-        Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "admin", "password");
+        Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "root", "");
         PreparedStatement pst=conn.prepareStatement("UPDATE pantaloni SET "+taglia+"=? WHERE IDpanta=?");
         pst.setInt(1,q);
         pst.setInt(2,id);
@@ -101,7 +96,7 @@ public class GestionePantalone {
     public void eliminaPantalone(int id)
     {
         try{
-            Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "admin", "password");
+            Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "root", "");
             Statement st=conn.createStatement();
             ResultSet rs=st.executeQuery("DELETE from pantaloni WHERE IDpanta="+id+"");
         }catch(SQLException s)
@@ -114,7 +109,7 @@ public class GestionePantalone {
     public void visualizzaPantaloni()
      {
          try{
-             Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "admin", "password");
+             Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "root", "");
              Statement st=conn.createStatement();
              ResultSet rs=st.executeQuery("SELECT * from pantaloni");
              ResultSetMetaData rm=rs.getMetaData();
@@ -139,4 +134,21 @@ public class GestionePantalone {
              System.out.println("Errore SQL!");
          }
      }
+    
+     public int getLastID()
+    {
+        try{
+        Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "root", "");
+             Statement st=conn.createStatement();
+             ResultSet rs=st.executeQuery("SELECT IDpanta from pantaloni");
+             rs.last();
+             int lastid=rs.getInt("IDpanta");
+             return lastid;
+        }catch(SQLException ex)
+        {
+            System.out.println("Errore SQL!");
+            ex.printStackTrace();
+        }
+        return -1;
+    }
 }
