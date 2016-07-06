@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Magazzino;
 
 import java.sql.Connection;
@@ -23,11 +18,11 @@ public class GestioneFelpe {
         
     }
     
-    public void inserisciFelpa(String cv,int sv,int mv,int lv,int xlv,int cppv,int cernv,int tasv,float pbv,String Matv)
+    public void inserisciFelpa(int idfelpa,String gen,String cv,int sv,int mv,int lv,int xlv,int cppv,int cernv,int tasv,float pbv,String Matv)
     {
         try{
-        Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "admin", "password");
-        PreparedStatement pst=conn.prepareStatement("INSERT INTO felpa(Colore, S, M, L, XL, Cappuccio, Cerniera, Tasche, PrezzoBase, Materiale) VALUES(?,?,?,?,?,?,?,?,?,?)");
+        Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "root", "");
+        PreparedStatement pst=conn.prepareStatement("INSERT INTO felpa(Genere,Colore,S, M, L, XL, Cappuccio, Cerniera, Tasche, PrezzoBase, Materiale) VALUES(?,?,?,?,?,?,?,?,?,?)");
         pst.setString(1,cv);
         pst.setInt(2,sv);
         pst.setInt(3,mv);
@@ -50,7 +45,7 @@ public class GestioneFelpe {
     public int getQuantitaAttuale(int id, String taglia)
     {
         try{
-        Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "admin", "password");
+        Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "root", "");
         Statement st=conn.createStatement();
         ResultSet res=st.executeQuery("SELECT * FROM felpa WHERE IDfelpa="+id+""); //gli spazi sono importanti!!
         //altrimenti è come scrivere FROMtabella che non è un comando sql
@@ -82,7 +77,7 @@ public class GestioneFelpe {
         {
             //questa parte funziona quella prima di controllo no, ma il compilatore
             //non da' errori, eseguendolo da solo Errore Sql
-        Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "admin", "password");
+        Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "root", "");
         PreparedStatement pst=conn.prepareStatement("UPDATE felpa SET "+taglia+"=? WHERE IDfelpa=?");
         pst.setInt(1,q);
         pst.setInt(2,id);
@@ -102,7 +97,7 @@ public class GestioneFelpe {
     public void eliminaFelpa(int id)
     {
         try{
-            Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "admin", "password");
+            Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "root", "");
             Statement st=conn.createStatement();
             ResultSet rs=st.executeQuery("DELETE from felpa WHERE IDfelpa="+id+"");
         }catch(SQLException s)
@@ -115,7 +110,7 @@ public class GestioneFelpe {
      public void visualizzaFelpe()
      {
          try{
-             Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "admin", "password");
+             Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "root", "");
              Statement st=conn.createStatement();
              ResultSet rs=st.executeQuery("SELECT * from felpa");
              ResultSetMetaData rm=rs.getMetaData();
@@ -140,4 +135,21 @@ public class GestioneFelpe {
              System.out.println("Errore SQL!");
          }
      }
+     
+     public int getLastID()
+    {
+        try{
+        Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "root", "");
+             Statement st=conn.createStatement();
+             ResultSet rs=st.executeQuery("SELECT IDfelpa from felpa");
+             rs.last();
+             int lastid=rs.getInt("IDfelpa");
+             return lastid;
+        }catch(SQLException ex)
+        {
+            System.out.println("Errore SQL!");
+            ex.printStackTrace();
+        }
+        return -1;
+    }
 }
