@@ -22,17 +22,18 @@ public class GestioneFelpe {
     {
         try{
         Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "root", "");
-        PreparedStatement pst=conn.prepareStatement("INSERT INTO felpa(Genere,Colore,S, M, L, XL, Cappuccio, Cerniera, Tasche, PrezzoBase, Materiale) VALUES(?,?,?,?,?,?,?,?,?,?)");
-        pst.setString(1,cv);
-        pst.setInt(2,sv);
-        pst.setInt(3,mv);
-        pst.setInt(4,lv);
-        pst.setInt(5,xlv);
-        pst.setInt(6,cppv);
-        pst.setInt(7,cernv);
-        pst.setInt(8,tasv);
-        pst.setFloat(9,pbv);
-        pst.setString(10,Matv);
+        PreparedStatement pst=conn.prepareStatement("INSERT INTO felpa(Genere,Colore,S, M, L, XL, Cappuccio, Cerniera, Tasche, PrezzoBase, Materiale) VALUES(?,?,?,?,?,?,?,?,?,?,?)");
+        pst.setString(1,gen);
+        pst.setString(2,cv);
+        pst.setInt(3,sv);
+        pst.setInt(4,mv);
+        pst.setInt(5,lv);
+        pst.setInt(6,xlv);
+        pst.setInt(7,cppv);
+        pst.setInt(8,cernv);
+        pst.setInt(9,tasv);
+        pst.setFloat(10,pbv);
+        pst.setString(11,Matv);
         pst.executeUpdate();
         conn.close();
         System.out.println("Fatto");
