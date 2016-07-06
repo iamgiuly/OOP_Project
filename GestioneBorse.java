@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Magazzino;
 
 import java.sql.Connection;
@@ -24,10 +19,10 @@ public class GestioneBorse {
     
     }
     
-    public void inserisciBorsa(String mod,String col,float pb,int q)
+    public void inserisciBorsa(int idborsa, String mod,String col,float pb,int q)
     {
         try{
-            Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "admin", "password");
+            Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "root", "");
         PreparedStatement pst=conn.prepareStatement("INSERT INTO borse(Modello,Colore,PrezzoBase,Quantità) VALUES(?,?,?,?)");
         pst.setString(1,mod);
         pst.setString(2,col);
@@ -53,7 +48,7 @@ public class GestioneBorse {
         {
             //questa parte funziona quella prima di controllo no, ma il compilatore
             //non da' errori, eseguendolo da solo Errore Sql
-        Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "admin", "password");
+        Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "root", "");
         PreparedStatement pst=conn.prepareStatement("UPDATE borse SET Quantità=? WHERE IDborsa=?");
         pst.setInt(1,q);
         pst.setInt(2,id);
@@ -73,7 +68,7 @@ public class GestioneBorse {
     public int getQuantitaAttuale(int id)
     {
         try{
-        Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "admin", "password");
+        Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "root", "");
         Statement st=conn.createStatement();
         ResultSet res=st.executeQuery("SELECT * FROM borse WHERE IDborse="+id+""); //gli spazi sono importanti!!
         //altrimenti è come scrivere FROMtabella che non è un comando sql
@@ -97,7 +92,7 @@ public class GestioneBorse {
     public void eliminaBorsa(int id)
     {
         try{
-            Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "admin", "password");
+            Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "root", "");
             Statement st=conn.createStatement();
             ResultSet rs=st.executeQuery("DELETE from borse WHERE IDborse="+id+"");
         }catch(SQLException s)
@@ -110,7 +105,7 @@ public class GestioneBorse {
     public void visualizzaBorse()
      {
          try{
-             Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "admin", "password");
+             Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "root", "");
              Statement st=conn.createStatement();
              ResultSet rs=st.executeQuery("SELECT * from borse");
              ResultSetMetaData rm=rs.getMetaData();
@@ -135,6 +130,23 @@ public class GestioneBorse {
              System.out.println("Errore SQL!");
          }
      }
+    
+     public int getLastID()
+    {
+        try{
+        Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "root", "");
+             Statement st=conn.createStatement();
+             ResultSet rs=st.executeQuery("SELECT IDborse from borse");
+             rs.last();
+             int lastid=rs.getInt("IDborse");
+             return lastid;
+        }catch(SQLException ex)
+        {
+            System.out.println("Errore SQL!");
+            ex.printStackTrace();
+        }
+        return -1;
+    }
     
 }
 
