@@ -1,23 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Magazzino;
-import java.sql.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.lang.NullPointerException;
 
-/**
- *
- * @author Sara
- */
 public class Magazzino {
     private GestioneBorse b;
     private GestioneFelpe f;
@@ -41,12 +23,13 @@ public class Magazzino {
      }catch(ClassNotFoundException s)
      {
          System.out.println("Errore Connessione!");
+         s.printStackTrace();
      }
     }
     
-    public void inserisciFelpa(String cv,int sv,int mv,int lv,int xlv,int cppv,int cernv,int tasv,float pbv,String Matv)
+    public void inserisciFelpa(int idfelpa,String gen,String cv,int sv,int mv,int lv,int xlv,int cppv,int cernv,int tasv,float pbv,String Matv)
     {
-        f.inserisciFelpa(cv, sv, mv, lv, xlv, cppv, cernv, tasv, pbv, Matv);
+        f.inserisciFelpa(idfelpa,gen,cv, sv, mv, lv, xlv, cppv, cernv, tasv, pbv, Matv);
     }
     
     public void cambiaQuantitaFelpa(int id,int q,String taglia) 
@@ -64,9 +47,9 @@ public class Magazzino {
         t.inserisciMaglia(idmaglia,gen,col,s,m,l,xl,scol,maniche,mat,pb);
     }
     
-    public void inserisciBorsa(String mod,String col,float pb,int q)
+    public void inserisciBorsa(int idborsa, String mod,String col,float pb,int q)
     {
-        b.inserisciBorsa(mod, col, pb, q);
+        b.inserisciBorsa(idborsa,mod, col, pb, q);
     }
     
     public void cambiaQuantitaBorsa(int id,int q)
@@ -79,9 +62,9 @@ public class Magazzino {
         b.eliminaBorsa(id);
     }   
     
-    public void inserisciGiubbotto(String gen,String mat,String col,int s,int m,int l,int xl,float pb)
+    public void inserisciGiubbotto(int idgiubb,String gen,String mat,String col,int s,int m,int l,int xl,float pb)
     {
-        g.inserisciGiubbotto(gen, mat, col, s, m, l, xl, pb);
+        g.inserisciGiubbotto(idgiubb,gen, mat, col, s, m, l, xl, pb);
     }
     
     public void cambiaQuantitaGiubbotto(int id,int q,String taglia)
@@ -94,9 +77,9 @@ public class Magazzino {
         g.eliminaGiubbotto(id);
     }
     
-       public void inserisciPantalone(String gen,String col,String mat,String mod,int s,int m,int l,int xl,float pb)
+       public void inserisciPantalone(int idpant, String gen,String col,String mat,String mod,int s,int m,int l,int xl,float pb)
     {
-        j.inserisciPantalone(gen, col, mat, mod, s, m, l, xl, pb);
+        j.inserisciPantalone(idpant,gen, col, mat, mod, s, m, l, xl, pb);
     }
        
     public void cambiaQuantitaPantalone(int id,int q,String taglia)
@@ -111,9 +94,9 @@ public class Magazzino {
      
       
      
-     public void inserisciPubblicità(String tc,String form,float sp,String col,float pb,int q)
+     public void inserisciPubblicità(int idpubb,String tc,String form,float sp,String col,float pb,int q)
      {
-         p.inserisciPubblicità(tc, form, sp, col, pb, q);
+         p.inserisciPubblicità(idpubb,tc, form, sp, col, pb, q);
      }
      
      public void cambiaQuantitaPubblicità(int id,int q)
@@ -160,6 +143,36 @@ public class Magazzino {
       public int getLastIDmaglia()
      {
          int i=t.getLastID();
+         return i;
+     }
+      
+       public int getLastIDborsa()
+     {
+         int i=b.getLastID();
+         return i;
+     }
+       
+        public int getLastIDfelpa()
+     {
+         int i=f.getLastID();
+         return i;
+     }
+        
+         public int getLastIDgiubb()
+     {
+         int i=g.getLastID();
+         return i;
+     }
+         
+          public int getLastIDpanta()
+     {
+         int i=j.getLastID();
+         return i;
+     }
+          
+           public int getLastIDpubb()
+     {
+         int i=p.getLastID();
          return i;
      }
 }
