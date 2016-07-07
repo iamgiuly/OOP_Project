@@ -120,6 +120,24 @@ public class GestioneOrdine {
          {
              System.out.println("Errore SQL!");
          }
+         
+         public int getLastID()
+    {
+        try{
+        Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "root", "");
+             Statement st=conn.createStatement();
+             ResultSet rs=st.executeQuery("SELECT idOrdine from ordine");
+             rs.last();
+             int lastid=rs.getInt("idOrdine");
+             return lastid;
+        }catch(SQLException ex)
+        {
+            System.out.println("Errore SQL!");
+            ex.printStackTrace();
+        }
+        return -1;
+    
+}
      }
     
 }
