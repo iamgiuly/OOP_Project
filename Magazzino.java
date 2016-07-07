@@ -175,4 +175,9 @@ public class Magazzino {
          int i=p.getLastID();
          return i;
      }
+     public int getLastIDord()
+     {
+         int i=o.getLastID();
+         return i;
+     }
 }
