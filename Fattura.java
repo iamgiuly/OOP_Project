@@ -39,11 +39,11 @@ public class Fattura {
     String cliente;
     String data;
     AtomicInteger numerofattura;
-    ArrayMaglia arraymaglia=new ArrayMaglia(); 
+    
     private static String FILEOUT = "C:/Workspace/Fattura.pdf";
     private static String FILEIN ="C:/Workspace/TemplateInvoice.pdf";
-    /*incerti*/
-    boolean controllo; //serve per controllare se sono presenti alcune categorie di capi ed eseguire o no quella parte di codice (da rivedere)
+    int y=0; int x=0; //Coordinate che vanno a posizionare il testo dinamicamente nella tabella
+
     
     
 public Fattura(){
@@ -63,13 +63,13 @@ public static void main (String args[]) throws SQLException, IOException, Docume
     String data="2016-06-01";
     AtomicInteger numerofattura = new AtomicInteger(1); //COME INCREMENTARLO?
     Fattura fattura = new Fattura(cliente, data);
-    fattura.setIntestazione(cliente, data, numerofattura, pdfStamper);
-            pdfReader.close();
+    fattura.setFattura(cliente, data, numerofattura, pdfStamper);
+    pdfReader.close();
     
 
 }
 
-public void setIntestazione(String cliente, String data, AtomicInteger numerofattura, PdfStamper s) throws SQLException, DocumentException, FileNotFoundException, IOException{ //Ho messo che il numero della fattura va passato come parametro, voglio capire se si può fare altrimenti (con un contatore)
+public void setFattura(String cliente, String data, AtomicInteger numerofattura, PdfStamper s) throws SQLException, DocumentException, FileNotFoundException, IOException{ //Ho messo che il numero della fattura va passato come parametro, voglio capire se si può fare altrimenti (con un contatore)
     try
  {
     s.getAcroFields().setField("Num", numerofattura.toString()); // sistemare
@@ -79,7 +79,8 @@ public void setIntestazione(String cliente, String data, AtomicInteger numerofat
     BaseFont bf = BaseFont.createFont(BaseFont.HELVETICA, BaseFont.CP1250, BaseFont.EMBEDDED);
     content.beginText();
     content.setFontAndSize(bf, 7);
-    inserisciDati(cliente, data, s);
+    inserisciDatiMaglie(cliente, data, s);
+    inserisciDatiBorse(cliente, data, s);
     content.endText();
     s.close();
     
@@ -89,25 +90,24 @@ public void setIntestazione(String cliente, String data, AtomicInteger numerofat
       
       }
 }
-//IDEA: creare una mega casella di testo dove inserire questo metodo
-public void inserisciDati(String cliente, String data, PdfStamper s) throws SQLException, IOException, DocumentException{
-    int y=0; int x=0;
+//IDEA: fare un metodo inserisciDati per ogni Array diverso (uno per arraymaglia, uno per arrayborsa e così via)
+public void inserisciDatiMaglie(String cliente, String data, PdfStamper s) throws SQLException, IOException, DocumentException{
+    ArrayMaglia arraymaglia=new ArrayMaglia(); 
     arraymaglia.ArrayIDmaglia(cliente, data);
     
     PdfContentByte content = s.getUnderContent(1);//1 for the first page
     BaseFont bf = BaseFont.createFont(BaseFont.HELVETICA, BaseFont.CP1250, BaseFont.EMBEDDED);
-    
     content.setFontAndSize(bf, 7);
     
     
     for (int j=0; j<arraymaglia.IDmaglie.length; j++){
         arraymaglia.accessoMaglie(j);
         for(int z=0; z<arraymaglia.riga.length; z++){
-        content.showTextAligned(PdfContentByte.ALIGN_LEFT, arraymaglia.riga[z]+ "   ", 95+x,495+y,0);
+        content.showTextAligned(PdfContentByte.ALIGN_LEFT, arraymaglia.riga[z]+ "   ", 95+x,538-y,0);
         x+=97; //sposta la coordinata y ad ogni stampa
         
     }
-        content.showTextAligned(PdfContentByte.ALIGN_LEFT, "Maglia", 95+x,495+y,0);
+        content.showTextAligned(PdfContentByte.ALIGN_LEFT, "Maglia", 95+x,538-y,0);
         
     x=0;
     y+=20;
@@ -115,6 +115,28 @@ public void inserisciDati(String cliente, String data, PdfStamper s) throws SQLE
     
 }
 
+public void inserisciDatiBorse(String cliente, String data, PdfStamper s) throws SQLException, IOException, DocumentException{
+    ArrayBorsa arrayborsa=new ArrayBorsa();
+    arrayborsa.ArrayIDborsa(cliente, data);
+    
+    PdfContentByte content = s.getUnderContent(1);//1 for the first page
+    BaseFont bf = BaseFont.createFont(BaseFont.HELVETICA, BaseFont.CP1250, BaseFont.EMBEDDED);
+    content.setFontAndSize(bf, 7);
+    
+    
+    for (int j=0; j<arrayborsa.IDborse.length; j++){
+        arrayborsa.accessoBorse(j);
+        for(int z=0; z<arrayborsa.riga.length; z++){
+        content.showTextAligned(PdfContentByte.ALIGN_LEFT, arrayborsa.riga[z]+ "   ", 95+x,538-y,0);
+        x+=97; //sposta la coordinata y ad ogni stampa
+        
+    }
+        content.showTextAligned(PdfContentByte.ALIGN_LEFT, "Borsa", 95+x,538-y,0);
+        
+    x=0;
+    y+=20;
+    }
+//MI calcolar il prezzo totale man mano che calcolo i preventivi lo agggiungo!
 
-} 
+}} 
 
