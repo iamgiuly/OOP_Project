@@ -1,5 +1,9 @@
 package Magazzino;
 
+import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class Magazzino {
     private GestioneBorse b;
     private GestioneFelpe f;
@@ -180,4 +184,10 @@ public class Magazzino {
          int i=o.getLastID();
          return i;
      }
+     
+     public ResultSet CercaOrdine(int id) throws IOException, SQLException{
+         ResultSet rs=o.CercaOrdine(id);
+         return rs;
+     
+}
 }
