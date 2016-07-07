@@ -109,9 +109,9 @@ public class Magazzino {
          p.eliminaPubblicità(id);
      }
      
-     public void inserisciOrdine(int id,String cliente,String data,int idmaglia,int idpers,int quantita,String taglia,float pfin,int idb,int idf,int idgiubb,int idpantalone,int idpubb,String stato)
+     public void inserisciOrdine(int id,String cliente,String data,int idmaglia,int idpers,int quantita,String taglia,int idb,int idf,int idgiubb,int idpantalone,int idpubb,String stato)
      {
-         o.inserisciOrdine(id, cliente, data, idmaglia, idpers, quantita, taglia, pfin, idb, idf, idgiubb, idpantalone, idpubb, stato);
+         o.inserisciOrdine(id, cliente, data, idmaglia, idpers, quantita, taglia, idb, idf, idgiubb, idpantalone, idpubb, stato);
      }
      
      public void eliminaOrdine(int id)
