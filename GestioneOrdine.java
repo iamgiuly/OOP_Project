@@ -23,11 +23,11 @@ public class GestioneOrdine {
         
     }
     
-    public void inserisciOrdine(int id,String cliente,String data,int idmaglia,int idpers,int quantita,String taglia,float pfin,int idb,int idf,int idgiubb,int idpantalone,int idpubb,String stato)
+    public void inserisciOrdine(int id,String cliente,String data,int idmaglia,int idpers,int quantita,String taglia,int idb,int idf,int idgiubb,int idpantalone,int idpubb,String stato)
     {
         try{
         Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "admin", "password");
-        PreparedStatement pst=conn.prepareStatement("INSERT INTO ordine(idOrdine, Cliente, DataOrdine, IDmaglia, IDpers, Quantità, Taglia, PrezzoFinale, IDborse,IDfelpa,IDgiubbotto,IDpantalone,IDpubblicità,Stato) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+        PreparedStatement pst=conn.prepareStatement("INSERT INTO ordine(idOrdine, Cliente, DataOrdine, IDmaglia, IDpers, Quantità, Taglia, IDborse,IDfelpa,IDgiubbotto,IDpantalone,IDpubblicità,Stato) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)");
         pst.setInt(1,id);
         pst.setString(2,cliente);
         pst.setString(3,data);
@@ -35,13 +35,12 @@ public class GestioneOrdine {
         pst.setInt(5,idpers);
         pst.setInt(6,quantita);
         pst.setString(7,taglia);
-        pst.setFloat(8,pfin);
-        pst.setInt(9,idb);
-        pst.setInt(10,idf);
-        pst.setInt(11,idgiubb);
-        pst.setInt(12,idpantalone);
-        pst.setInt(13,idpubb);
-        pst.setString(14,stato);
+        pst.setInt(8,idb);
+        pst.setInt(9,idf);
+        pst.setInt(10,idgiubb);
+        pst.setInt(11,idpantalone);
+        pst.setInt(12,idpubb);
+        pst.setString(13,stato);
         pst.executeUpdate();
         conn.close();
         System.out.println("Fatto");
@@ -120,6 +119,7 @@ public class GestioneOrdine {
          {
              System.out.println("Errore SQL!");
          }
+     }
          
          public int getLastID()
     {
@@ -138,6 +138,7 @@ public class GestioneOrdine {
         return -1;
     
 }
+        
      }
     
-}
+
