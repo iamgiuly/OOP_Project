@@ -10,6 +10,8 @@ package Interfaccia;
  * @author Serena
  */
 public class GestisciOrdini extends java.awt.Dialog {
+    InserisciOrdine i=new InserisciOrdine(null,true);
+    CercaOrdine c=new CercaOrdine(null,true);
 
     /**
      * Creates new form GestisciOrdini
@@ -65,6 +67,11 @@ public class GestisciOrdini extends java.awt.Dialog {
         jMenu1.setText("Ordine");
 
         jMenuItem1.setText("Nuovo");
+        jMenuItem1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuItem1MouseClicked(evt);
+            }
+        });
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -73,6 +80,11 @@ public class GestisciOrdini extends java.awt.Dialog {
         jMenu1.add(jMenuItem1);
 
         jMenuItem4.setText("Cerca");
+        jMenuItem4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuItem4MouseClicked(evt);
+            }
+        });
         jMenu1.add(jMenuItem4);
 
         jMenuBar2.add(jMenu1);
@@ -121,6 +133,15 @@ public class GestisciOrdini extends java.awt.Dialog {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {                                           
         // TODO add your handling code here:
     }                                          
+
+    private void jMenuItem1MouseClicked(java.awt.event.MouseEvent evt) {                                        
+       i.setVisible(true);
+        
+    }                                       
+
+    private void jMenuItem4MouseClicked(java.awt.event.MouseEvent evt) {                                        
+        c.setVisible(true);
+    }                                       
 
     /**
      * @param args the command line arguments
