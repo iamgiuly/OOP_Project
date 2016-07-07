@@ -5,6 +5,7 @@
  */
 package Magazzino;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -138,7 +139,16 @@ public class GestioneOrdine {
         return -1;
     
 }
-        
+      
+        public ResultSet CercaOrdine(int id) throws IOException,SQLException {
+        ResultSet rs=null;
+        String ordine="";
+        Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "admin", "password");
+        Statement st=conn.createStatement();
+        rs=st.executeQuery("SELECT * from ordine WHERE idOrdine="+id+"");
+        ResultSetMetaData rm=rs.getMetaData();
+        return rs;
+        }
      }
     
 
