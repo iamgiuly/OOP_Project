@@ -189,5 +189,35 @@ public class Magazzino {
          ResultSet rs=o.CercaOrdine(id);
          return rs;
      
-}
+     }
+     
+     public DefaultTableModel resultSetToTableModel(ResultSet row) throws SQLException
+    {
+        DefaultTableModel model=null;
+    ResultSetMetaData meta= row.getMetaData();
+    if(model==null) model= new DefaultTableModel();
+    String cols[]=new String[meta.getColumnCount()];
+    for(int i=0;i< cols.length;++i)
+        {
+        cols[i]= meta.getColumnLabel(i+1);
+        }
+
+    model.setColumnIdentifiers(cols);
+
+    while(row.next())
+        {
+        Object data[]= new Object[cols.length];
+        for(int i=0;i< data.length;++i)
+             {
+             data[i]=row.getObject(i+1);
+             }
+        model.addRow(data);
+        }
+    return model;
+    }
+    
+    public void selezionaOrdine(String cliente, String date)
+      {
+          o.selezionaOrdine(cliente, date);
+      }
 }
