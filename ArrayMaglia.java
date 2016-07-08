@@ -5,12 +5,15 @@
  */
 package fattura;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import ordini.PreventivoMaglia;
+import ordini.Personalizzazione;
 
 /**
  *
@@ -86,5 +89,32 @@ public class ArrayMaglia {
          } 
       return riga;
 }
+    /*calcola in base alle caratteristiche e alle personalizzazioni e alla quantità l'importo totale delle maglia acquistate*/
+    public float importoMaglia(int j) throws SQLException, IOException{
+        /*variabili d'appoggio */
+        String color, ts, inchiostro, appoggio;
+        boolean scoll=false, manica=false;
+        int quantita;
+        PreventivoMaglia pmaglia = new PreventivoMaglia();
+        Personalizzazione pers = new Personalizzazione();
+        
+        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "root", "");
+        PreparedStatement ps=conn.prepareStatement("SELECT m.Colore, m.Scollatura, m.Maniche, o.Quantità, pers.TipoStampa, pers.Inchiostro FROM maglia m JOIN ordine o JOIN personalizzazione pers ON m.IDmaglia=o.IDmaglia AND o.IDpers=pers.IDpers WHERE m.IDmaglia=?");        
+        ps.setInt(1, IDmaglie[j]);
+        ResultSet rs=ps.executeQuery();
+        rs.next();
+        color=rs.getString(1);
+        appoggio=rs.getString(2);
+        if("V".equals(appoggio))
+            scoll=true;
+        appoggio=rs.getString(3);
+        if("Lunghe".equals(appoggio));
+            manica=true;
+        quantita=rs.getInt(4);
+        ts=rs.getString(5);
+        inchiostro=rs.getString(6);
+        System.out.println((pmaglia.ParzialeMaglia(color, scoll, manica)+pers.prezzoPersonalizzazioni(ts, inchiostro))*quantita); //Somma personalizzazioni e moltiplicazione per quant
+        return (pmaglia.ParzialeMaglia(color, scoll, manica)+pers.prezzoPersonalizzazioni(ts, inchiostro))*quantita;
+    }
 
 }
