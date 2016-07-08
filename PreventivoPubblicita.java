@@ -6,8 +6,6 @@
 package ordini;
 import merce.Pubblicita;
 import java.io.*;
-import java.lang.NullPointerException;
-
 /**
  *
  * @author Giulia Evangelisti
