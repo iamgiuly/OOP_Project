@@ -63,14 +63,12 @@ public class Personalizzazione {
         this.tipoStampa=null;
         this.inchiostro=null;
         this.prezzoBase=(float)1.50 ;
-        this.numPersonalizzazioni=0;
     }
     
     public Personalizzazione(String ts,String i,int np) {
         this.tipoStampa=ts;
         this.inchiostro=i;
         this.prezzoBase=(float)1.50;
-        this.numPersonalizzazioni=np;
     }
     
     /**Il metodo sotto implementato calcola il prezzo relativo a una personalizzazione
@@ -86,9 +84,9 @@ public class Personalizzazione {
      * @throws java.io.IOException
      */
     
-    public float prezzoPersonalizzazioni(String ts,String i,int np) throws IOExeption,IOException {
+    public float prezzoPersonalizzazioni(String ts,String i) throws IOException {
         float prezzo=prezzoBase;
-        BufferedReader br=new BufferedReader (new InputStreamReader(System.in));
+        //BufferedReader br=new BufferedReader (new InputStreamReader(System.in));
         if(ts!=null && i!=null) switch(ts) {
             case "serigrafia": if("colorato".equals(i)) prezzo+=0.50;
                                
@@ -108,7 +106,7 @@ public class Personalizzazione {
 
         }
         
-        return prezzo*=np;
+        return prezzo;
     }
     
 }
