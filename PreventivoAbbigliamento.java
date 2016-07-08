@@ -125,7 +125,7 @@ int quant;
             totaleAbbigliamento+= pmaglia.ParzialeMaglia(color, scoll, manica);
             
             if (p==true){
-            totaleAbbigliamento+=pers.prezzoPersonalizzazioni(tipo, i, nrpers);
+            totaleAbbigliamento+=pers.prezzoPersonalizzazioni(tipo, i);
             }
             return totaleAbbigliamento*quant;
                                  
@@ -147,7 +147,7 @@ int quant;
 
             totaleAbbigliamento+=ppanta.ParzialePantalone(color, model);
             if (p==true){
-            totaleAbbigliamento+=pers.prezzoPersonalizzazioni(tipo, i, nrpers);           
+            totaleAbbigliamento+=pers.prezzoPersonalizzazioni(tipo, i);           
             }
             return totaleAbbigliamento*quant;
            
@@ -170,7 +170,7 @@ int quant;
             totaleAbbigliamento+=pgiubb.ParzialeGiubbotto(color, materiale);
             
             if (p==true){
-            totaleAbbigliamento+=pers.prezzoPersonalizzazioni(tipo, i, nrpers);           
+            totaleAbbigliamento+=pers.prezzoPersonalizzazioni(tipo, i);           
             }
             
             return totaleAbbigliamento*quant;
@@ -222,7 +222,7 @@ int quant;
             totaleAbbigliamento+=pfelpa.ParzialeFelpa(color, cern, capp, tasche);
             
             if (p==true){
-            totaleAbbigliamento+=pers.prezzoPersonalizzazioni(tipo, i, nrpers);           
+            totaleAbbigliamento+=pers.prezzoPersonalizzazioni(tipo, i);           
             }
             return totaleAbbigliamento*quant;
         
@@ -245,7 +245,7 @@ int quant;
 
             totaleAbbigliamento+=pborsa.ParzialeBorsa(model, color);
             if (p==true){
-            totaleAbbigliamento+=pers.prezzoPersonalizzazioni(tipo, i, nrpers);           
+            totaleAbbigliamento+=pers.prezzoPersonalizzazioni(tipo, i);           
             }
             return totaleAbbigliamento*quant;
             
