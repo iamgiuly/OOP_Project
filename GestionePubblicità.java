@@ -1,4 +1,9 @@
-package Magazzino;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package magazzino;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -19,10 +24,10 @@ public class GestionePubblicità {
         
     }
     
-    public void inserisciPubblicità(int idpubb,String tc,String form,float sp,String col,float pb,int q)
+    public void inserisciPubblicità(int id,String tc,String form,float sp,String col,float pb,int q)
     {
         try{
-            Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "root", "");
+            Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "admin", "password");
             PreparedStatement pst=conn.prepareStatement("INSERT into pubblicità(TipoCarta,Formato,Spessore,Colore,PrezzoBase,Quantità) VALUES (?,?,?,?,?,?)");
             pst.setString(1,tc);
             pst.setString(2,form);
@@ -50,7 +55,7 @@ public class GestionePubblicità {
         {
             //questa parte funziona quella prima di controllo no, ma il compilatore
             //non da' errori, eseguendolo da solo Errore Sql
-        Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "root", "");
+        Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "admin", "password");
         PreparedStatement pst=conn.prepareStatement("UPDATE pubblicità SET Quantità=? WHERE IDpubb=?");
         pst.setInt(1,q);
         pst.setInt(2,id);
@@ -70,7 +75,7 @@ public class GestionePubblicità {
     public int getQuantitaAttuale(int id)
     {
         try{
-        Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "root", "");
+        Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "admin", "password");
         Statement st=conn.createStatement();
         ResultSet res=st.executeQuery("SELECT * FROM pubblicità WHERE IDpubb="+id+""); //gli spazi sono importanti!!
         //altrimenti è come scrivere FROMtabella che non è un comando sql
@@ -94,7 +99,7 @@ public class GestionePubblicità {
     public void eliminaPubblicità(int id) //elimina intera riga
     {
         try{
-            Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "root", "");
+            Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "admin", "password");
             Statement st=conn.createStatement();
             ResultSet rs=st.executeQuery("DELETE from pubblicità WHERE IDpubb="+id+"");
         }catch(SQLException s)
@@ -104,39 +109,26 @@ public class GestionePubblicità {
         }
     }
     
-    public void visualizzaPubblicita()
+    public ResultSet visualizzaPubblicita()
      {
+         ResultSet rs=null;
          try{
-             Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "root", "");
+             Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "admin", "password");
              Statement st=conn.createStatement();
-             ResultSet rs=st.executeQuery("SELECT * from pubblicità");
+             rs=st.executeQuery("SELECT * from pubblicità");
              ResultSetMetaData rm=rs.getMetaData();
-             int numColonne=rm.getColumnCount();
-             for(int i=1; i<=numColonne;i++)
-             {
-                 System.out.print(rm.getColumnName(i) + "   ");
-             }
-             System.out.println();
-             while(rs.next())
-             {
-                 for(int i = 1 ; i <= numColonne; i++){ //stampa una riga
-                     System.out.print(rs.getString(i) + " ");
-                 }
-                 System.out.println();
-             }
-             st.close();
-             rs.close();
-             conn.close();
+             return rs;
          }catch(SQLException s)
          {
              System.out.println("Errore SQL!");
          }
+         return rs;
      }
     
-     public int getLastID()
+    public int getLastID()
     {
         try{
-        Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "root", "");
+        Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "admin", "password");
              Statement st=conn.createStatement();
              ResultSet rs=st.executeQuery("SELECT IDpubb from pubblicità");
              rs.last();

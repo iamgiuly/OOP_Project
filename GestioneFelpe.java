@@ -1,4 +1,9 @@
-package Magazzino;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package magazzino;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -18,11 +23,11 @@ public class GestioneFelpe {
         
     }
     
-    public void inserisciFelpa(int idfelpa,String gen,String cv,int sv,int mv,int lv,int xlv,int cppv,int cernv,int tasv,float pbv,String Matv)
+    public void inserisciFelpa(int id,String gen,String cv,int sv,int mv,int lv,int xlv,int cppv,int cernv,int tasv,float pbv,String Matv)
     {
         try{
         Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "root", "");
-        PreparedStatement pst=conn.prepareStatement("INSERT INTO felpa(Genere,Colore,S, M, L, XL, Cappuccio, Cerniera, Tasche, PrezzoBase, Materiale) VALUES(?,?,?,?,?,?,?,?,?,?,?)");
+        PreparedStatement pst=conn.prepareStatement("INSERT INTO felpa(Genere,Colore, S, M, L, XL, Cappuccio, Cerniera, Tasche, PrezzoBase, Materiale) VALUES(?,?,?,?,?,?,?,?,?,?,?)");
         pst.setString(1,gen);
         pst.setString(2,cv);
         pst.setInt(3,sv);
@@ -46,7 +51,7 @@ public class GestioneFelpe {
     public int getQuantitaAttuale(int id, String taglia)
     {
         try{
-        Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "root", "");
+        Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "admin", "password");
         Statement st=conn.createStatement();
         ResultSet res=st.executeQuery("SELECT * FROM felpa WHERE IDfelpa="+id+""); //gli spazi sono importanti!!
         //altrimenti è come scrivere FROMtabella che non è un comando sql
@@ -78,7 +83,7 @@ public class GestioneFelpe {
         {
             //questa parte funziona quella prima di controllo no, ma il compilatore
             //non da' errori, eseguendolo da solo Errore Sql
-        Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "root", "");
+        Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "admin", "password");
         PreparedStatement pst=conn.prepareStatement("UPDATE felpa SET "+taglia+"=? WHERE IDfelpa=?");
         pst.setInt(1,q);
         pst.setInt(2,id);
@@ -98,7 +103,7 @@ public class GestioneFelpe {
     public void eliminaFelpa(int id)
     {
         try{
-            Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "root", "");
+            Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "admin", "password");
             Statement st=conn.createStatement();
             ResultSet rs=st.executeQuery("DELETE from felpa WHERE IDfelpa="+id+"");
         }catch(SQLException s)
@@ -108,39 +113,26 @@ public class GestioneFelpe {
         }
     }
     
-     public void visualizzaFelpe()
+     public ResultSet visualizzaFelpe()
      {
+         ResultSet rs=null;
          try{
-             Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "root", "");
+             Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "admin", "password");
              Statement st=conn.createStatement();
-             ResultSet rs=st.executeQuery("SELECT * from felpa");
+             rs=st.executeQuery("SELECT * from felpa");
              ResultSetMetaData rm=rs.getMetaData();
-             int numColonne=rm.getColumnCount();
-             for(int i=1; i<=numColonne;i++)
-             {
-                 System.out.print(rm.getColumnName(i) + "   ");
-             }
-             System.out.println();
-             while(rs.next())
-             {
-                 for(int i = 1 ; i <= numColonne; i++){ //stampa una riga
-                     System.out.print(rs.getString(i) + " ");
-                 }
-                 System.out.println();
-             }
-             st.close();
-             rs.close();
-             conn.close();
+             return rs;
          }catch(SQLException s)
          {
              System.out.println("Errore SQL!");
          }
+         return rs;
      }
      
      public int getLastID()
     {
         try{
-        Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "root", "");
+        Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "admin", "password");
              Statement st=conn.createStatement();
              ResultSet rs=st.executeQuery("SELECT IDfelpa from felpa");
              rs.last();
