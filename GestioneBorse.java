@@ -1,4 +1,9 @@
-package Magazzino;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package magazzino;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -19,7 +24,7 @@ public class GestioneBorse {
     
     }
     
-    public void inserisciBorsa(int idborsa, String mod,String col,float pb,int q)
+    public void inserisciBorsa(int id,String mod,String col,float pb,int q)
     {
         try{
             Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "root", "");
@@ -102,39 +107,26 @@ public class GestioneBorse {
         }
     }
     
-    public void visualizzaBorse()
+    public ResultSet visualizzaBorse()
      {
+         ResultSet rs=null;
          try{
              Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "root", "");
              Statement st=conn.createStatement();
-             ResultSet rs=st.executeQuery("SELECT * from borse");
+             rs=st.executeQuery("SELECT * from borse");
              ResultSetMetaData rm=rs.getMetaData();
-             int numColonne=rm.getColumnCount();
-             for(int i=1; i<=numColonne;i++)
-             {
-                 System.out.print(rm.getColumnName(i) + "   ");
-             }
-             System.out.println();
-             while(rs.next())
-             {
-                 for(int i = 1 ; i <= numColonne; i++){ //stampa una riga
-                     System.out.print(rs.getString(i) + " ");
-                 }
-                 System.out.println();
-             }
-             st.close();
-             rs.close();
-             conn.close();
+             return rs;
          }catch(SQLException s)
          {
              System.out.println("Errore SQL!");
          }
+         return rs;
      }
     
-     public int getLastID()
+    public int getLastID()
     {
         try{
-        Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "root", "");
+        Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "admin", "password");
              Statement st=conn.createStatement();
              ResultSet rs=st.executeQuery("SELECT IDborse from borse");
              rs.last();
@@ -147,7 +139,6 @@ public class GestioneBorse {
         }
         return -1;
     }
-    
 }
 
 
