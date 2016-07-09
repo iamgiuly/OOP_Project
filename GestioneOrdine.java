@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package magazzino;
+package Magazzino;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -169,5 +170,24 @@ public class GestioneOrdine {
         }
         return -1;
     }
+        
+        public void ModificaOrdine(int id,String cliente,String data,int idmaglia,int idpers,int quantità,String taglia,int idborsa,int idfelpa,int idgiubb,int idpant,int idpubb,String stato) throws SQLException {
+           Connection conn=DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "admin", "password");
+           PreparedStatement ps=conn.prepareStatement("UPDATE ordine SET Cliente=?,DataOrdine=?,IDmaglia=?,IDpers=?,Quantità=?,Taglia=?,IDborse=?,IDfelpa=?,IDgiubbotto=?,IDpantalone=?,IDpubblicità=?,Stato=? WHERE idOrdine=?");
+           ps.setString(1,cliente);
+           ps.setString(2, data);
+           ps.setInt(3, idmaglia);
+           ps.setInt(4,idpers);
+           ps.setInt(5, quantità);
+           ps.setString(6,taglia);
+           ps.setInt(7,idborsa);
+           ps.setInt(8,idfelpa);
+           ps.setInt(9, idgiubb);
+           ps.setInt(10,idpant);
+           ps.setInt(11, idpubb);
+           ps.setString(12,stato);
+           ps.setInt(13, id);
+           ResultSet rs=ps.executeQuery();
+        }
     
 }
