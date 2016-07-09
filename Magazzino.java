@@ -2,7 +2,9 @@ package Magazzino;
 
 import java.io.IOException;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import javax.swing.table.DefaultTableModel;
 
 public class Magazzino {
     private GestioneBorse b;
@@ -220,4 +222,7 @@ public class Magazzino {
       {
           o.selezionaOrdine(cliente, date);
       }
+    public void ModificaOrdine(int id,String cliente,String data,int idmaglia,int idpers,int quantità,String taglia,int idborsa,int idfelpa,int idgiubb,int idpant,int idpubb,String stato) throws SQLException{
+        o.ModificaOrdine(id, cliente, data, idmaglia, idpers, quantità, taglia, idborsa, idfelpa, idgiubb, idpant, idpubb, stato);
+}
 }
