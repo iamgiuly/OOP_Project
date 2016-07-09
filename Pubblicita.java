@@ -53,6 +53,7 @@ public class Pubblicita extends Merce {
         this.spessore="7 mm";
         this.colore="Bianco";
         this.parzialeSpessore=0;
+        this.prezzobase=(float)1.00;
     }
     public Pubblicita(String tc, String color, String formato, boolean cs, String sp)
     {
@@ -62,6 +63,7 @@ public class Pubblicita extends Merce {
         this.spessore=sp;
         this.colore=color;
         this.parzialeSpessore=0;
+        this.prezzobase=(float)1.00;
     }
     public float calcoloSP(String s){
         if(s!=null) switch(s){
@@ -77,9 +79,9 @@ public class Pubblicita extends Merce {
         return parzialeSpessore;
     }
     
-    public float calcoloPU(String cc, String formato, boolean cs, String sp){
+   public float calcoloPU(String cc, String formato, boolean cs, String sp){
        if(!"Bianco".equals(cc))
-           PrezzoUnitario+=2.00; //e se una persona scrive pinco panco invece che un colore? XD
+           PrezzoUnitario=prezzobase; 
        if(formato!=null) switch (formato){
            case "A2":
                PrezzoUnitario+=2.5;
