@@ -1,11 +1,30 @@
-package Magazzino;
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package magazzino;
 import java.io.IOException;
+import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.lang.NullPointerException;
+import java.util.ArrayList;
+import java.util.GregorianCalendar;
+import java.util.Iterator;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
+
+/**
+ *
+ * @author Sara
+ */
 public class Magazzino {
     private GestioneBorse b;
     private GestioneFelpe f;
@@ -33,9 +52,9 @@ public class Magazzino {
      }
     }
     
-    public void inserisciFelpa(int idfelpa,String gen,String cv,int sv,int mv,int lv,int xlv,int cppv,int cernv,int tasv,float pbv,String Matv)
+    public void inserisciFelpa(int id,String gen,String cv,int sv,int mv,int lv,int xlv,int cppv,int cernv,int tasv,float pbv,String Matv)
     {
-        f.inserisciFelpa(idfelpa,gen,cv, sv, mv, lv, xlv, cppv, cernv, tasv, pbv, Matv);
+        f.inserisciFelpa(id,gen,cv, sv, mv, lv, xlv, cppv, cernv, tasv, pbv, Matv);
     }
     
     public void cambiaQuantitaFelpa(int id,int q,String taglia) 
@@ -53,9 +72,9 @@ public class Magazzino {
         t.inserisciMaglia(idmaglia,gen,col,s,m,l,xl,scol,maniche,mat,pb);
     }
     
-    public void inserisciBorsa(int idborsa, String mod,String col,float pb,int q)
+    public void inserisciBorsa(int id,String mod,String col,float pb,int q)
     {
-        b.inserisciBorsa(idborsa,mod, col, pb, q);
+        b.inserisciBorsa(id,mod, col, pb, q);
     }
     
     public void cambiaQuantitaBorsa(int id,int q)
@@ -68,9 +87,9 @@ public class Magazzino {
         b.eliminaBorsa(id);
     }   
     
-    public void inserisciGiubbotto(int idgiubb,String gen,String mat,String col,int s,int m,int l,int xl,float pb)
+    public void inserisciGiubbotto(int id,String gen,String mat,String col,int s,int m,int l,int xl,float pb)
     {
-        g.inserisciGiubbotto(idgiubb,gen, mat, col, s, m, l, xl, pb);
+        g.inserisciGiubbotto(id,gen, mat, col, s, m, l, xl, pb);
     }
     
     public void cambiaQuantitaGiubbotto(int id,int q,String taglia)
@@ -83,9 +102,9 @@ public class Magazzino {
         g.eliminaGiubbotto(id);
     }
     
-       public void inserisciPantalone(int idpant, String gen,String col,String mat,String mod,int s,int m,int l,int xl,float pb)
+       public void inserisciPantalone(int id,String gen,String col,String mat,String mod,int s,int m,int l,int xl,float pb)
     {
-        j.inserisciPantalone(idpant,gen, col, mat, mod, s, m, l, xl, pb);
+        j.inserisciPantalone(id,gen, col, mat, mod, s, m, l, xl, pb);
     }
        
     public void cambiaQuantitaPantalone(int id,int q,String taglia)
@@ -100,9 +119,9 @@ public class Magazzino {
      
       
      
-     public void inserisciPubblicità(int idpubb,String tc,String form,float sp,String col,float pb,int q)
+     public void inserisciPubblicità(int id,String tc,String form,String sp,String col,float pb,int q)
      {
-         p.inserisciPubblicità(idpubb,tc, form, sp, col, pb, q);
+         p.inserisciPubblicità(id,tc, form, sp, col, pb, q);
      }
      
      public void cambiaQuantitaPubblicità(int id,int q)
@@ -115,15 +134,20 @@ public class Magazzino {
          p.eliminaPubblicità(id);
      }
      
-     public void inserisciOrdine(int id,String cliente,String data,int idmaglia,int idpers,int quantita,String taglia,int idb,int idf,int idgiubb,int idpantalone,int idpubb,String stato)
+     public void inserisciOrdine(String cliente,String data,int idmaglia,int idpers,int quantita,String taglia,int idb,int idf,int idgiubb,int idpantalone,int idpubb,String stato)
      {
-         o.inserisciOrdine(id, cliente, data, idmaglia, idpers, quantita, taglia, idb, idf, idgiubb, idpantalone, idpubb, stato);
+         o.inserisciOrdine(cliente, data, idmaglia, idpers, quantita, taglia,idb, idf, idgiubb, idpantalone, idpubb, stato);
      }
      
      public void eliminaOrdine(int id)
      {
          o.eliminaOrdine(id);
      }
+     
+      public void selezionaOrdine(String cliente, String date)
+      {
+          o.selezionaOrdine(cliente, date);
+      }
      
      public void visualizzaMagazzino()
      {
@@ -141,9 +165,35 @@ public class Magazzino {
          }
      }
      
-     public void visualizzaOrdini()
+     public DefaultTableModel resultSetToTableModel(ResultSet row) throws SQLException
+    {
+        DefaultTableModel model=null;
+    ResultSetMetaData meta= row.getMetaData();
+    if(model==null) model= new DefaultTableModel();
+    String cols[]=new String[meta.getColumnCount()];
+    for(int i=0;i< cols.length;++i)
+        {
+        cols[i]= meta.getColumnLabel(i+1);
+        }
+
+    model.setColumnIdentifiers(cols);
+
+    while(row.next())
+        {
+        Object data[]= new Object[cols.length];
+        for(int i=0;i< data.length;++i)
+             {
+             data[i]=row.getObject(i+1);
+             }
+        model.addRow(data);
+        }
+    return model;
+    }
+     
+     public ResultSet visualizzaOrdini()
      {
-         o.visualizzaOrdini();
+         ResultSet rs=o.visualizzaOrdini();
+         return rs;
      }
      
       public int getLastIDmaglia()
@@ -152,7 +202,7 @@ public class Magazzino {
          return i;
      }
       
-       public int getLastIDborsa()
+      public int getLastIDborsa()
      {
          int i=b.getLastID();
          return i;
@@ -181,9 +231,9 @@ public class Magazzino {
          int i=p.getLastID();
          return i;
      }
-     public int getLastIDord()
+	 public int getLastIDord()
      {
-         int i=o.getLastID();
+         int i=o.getLastIDord();
          return i;
      }
      
@@ -191,38 +241,19 @@ public class Magazzino {
          ResultSet rs=o.CercaOrdine(id);
          return rs;
      
-     }
+	}
      
-     public DefaultTableModel resultSetToTableModel(ResultSet row) throws SQLException
-    {
-        DefaultTableModel model=null;
-    ResultSetMetaData meta= row.getMetaData();
-    if(model==null) model= new DefaultTableModel();
-    String cols[]=new String[meta.getColumnCount()];
-    for(int i=0;i< cols.length;++i)
-        {
-        cols[i]= meta.getColumnLabel(i+1);
-        }
-
-    model.setColumnIdentifiers(cols);
-
-    while(row.next())
-        {
-        Object data[]= new Object[cols.length];
-        for(int i=0;i< data.length;++i)
-             {
-             data[i]=row.getObject(i+1);
-             }
-        model.addRow(data);
-        }
-    return model;
-    }
-    
-    public void selezionaOrdine(String cliente, String date)
-      {
-          o.selezionaOrdine(cliente, date);
-      }
-    public void ModificaOrdine(int id,String cliente,String data,int idmaglia,int idpers,int quantità,String taglia,int idborsa,int idfelpa,int idgiubb,int idpant,int idpubb,String stato) throws SQLException{
+      public void ModificaOrdine(int id,String cliente,String data,int idmaglia,int idpers,int quantità,String taglia,int idborsa,int idfelpa,int idgiubb,int idpant,int idpubb,String stato) throws SQLException{
         o.ModificaOrdine(id, cliente, data, idmaglia, idpers, quantità, taglia, idborsa, idfelpa, idgiubb, idpant, idpubb, stato);
-}
+        }
+      public void aggiornaMagazzino()
+      {
+          t.aggiornaMagazzinoMaglie();
+          b.aggiornaMagazzinoBorse();
+          f.aggiornaMagazzinoFelpe();
+          p.aggiornaMagazzinoPubblicita();
+          j.aggiornaMagazzinoPantaloni();
+          g.aggiornaMagazzinoGiubbotti();
+      }
+ 
 }

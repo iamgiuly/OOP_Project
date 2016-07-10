@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Magazzino;
+package magazzino;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -25,45 +25,41 @@ public class GestioneOrdine {
         
     }
     
-    public void inserisciOrdine(int id,String cliente,String data,int idmaglia,int idpers,int quantita,String taglia,int idb,int idf,int idgiubb,int idpantalone,int idpubb,String stato)
+    public void inserisciOrdine(String cliente,String data,int idmaglia,int idpers,int quantita,String taglia,int idb,int idf,int idgiubb,int idpantalone,int idpubb,String stato)
     {
         try{
-        Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "root", "");
-        PreparedStatement pst=conn.prepareStatement("INSERT INTO ordine(idOrdine, Cliente, DataOrdine, IDmaglia, IDpers, Quantità, Taglia, IDborse,IDfelpa,IDgiubbotto,IDpantalone,IDpubblicità,Stato) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-        pst.setInt(1,id);
-        pst.setString(2,cliente);
-        pst.setString(3,data);
-        pst.setInt(4,idmaglia);
-        pst.setInt(5,idpers);
-        pst.setInt(6,quantita);
-        pst.setString(7,taglia);
-        pst.setInt(8,idb);
-        pst.setInt(9,idf);
-        pst.setInt(10,idgiubb);
-        pst.setInt(11,idpantalone);
-        pst.setInt(12,idpubb);
-        pst.setString(13,stato);
+        Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "admin", "password");
+        PreparedStatement pst=conn.prepareStatement("INSERT INTO ordine(Cliente, DataOrdine, IDmaglia, IDpers, Quantità, Taglia,IDborse,IDfelpa,IDgiubbotto,IDpantalone,IDpubblicità,Stato) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)");
+        //pst.setInt(1,id);
+        pst.setString(1,cliente);
+        pst.setString(2,data);
+        pst.setInt(3,idmaglia);
+        pst.setInt(4,idpers);
+        pst.setInt(5,quantita);
+        pst.setString(6,taglia);
+        pst.setInt(7,idb);
+        pst.setInt(8,idf);
+        pst.setInt(9,idgiubb);
+        pst.setInt(10,idpantalone);
+        pst.setInt(11,idpubb);
+        pst.setString(12,stato);
         pst.executeUpdate();
         conn.close();
-        System.out.println("Fatto");
         }catch(SQLException ex)
      {
          System.out.println("ErrorSql!");
+         ex.printStackTrace();
      }
     }
     
     public void eliminaOrdine(int id)
     {
         try{
-            if(controllaStato(id)){
-                Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "root", "");
-                Statement st=conn.createStatement();
-                ResultSet rs=st.executeQuery("DELETE from ordine WHERE idOrdine="+id+"");
-                System.out.println("Ordine eliminato!");
-            }
-            else
-            {
-                System.out.println("Ordine non completato!");
+            if(controllaStato(id)==true){
+                Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "admin", "password");
+                PreparedStatement pst=conn.prepareStatement("DELETE FROM ordine WHERE idOrdine=?");
+                pst.setInt(1, id);
+                pst.executeUpdate();
             }
         }catch(SQLException s)
         {
@@ -76,16 +72,17 @@ public class GestioneOrdine {
     {
         
         String stato="";
-        Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "root", "");
-        Statement st=conn.createStatement();
-        ResultSet rs=st.executeQuery("SELECT Stato from ordine WHERE idOrdine="+id+"");
-        if(rs.next()){
+        Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "admin", "password");
+        PreparedStatement pst=conn.prepareStatement("SELECT Stato FROM ordine WHERE idOrdine=?");
+        pst.setInt(1, id);
+        ResultSet rs=pst.executeQuery();
+        while(rs.next()){
             stato=rs.getString("Stato");
         }
         rs.close();
-        st.close();
+        pst.close();
         conn.close();
-        if(stato=="Emesso"){
+        if(stato.equals("Emesso")){
             return true;
         }
         else{
@@ -109,6 +106,7 @@ public class GestioneOrdine {
          }
          return rs;
      }
+      
        
      public void selezionaOrdine(String cliente, String date){
            try{
@@ -152,11 +150,11 @@ public class GestioneOrdine {
         ResultSetMetaData rm=rs.getMetaData();
         return rs;
         }
-        
-        public int getLastID()
+           
+        public int getLastIDord()
     {
         try{
-        Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "root", "");
+        Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "admin", "password");
              Statement st=conn.createStatement();
              ResultSet rs=st.executeQuery("SELECT idOrdine from ordine");
              rs.last();
@@ -187,6 +185,17 @@ public class GestioneOrdine {
            ps.setString(12,stato);
            ps.setInt(13, id);
            ResultSet rs=ps.executeQuery();
+        }
+        
+        public void modificaStato(int id,String stato) throws SQLException
+        {
+            Connection conn=DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "admin", "password");
+            PreparedStatement pst=conn.prepareStatement("UPDATE ordine SET Stato=? WHERE idOrdine=?");
+            pst.setString(1,stato);
+            pst.setInt(2,id);
+            pst.executeUpdate();
+            System.out.println("Stato modificato");
+            conn.close();
         }
     
 }

@@ -12,12 +12,16 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author Sara
  */
 public class GestioneFelpe {
+    GestioneOrdine ord=new GestioneOrdine();
+    
     public GestioneFelpe()
     {
         
@@ -97,6 +101,7 @@ public class GestioneFelpe {
         }catch(SQLException ex)
         {
             System.out.println("Errore SQL!");
+            ex.printStackTrace();
         }
     }
     
@@ -145,4 +150,52 @@ public class GestioneFelpe {
         }
         return -1;
     }
+     
+     public void aggiornaMagazzinoFelpe()
+      {
+          try{
+        int j=0;
+        Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "root", "");
+        Statement st=conn.createStatement();
+        ResultSet rs=st.executeQuery("SELECT idOrdine,IDfelpa,Quantità,Taglia from ordine WHERE Stato='Da aggiornare'");
+        List<Integer> id=new ArrayList<Integer>();
+        List<Integer> quantita=new ArrayList<Integer>();
+        List<String> taglia=new ArrayList<String>();
+        List<Integer> idord=new ArrayList<Integer>();
+        while(rs.next()) //da ripetere per ogni tipologia, aggiorna magazzino conterra tutto
+        {
+            idord.add(rs.getInt("idOrdine"));
+            id.add(rs.getInt("IDfelpa"));
+            quantita.add(rs.getInt("Quantità"));
+            taglia.add(rs.getString("Taglia"));
+            
+        }
+        
+        st.close();
+        rs.close();
+        while(id.size()>j) //se entra nel while ho maglie da modificare
+        {
+            if((((id.get(j)).equals(0))==false))
+            {
+               
+            st=conn.createStatement();
+            rs=st.executeQuery("SELECT "+taglia.get(j)+" FROM felpa WHERE IDfelpa="+id.get(j)+"");
+            while(rs.next()){
+            int q=rs.getInt(""+taglia.get(j)+""); //questa è la quantità nel database della taglia che ci interessa
+            int rimanenti=q-(quantita.get(j));
+            
+            cambiaQuantitaFelpa(id.get(j),rimanenti,taglia.get(j));
+            ord.modificaStato(idord.get(j),"In lavorazione");
+            }
+            }
+            
+            j++;
+            
+        }
+        
+      }catch(SQLException ex)
+      {
+          ex.printStackTrace();
+      }
+      }
 }
