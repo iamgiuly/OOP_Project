@@ -59,25 +59,25 @@ public Maglia (String g, String m, String s, boolean scoll, boolean manica, floa
     public float CalcoloPU(String color, boolean scoll, boolean manica) throws SQLException{
         try{
         Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "root", "");
-        PreparedStatement ps=conn.prepareStatement("SELECT PrezzoBase FROM maglia WHERE Colore=? AND Scollatura=? AND Maniche=? AND IDmaglia IS NOT NULl");        
-        ps.setString(1, color);
+        PreparedStatement ps=conn.prepareStatement("SELECT PrezzoBase FROM maglia WHERE Scollatura=? AND Maniche=? AND IDmaglia IS NOT NULl");        
         if(scoll==true){
-        ps.setString(2, "V");}
-        else if(scoll==false) {        
-            ps.setString(2,"Girocollo");}
+        ps.setString(1, "V");}
+        else {        
+            ps.setString(1,"Girocollo");}
         
         if(manica==true){
-            ps.setString(3, "Lunghe");}
+            ps.setString(2, "Lunghe");}
                     
-        else if(manica==false){
+        else{
         
-            ps.setString(3, "Corte");}
+            ps.setString(2, "Corte");}
         
         ResultSet rs=ps.executeQuery();
         while(rs.next()){
             PrezzoUnitario=rs.getFloat("PrezzoBase");
             
         }
+        System.out.println(PrezzoUnitario);
     if (!"Bianco".equals(color))
             this.PrezzoUnitario+=1.00;
     if(scoll==true)
