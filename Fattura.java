@@ -95,7 +95,7 @@ public void inserisciDatiMaglie(String cliente, String data, PdfStamper s) throw
             }
         
         content.showTextAligned(PdfContentByte.ALIGN_LEFT, "Maglia", 95+x,538-y,0);
-        x+=99;
+        x+=97;
         content.showTextAligned(PdfContentByte.ALIGN_LEFT, convertitore , 95+x,538-y,0);
         
         
