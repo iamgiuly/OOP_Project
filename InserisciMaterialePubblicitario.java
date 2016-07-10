@@ -26,6 +26,7 @@ public class InserisciMaterialePubblicitario extends java.awt.Dialog {
     public InserisciMaterialePubblicitario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.setLocationRelativeTo(parent);
     }
 
     /**

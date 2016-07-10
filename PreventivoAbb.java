@@ -22,6 +22,7 @@ public class PreventivoAbb extends javax.swing.JDialog {
     public PreventivoAbb(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.setLocationRelativeTo(parent);
     }
 
     /**

@@ -33,9 +33,8 @@ public class FatturaOrdine extends java.awt.Dialog {
         super(parent, modal);
      String FILEOUT = "C:/Workspace/Fattura.pdf";
      String FILEIN ="C:/Workspace/TemplateInvoice.pdf";
-    
-
     initComponents();
+    this.setLocationRelativeTo(parent);
     }
 
     /**
@@ -135,13 +134,13 @@ public class FatturaOrdine extends java.awt.Dialog {
         // TODO add your handling code here:
         try{
         AtomicInteger numerofattura=new AtomicInteger(1);
-        String cliente,data;;
+        String cliente,data;
         cliente=jTextField1.getText();
         data=jTextField2.getText();
         Fattura fat=new Fattura(cliente,data);
         fat.setFattura(cliente,data,numerofattura,pdfStamper);
         pdfStamper.close();
-        JOptionPane.showMessageDialog(null,"Fattura emessa");
+        JOptionPane.showMessageDialog(null,"Fattura emessa nel percorso \n C:'\'WorkSpace");
         }catch(SQLException|DocumentException|IOException ex)
         {
           ex.printStackTrace();

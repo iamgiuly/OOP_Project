@@ -34,6 +34,7 @@ public class CercaOrdine extends java.awt.Dialog{
     public CercaOrdine(java.awt.Frame parent, boolean modal) throws IOException,DocumentException{
         super(parent, modal);
         initComponents();
+        this.setLocationRelativeTo(parent);
     }
 
     /**
@@ -152,26 +153,41 @@ public class CercaOrdine extends java.awt.Dialog{
     }//GEN-LAST:event_closeDialog
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
-
+        try{
         id=Integer.parseInt(jTextField1.getText());
-        mag.eliminaOrdine(id);  
-        JOptionPane.showMessageDialog(null,"Fatto!");
-        
+        if(go.controllaStato(id))
+        {
+            mag.eliminaOrdine(id);  
+            JOptionPane.showMessageDialog(null,"Fatto!");
+        }else{
+            JOptionPane.showMessageDialog(null,"Ordine non eliminabile!");
+        }
+        }catch(SQLException ex)
+                {
+                ex.printStackTrace();
+                }       
     }//GEN-LAST:event_jButton3MouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         id=Integer.parseInt(jTextField1.getText());
         try{
             ResultSet rs=go.CercaOrdine(id);
-        DefaultTableModel model;
-        model=mag.resultSetToTableModel(rs);
-        JOptionPane.showMessageDialog(null,new JScrollPane(new JTable(model)));
-        }catch(SQLException ex)
+            if(rs.next()==true)
+            {
+                rs.beforeFirst();
+                DefaultTableModel model;
+                model=mag.resultSetToTableModel(rs);            
+                JOptionPane.showMessageDialog(null,new JScrollPane(new JTable(model)));
+              rs.close();  
+            }else
+            {
+                JOptionPane.showMessageDialog(null,"Inesistente!");
+            }
+        }catch(SQLException |IOException ex)
         {
             ex.printStackTrace();
-}       catch (IOException ex) {
-            Logger.getLogger(CercaOrdine.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked

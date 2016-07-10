@@ -33,6 +33,7 @@ public class InserisciOrdine extends java.awt.Dialog {
     public InserisciOrdine(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.setLocationRelativeTo(parent);
     }
 
     /**

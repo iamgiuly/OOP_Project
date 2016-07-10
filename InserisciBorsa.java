@@ -27,6 +27,7 @@ public class InserisciBorsa extends java.awt.Dialog {
     public InserisciBorsa(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.setLocationRelativeTo(parent);
     }
 
     /**

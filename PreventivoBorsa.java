@@ -5,6 +5,9 @@
  */
 package Interfaccia;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import merce.*;
 import ordini.Personalizzazione;
@@ -27,6 +30,7 @@ public class PreventivoBorsa extends java.awt.Dialog {
     public PreventivoBorsa(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.setLocationRelativeTo(parent);
     }
 
     /**
@@ -204,6 +208,8 @@ public class PreventivoBorsa extends java.awt.Dialog {
         }catch(IOException ex)
         {
             ex.printStackTrace();
+        } catch (SQLException ex) {
+            Logger.getLogger(PreventivoBorsa.class.getName()).log(Level.SEVERE, null, ex);
         }
        
     }//GEN-LAST:event_button1MouseClicked

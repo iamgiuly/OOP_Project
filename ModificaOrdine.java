@@ -23,6 +23,7 @@ public class ModificaOrdine extends java.awt.Dialog {
     int id,idmaglia,idpers,idborsa,idfelpa,idgiubb,idpant,idpubb,quantità;
     String cliente,data,taglia,stato;
     Magazzino mag=new Magazzino();
+    GestioneOrdine ord=new GestioneOrdine();
 
     /**
      * Creates new form ModificaOrdine
@@ -30,6 +31,7 @@ public class ModificaOrdine extends java.awt.Dialog {
     public ModificaOrdine(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.setLocationRelativeTo(parent);
     }
 
     /**
@@ -277,9 +279,14 @@ public class ModificaOrdine extends java.awt.Dialog {
         }
         pst.setString(12,stato);
         pst.setInt(13,codice);
-        pst.executeUpdate();
-        conn.close();
-        JOptionPane.showMessageDialog(null,"Fatto!");
+        if(ord.controllaStato(codice))
+        {
+            pst.executeUpdate();
+            conn.close();
+            JOptionPane.showMessageDialog(null,"Fatto!");
+        }else{
+            JOptionPane.showMessageDialog(null,"Modifica non consentita!");
+        }
         }catch(SQLException ex)
         {
             ex.printStackTrace();

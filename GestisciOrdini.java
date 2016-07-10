@@ -38,6 +38,7 @@ public class GestisciOrdini extends java.awt.Dialog {
         ResultSet r=m.visualizzaOrdini();
         model=m.resultSetToTableModel(r);
         initComponents();
+        this.setLocationRelativeTo(parent);
         }catch(SQLException ex)
         {
             ex.printStackTrace();
@@ -129,9 +130,9 @@ public class GestisciOrdini extends java.awt.Dialog {
             .addGroup(jInternalFrame2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
                 .addGap(25, 25, 25))
         );

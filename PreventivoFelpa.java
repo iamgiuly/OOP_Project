@@ -6,6 +6,9 @@
 package Interfaccia;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import merce.Felpa;
 import ordini.Personalizzazione;
@@ -27,6 +30,7 @@ public class PreventivoFelpa extends java.awt.Dialog {
     public PreventivoFelpa(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.setLocationRelativeTo(parent);
     }
 
     /**
@@ -233,6 +237,8 @@ public class PreventivoFelpa extends java.awt.Dialog {
         }catch(IOException ex)
         {
             ex.printStackTrace();
+        } catch (SQLException ex) {
+            Logger.getLogger(PreventivoFelpa.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_button1MouseClicked
 

@@ -21,6 +21,7 @@ public class FinestraPrincipale extends javax.swing.JFrame{
      */
     public FinestraPrincipale() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

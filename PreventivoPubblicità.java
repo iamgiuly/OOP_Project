@@ -17,6 +17,7 @@ public class PreventivoPubblicità extends java.awt.Dialog {
     public PreventivoPubblicità(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.setLocationRelativeTo(parent);
     }
 
     /**
