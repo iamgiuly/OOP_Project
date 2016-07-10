@@ -82,7 +82,7 @@ public class GestioneOrdine {
         rs.close();
         pst.close();
         conn.close();
-        if(stato.equals("Emesso")){
+        if(!stato.equals("Emesso")&&!stato.equals("In lavorazione")){ //posso modificarlo e cancellarlo
             return true;
         }
         else{
