@@ -198,13 +198,13 @@ public class InserisciMaglia extends java.awt.Dialog {
         col=jTextField2.getText();
         scol=jTextField3.getText();
         man=jTextField4.getText();
-        mat=jTextField10.getText();
+        mat=jTextField5.getText();
         s=Integer.parseInt(jTextField6.getText());
         m=Integer.parseInt(jTextField7.getText());
-        l=Integer.parseInt(jTextField5.getText());
-        xl=Integer.parseInt(jTextField8.getText());
-        pb=Float.parseFloat(jTextField9.getText());
-        mag.inserisciMaglia(a.incrementAndGet(), gen, col, s,m,l,xl,scol,man,mat,pb);
+        l=Integer.parseInt(jTextField8.getText());
+        xl=Integer.parseInt(jTextField9.getText());
+        pb=Float.parseFloat(jTextField10.getText());
+        mag.inserisciMaglia(a.incrementAndGet(),gen,col, s,m,l,xl,scol,man,mat,pb);
         // TODO add your handling code here:
     } 
 

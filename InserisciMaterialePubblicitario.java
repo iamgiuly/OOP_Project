@@ -15,8 +15,8 @@ public class InserisciMaterialePubblicitario extends java.awt.Dialog {
     int id=mag.getLastIDpubb();
     AtomicInteger a=new AtomicInteger(id);
     int q;
-    String tcarta,form,col;
-    float pb,spes;
+    String tcarta,form,col,spes;
+    float pb;
 
     /**
      * Creates new form InserisciMaterialePubblicitario
@@ -155,7 +155,7 @@ public class InserisciMaterialePubblicitario extends java.awt.Dialog {
      private void button1MouseClicked(java.awt.event.MouseEvent evt) {                                     
         tcarta=jTextField1.getText();
         form=jTextField2.getText();
-        spes=Float.parseFloat(jTextField3.getText());
+        spes=jTextField3.getText();
         col=jTextField4.getText();
         q=Integer.parseInt(jTextField5.getText());
         pb=Float.parseFloat(jTextField6.getText());

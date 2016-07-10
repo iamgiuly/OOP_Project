@@ -5,18 +5,44 @@
  */
 package Interfaccia;
 
+import com.itextpdf.text.DocumentException;
+import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+import magazzino.GestioneOrdine;
+import magazzino.Magazzino;
+
 /**
  *
  * @author utente
  */
 public class GestisciOrdini extends java.awt.Dialog {
+    
+   private GestioneOrdine g=new GestioneOrdine();
+   private Magazzino m=new Magazzino();
+   private DefaultTableModel model;
+   private InserisciOrdine in=new InserisciOrdine(null,true);
+
+   
 
     /**
      * Creates new form GestisciOrdini
      */
     public GestisciOrdini(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        try{
+        ResultSet r=m.visualizzaOrdini();
+        model=m.resultSetToTableModel(r);
         initComponents();
+        }catch(SQLException ex)
+        {
+            ex.printStackTrace();
+        }
+       
     }
 
     /**
@@ -45,26 +71,26 @@ public class GestisciOrdini extends java.awt.Dialog {
 
         jInternalFrame2.setVisible(true);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "Cod. ordine", "Cliente", "Data", "Cod. maglia", "Cod. pers.", "Quantità", "Taglia", "Prezzo finale", "Cod. borsa", "Cod. felpa", "Cod. giubbotto", "Cod. pantalone", "Cod. pubblicità", "Stato"
-            }
-        ));
+        jTable2.setModel(model);
         jScrollPane2.setViewportView(jTable2);
 
         jLabel1.setText("Tabella degli ordini");
 
         jButton1.setLabel("Salva modifiche");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
 
         jMenu1.setText("Ordine");
 
         jMenuItem1.setText("Nuovo");
+        jMenuItem1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jMenuItem1MousePressed(evt);
+            }
+        });
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -73,6 +99,11 @@ public class GestisciOrdini extends java.awt.Dialog {
         jMenu1.add(jMenuItem1);
 
         jMenuItem4.setText("Cerca");
+        jMenuItem4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jMenuItem4MousePressed(evt);
+            }
+        });
         jMenu1.add(jMenuItem4);
 
         jMenuBar2.add(jMenu1);
@@ -84,25 +115,25 @@ public class GestisciOrdini extends java.awt.Dialog {
         jInternalFrame2Layout.setHorizontalGroup(
             jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 903, Short.MAX_VALUE)
-            .addGroup(jInternalFrame2Layout.createSequentialGroup()
-                .addGap(256, 256, 256)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrame2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
-                .addGap(76, 76, 76))
+                .addGap(74, 74, 74))
+            .addGroup(jInternalFrame2Layout.createSequentialGroup()
+                .addGap(389, 389, 389)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jInternalFrame2Layout.setVerticalGroup(
             jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jInternalFrame2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
                 .addComponent(jButton1)
-                .addGap(36, 36, 36))
+                .addGap(25, 25, 25))
         );
 
         add(jInternalFrame2, java.awt.BorderLayout.CENTER);
@@ -121,6 +152,35 @@ public class GestisciOrdini extends java.awt.Dialog {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+        ResultSet rs=m.visualizzaOrdini();
+       try {
+           model=m.resultSetToTableModel(rs);
+       } catch (SQLException ex) {
+           Logger.getLogger(GestisciOrdini.class.getName()).log(Level.SEVERE, null, ex);
+       }
+        jTable2.setModel(model);
+        
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jMenuItem1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem1MousePressed
+        // TODO add your handling code here:
+        in.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1MousePressed
+
+    private void jMenuItem4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem4MousePressed
+        // TODO add your handling code here:
+        try{
+            CercaOrdine search=new CercaOrdine(null,true);
+            search.setVisible(true);
+        }catch(IOException|DocumentException ex)
+        {
+            ex.printStackTrace();
+        }
+        
+    }//GEN-LAST:event_jMenuItem4MousePressed
 
     /**
      * @param args the command line arguments

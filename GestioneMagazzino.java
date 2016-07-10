@@ -32,6 +32,7 @@ public class GestioneMagazzino extends java.awt.Dialog {
     GestionePubblicità gu=new GestionePubblicità();
     GestioneGiubbotto gg=new GestioneGiubbotto();
     Magazzino m=new Magazzino();
+    JTable tabella=new JTable();
     
 
     /**
@@ -52,6 +53,8 @@ public class GestioneMagazzino extends java.awt.Dialog {
 
         jInternalFrame1 = new javax.swing.JInternalFrame();
         jToggleButton1 = new javax.swing.JToggleButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -74,14 +77,36 @@ public class GestioneMagazzino extends java.awt.Dialog {
             }
         });
 
+        jInternalFrame1.setPreferredSize(new java.awt.Dimension(562, 442));
         jInternalFrame1.setVisible(true);
 
         jToggleButton1.setText("Aggiorna magazzino");
+        jToggleButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jToggleButton1MouseClicked(evt);
+            }
+        });
         jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton1ActionPerformed(evt);
             }
         });
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
 
         jMenu1.setText("Inserisci");
 
@@ -227,11 +252,15 @@ public class GestioneMagazzino extends java.awt.Dialog {
                 .addGap(79, 79, 79)
                 .addComponent(jToggleButton1)
                 .addContainerGap(82, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrame1Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jInternalFrame1Layout.setVerticalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrame1Layout.createSequentialGroup()
-                .addContainerGap(154, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -318,7 +347,7 @@ public class GestioneMagazzino extends java.awt.Dialog {
             ResultSet rs=gt.visualizzaMaglie();
         DefaultTableModel model;
         model=m.resultSetToTableModel(rs);
-        JOptionPane.showMessageDialog(null,new JScrollPane(new JTable(model)));
+        jTable1.setModel(model);
         }catch(SQLException ex)
         {
             ex.printStackTrace();
@@ -336,7 +365,7 @@ public class GestioneMagazzino extends java.awt.Dialog {
             ResultSet rs=gf.visualizzaFelpe();
         DefaultTableModel model;
         model=m.resultSetToTableModel(rs);
-        JOptionPane.showMessageDialog(null,new JScrollPane(new JTable(model)));
+        jTable1.setModel(model);
         }catch(SQLException ex)
         {
             ex.printStackTrace();
@@ -350,7 +379,7 @@ public class GestioneMagazzino extends java.awt.Dialog {
             ResultSet rs=gg.visualizzaGiubbotti();
         DefaultTableModel model;
         model=m.resultSetToTableModel(rs);
-        JOptionPane.showMessageDialog(null,new JScrollPane(new JTable(model)));
+        jTable1.setModel(model);
         }catch(SQLException ex)
         {
             ex.printStackTrace();
@@ -364,7 +393,7 @@ public class GestioneMagazzino extends java.awt.Dialog {
             ResultSet rs=gp.visualizzaPantaloni();
         DefaultTableModel model;
         model=m.resultSetToTableModel(rs);
-        JOptionPane.showMessageDialog(null,new JScrollPane(new JTable(model)));
+        jTable1.setModel(model);
         }catch(SQLException ex)
         {
             ex.printStackTrace();
@@ -382,7 +411,7 @@ public class GestioneMagazzino extends java.awt.Dialog {
             ResultSet rs=gb.visualizzaBorse();
         DefaultTableModel model;
         model=m.resultSetToTableModel(rs);
-        JOptionPane.showMessageDialog(null,new JScrollPane(new JTable(model)));
+        jTable1.setModel(model);
         }catch(SQLException ex)
         {
             ex.printStackTrace();
@@ -396,13 +425,18 @@ public class GestioneMagazzino extends java.awt.Dialog {
             ResultSet rs=gu.visualizzaPubblicita();
         DefaultTableModel model;
         model=m.resultSetToTableModel(rs);
-        JOptionPane.showMessageDialog(null,new JScrollPane(new JTable(model)));
+        jTable1.setModel(model);
         }catch(SQLException ex)
         {
             ex.printStackTrace();
         }
         
     }//GEN-LAST:event_jMenuItem12MousePressed
+
+    private void jToggleButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jToggleButton1MouseClicked
+        // TODO add your handling code here:
+        m.aggiornaMagazzino();
+    }//GEN-LAST:event_jToggleButton1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -426,6 +460,8 @@ public class GestioneMagazzino extends java.awt.Dialog {
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JToggleButton jToggleButton1;
     // End of variables declaration//GEN-END:variables
 }

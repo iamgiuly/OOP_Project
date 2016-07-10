@@ -24,7 +24,7 @@ import javax.persistence.Transient;
 
 /**
  *
- * @author utente
+ * @author Serena
  */
 @Entity
 @Table(name = "ordine", catalog = "progettoale", schema = "")

@@ -1,4 +1,4 @@
-package Interfaccia;
+/*package Interfaccia;
 
 import javax.swing.*;
 import magazzino.*;
@@ -12,7 +12,7 @@ public class CherryQueen {
      potrebbe generare un errore (non si riesce a impostare lo stile),
      si intercetta nel blocco catch e se tale errore si verifica
      viene fatto apparire un messageDialog che ci avverte.*/
-   try {
+   /*try {
         UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
        }
    catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e){
@@ -22,4 +22,4 @@ public class CherryQueen {
      MainFrame CherryQueen;
      CherryQueen = new MainFrame();
     
-}}
+}}*/
