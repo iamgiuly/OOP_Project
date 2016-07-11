@@ -1,13 +1,8 @@
 package Interfaccia;
 
-import magazzino.*;
-import merce.*;
-import java.sql.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.lang.NullPointerException;
+import magazzino.Magazzino;
 import java.util.concurrent.atomic.AtomicInteger;
+import javax.swing.JOptionPane;
 
 
 public class InserisciBorsa extends java.awt.Dialog {
@@ -19,11 +14,6 @@ public class InserisciBorsa extends java.awt.Dialog {
     String col,mod;
     float pb;
 
-    /**
-     * Creates new form InserisciBorsa
-     * @param parent
-     * @param modal
-     */
     public InserisciBorsa(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -143,6 +133,7 @@ public class InserisciBorsa extends java.awt.Dialog {
         q=Integer.parseInt(jTextField3.getText());
         pb=Float.parseFloat(jTextField4.getText());
         mag.inserisciBorsa(a.incrementAndGet(), mod,col,pb,q);
+        JOptionPane.showMessageDialog(null,"Inserimento avvenuto");
         // TODO add your handling code here:
     }            
 

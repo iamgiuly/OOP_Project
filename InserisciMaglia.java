@@ -1,13 +1,8 @@
 package Interfaccia;
 
 import magazzino.*;
-import merce.*;
-import java.sql.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.lang.NullPointerException;
 import java.util.concurrent.atomic.AtomicInteger;
+import javax.swing.JOptionPane;
 
 
 public class InserisciMaglia extends java.awt.Dialog {
@@ -206,6 +201,7 @@ public class InserisciMaglia extends java.awt.Dialog {
         xl=Integer.parseInt(jTextField9.getText());
         pb=Float.parseFloat(jTextField10.getText());
         mag.inserisciMaglia(a.incrementAndGet(),gen,col, s,m,l,xl,scol,man,mat,pb);
+        JOptionPane.showMessageDialog(null,"Inserimento avvenuto");
         // TODO add your handling code here:
     } 
 

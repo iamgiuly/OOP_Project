@@ -1,13 +1,8 @@
 package Interfaccia;
 
 import magazzino.*;
-import merce.*;
-import java.sql.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.lang.NullPointerException;
 import java.util.concurrent.atomic.AtomicInteger;
+import javax.swing.JOptionPane;
 
 
 public class InserisciPantalone extends java.awt.Dialog {
@@ -193,6 +188,7 @@ public class InserisciPantalone extends java.awt.Dialog {
         xl=Integer.parseInt(jTextField9.getText());
         pb=Float.parseFloat(jTextField5.getText());
         mag.inserisciPantalone(a.incrementAndGet(), gen,col,mat,mod, s,m,l,xl,pb);
+        JOptionPane.showMessageDialog(null,"Inserimento avvenuto");
         // TODO add your handling code here:
     }
 

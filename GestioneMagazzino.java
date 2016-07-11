@@ -78,7 +78,7 @@ public class GestioneMagazzino extends java.awt.Dialog {
             }
         });
 
-        jInternalFrame1.setPreferredSize(new java.awt.Dimension(562, 442));
+        jInternalFrame1.setPreferredSize(new java.awt.Dimension(562, 222));
         jInternalFrame1.setVisible(true);
 
         jToggleButton1.setText("Aggiorna magazzino");
@@ -260,7 +260,7 @@ public class GestioneMagazzino extends java.awt.Dialog {
         jInternalFrame1Layout.setVerticalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrame1Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())

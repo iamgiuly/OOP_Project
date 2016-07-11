@@ -65,6 +65,7 @@ public class PreventivoFelpa extends java.awt.Dialog {
             }
         });
 
+        jInternalFrame1.setResizable(true);
         jInternalFrame1.setVisible(true);
 
         jLabel1.setText("Colore");
@@ -218,7 +219,7 @@ public class PreventivoFelpa extends java.awt.Dialog {
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
     private void button1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_button1MouseClicked
-        // TODO add your handling code here:
+       
         try{
         Personalizzazione p=new Personalizzazione();
         colore=jTextField1.getText();
@@ -234,11 +235,9 @@ public class PreventivoFelpa extends java.awt.Dialog {
         float pu=felpa.CalcoloPU(colore,cerniera,cappuccio,tasche);
         float pt=(pu+pp)*quantita;
         JOptionPane.showMessageDialog(null,"Il preventivo è: "+pt+"");
-        }catch(IOException ex)
+        }catch(IOException|SQLException ex)
         {
             ex.printStackTrace();
-        } catch (SQLException ex) {
-            Logger.getLogger(PreventivoFelpa.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_button1MouseClicked
 

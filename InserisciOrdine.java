@@ -77,7 +77,6 @@ public class InserisciOrdine extends java.awt.Dialog {
             }
         });
 
-        jInternalFrame1.setTitle("Nuovo ordine");
         jInternalFrame1.setVisible(true);
 
         jLabel1.setText("Cliente");
@@ -196,7 +195,7 @@ public class InserisciOrdine extends java.awt.Dialog {
                     .addComponent(jLabel7)
                     .addComponent(jLabel6)
                     .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(58, 58, 58))
         );
@@ -229,7 +228,6 @@ public class InserisciOrdine extends java.awt.Dialog {
         try{
         cliente=jTextField1.getText();
         data=jTextField2.getText();
-        taglia=jTextField7.getText();
         stato=jTextField8.getText();
         quantità=Integer.parseInt(jTextField11.getText());
         Connection conn= DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "admin", "password");
@@ -248,7 +246,13 @@ public class InserisciOrdine extends java.awt.Dialog {
             pst.setInt(4,Integer.parseInt(jTextField4.getText()));
         }
         pst.setInt(5,quantità);
-        pst.setString(6,taglia);
+        if(jTextField7.getText().isEmpty()){
+            pst.setNull(6,Types.INTEGER);
+        }
+        else{
+            pst.setString(6,jTextField7.getText());
+        }
+        
         if(jTextField5.getText().isEmpty()) {
             pst.setNull(7,Types.INTEGER);
         } else {

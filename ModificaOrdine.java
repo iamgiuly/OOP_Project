@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Interfaccia;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -11,8 +12,6 @@ import java.sql.ResultSet;
 import magazzino.*;
 import java.sql.SQLException;
 import java.sql.Types;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,7 +19,7 @@ import javax.swing.JOptionPane;
  * @author utente
  */
 public class ModificaOrdine extends java.awt.Dialog {
-    int id,idmaglia,idpers,idborsa,idfelpa,idgiubb,idpant,idpubb,quantità;
+    int id,idmaglia,idpers,idborsa,idfelpa,idgiubb,idpant,idpubb;
     String cliente,data,taglia,stato;
     Magazzino mag=new Magazzino();
     GestioneOrdine ord=new GestioneOrdine();
@@ -231,17 +230,27 @@ public class ModificaOrdine extends java.awt.Dialog {
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         try{
             int codice=Integer.parseInt(jTextField1.getText());
+            ResultSet rs=mag.CercaOrdine(codice);
         cliente=jTextField2.getText();
         data=jTextField3.getText();
         taglia=jTextField12.getText();
         stato=jTextField13.getText();
-        Connection conn=DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "admin", "password");
+        while(rs.next()){
+           Connection conn=DriverManager.getConnection("jdbc:mysql://localhost/cherryqueen", "admin", "password");
            PreparedStatement pst=conn.prepareStatement("UPDATE ordine SET Cliente=?,DataOrdine=?,IDmaglia=?,IDpers=?,Quantità=?,Taglia=?,IDborse=?,IDfelpa=?,IDgiubbotto=?,IDpantalone=?,IDpubblicità=?,Stato=? WHERE idOrdine=?");
-           pst.setString(1,cliente);
-        pst.setString(2,data);
-        if(jTextField4.getText().isEmpty()) {
+           if(jTextField2.getText().isEmpty()){
+               pst.setString(1,rs.getString("Cliente"));
+           }else{
+               pst.setString(1,cliente);
+           }
+           if(jTextField3.getText().isEmpty()){
+               pst.setString(2,rs.getString("DataOrdine"));
+           }else{
+               pst.setString(2,data);
+           }
+        if(jTextField4.getText().isEmpty()){
             pst.setNull(3,Types.INTEGER);
-        } else {
+        }  else {
             pst.setInt(3,Integer.parseInt(jTextField4.getText()));
         }
         if(jTextField5.getText().isEmpty()) {
@@ -249,9 +258,16 @@ public class ModificaOrdine extends java.awt.Dialog {
         } else {
             pst.setInt(4,Integer.parseInt(jTextField5.getText()));
         }
-        quantità=Integer.parseInt(jTextField11.getText());
-        pst.setInt(5,quantità);
-        pst.setString(6,taglia);
+        if(jTextField11.getText().isEmpty()){
+               pst.setInt(5,rs.getInt("Quantità"));
+           }else{
+               pst.setInt(5,Integer.parseInt(jTextField11.getText()));
+           }
+        if(jTextField12.getText().isEmpty()){
+               pst.setString(6,rs.getString("Taglia"));
+           }else{
+               pst.setString(6,taglia);
+           }
         if(jTextField6.getText().isEmpty()) {
             pst.setNull(7,Types.INTEGER);
         } else {
@@ -277,7 +293,11 @@ public class ModificaOrdine extends java.awt.Dialog {
         } else {
             pst.setInt(11,Integer.parseInt(jTextField10.getText()));
         }
-        pst.setString(12,stato);
+        if(jTextField13.getText().isEmpty()){
+               pst.setString(12,rs.getString("Stato"));
+           }else{
+               pst.setString(12,stato);
+           }
         pst.setInt(13,codice);
         if(ord.controllaStato(codice))
         {
@@ -286,8 +306,10 @@ public class ModificaOrdine extends java.awt.Dialog {
             JOptionPane.showMessageDialog(null,"Fatto!");
         }else{
             JOptionPane.showMessageDialog(null,"Modifica non consentita!");
+        } 
         }
-        }catch(SQLException ex)
+        
+        }catch(SQLException|IOException ex)
         {
             ex.printStackTrace();
         }

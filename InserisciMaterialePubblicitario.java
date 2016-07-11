@@ -1,13 +1,8 @@
 package Interfaccia;
 
 import magazzino.*;
-import merce.*;
-import java.sql.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.lang.NullPointerException;
 import java.util.concurrent.atomic.AtomicInteger;
+import javax.swing.JOptionPane;
 
 public class InserisciMaterialePubblicitario extends java.awt.Dialog {
     
@@ -161,6 +156,7 @@ public class InserisciMaterialePubblicitario extends java.awt.Dialog {
         q=Integer.parseInt(jTextField5.getText());
         pb=Float.parseFloat(jTextField6.getText());
         mag.inserisciPubblicità(a.incrementAndGet(), tcarta,form,spes,col,pb,q);
+        JOptionPane.showMessageDialog(null,"Inserimento avvenuto");
         // TODO add your handling code here:
     } 
 

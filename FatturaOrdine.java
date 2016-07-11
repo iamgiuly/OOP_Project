@@ -6,33 +6,21 @@
 package Interfaccia;
 
 import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.pdf.PdfReader;
-import com.itextpdf.text.pdf.PdfStamper;
-import fattura.Fattura;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.concurrent.atomic.AtomicInteger;
-import javax.swing.JOptionPane;
 
 /**
  *
  * @author utente
  */
 public class FatturaOrdine extends java.awt.Dialog {
-    String FILEOUT = "C:/Workspace/Fattura.pdf";
-    String FILEIN ="C:/Workspace/TemplateInvoice.pdf";
-    PdfReader pdfReader= new PdfReader(FILEIN); 
-    PdfStamper pdfStamper= new PdfStamper(pdfReader, new FileOutputStream(FILEOUT));
 
     /**
      * Creates new form FatturaOrdine
      */
     public FatturaOrdine(java.awt.Frame parent, boolean modal) throws IOException,DocumentException{
         super(parent, modal);
-     String FILEOUT = "C:/Workspace/Fattura.pdf";
-     String FILEIN ="C:/Workspace/TemplateInvoice.pdf";
+     
     initComponents();
     this.setLocationRelativeTo(parent);
     }
@@ -131,20 +119,19 @@ public class FatturaOrdine extends java.awt.Dialog {
     }//GEN-LAST:event_closeDialog
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        // TODO add your handling code here:
-        try{
+        
+        try{ 
         AtomicInteger numerofattura=new AtomicInteger(1);
         String cliente,data;
         cliente=jTextField1.getText();
         data=jTextField2.getText();
-        Fattura fat=new Fattura(cliente,data);
-        fat.setFattura(cliente,data,numerofattura,pdfStamper);
-        pdfStamper.close();
-        JOptionPane.showMessageDialog(null,"Fattura emessa nel percorso \n C:'\'WorkSpace");
-        }catch(SQLException|DocumentException|IOException ex)
+        PercorsoFattura file=new PercorsoFattura(null,true,cliente,data,numerofattura);
+        file.setVisible(true);
+        }catch(NullPointerException ex)
         {
           ex.printStackTrace();
         }
+        
     }//GEN-LAST:event_jButton1MouseClicked
 
     /**
